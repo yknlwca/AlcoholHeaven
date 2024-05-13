@@ -20,33 +20,28 @@ public class AlcoholServiceImpl implements AlcoholService {
 	}
 
 	@Override
-	public List<Alcohol> searchBoard(SearchCondition searchCondition) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Alcohol> searchBoard(String region) {
+		return alDao.search(region);
 	}
 
 	@Override
 	public Alcohol readAlcohol(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return alDao.selectOne(name);
 	}
 
 	@Override
 	public boolean writeAlcohol(Alcohol alcohol) {
-		// TODO Auto-generated method stub
-		return false;
+		return alDao.insertAlcohol(alcohol) == 1;
 	}
 
 	@Override
 	public boolean removeAlcohol(String name) {
-		// TODO Auto-generated method stub
-		return false;
+		return alDao.deleteAlcohol(name) == 1;
 	}
 
 	@Override
 	public boolean modifyAlcohol(Alcohol alcohol) {
-		// TODO Auto-generated method stub
-		return false;
+		return alDao.updateAlcohol(alcohol) == 1;
 	}
 	
 	

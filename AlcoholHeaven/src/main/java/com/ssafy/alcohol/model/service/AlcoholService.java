@@ -7,7 +7,7 @@ import com.ssafy.alcohol.model.dto.SearchCondition;
 
 public interface AlcoholService {
 	
-	public List<Alcohol> searchBoard(SearchCondition searchCondition);
+	public List<Alcohol> searchBoard(String region);
 
 	public Alcohol readAlcohol(String name);
 
