@@ -7,7 +7,7 @@ import com.ssafy.alcohol.model.dto.SearchCondition;
 
 public interface AlcoholDao {
 
-	public List<Alcohol> serach(SearchCondition searchCondition);
+	public List<Alcohol> search(String region);
 	
 	public Alcohol selectOne(String name);
 	
