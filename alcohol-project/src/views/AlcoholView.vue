@@ -1,6 +1,10 @@
 <template>
-  <div id="map"></div>
-  <router-view></router-view>
+  <div class="container">
+    <div class="alcohol">
+      <div id="map"></div>
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 <script setup>
 import * as d3 from "d3";
@@ -137,5 +141,8 @@ function drawMap(target) {
   cursor: pointer;
   font-size: 12px;
   fill: #fff;
+}
+.alcohol {
+  display: flex;
 }
 </style>
