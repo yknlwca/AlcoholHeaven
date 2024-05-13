@@ -4,7 +4,7 @@ import AlcoholView from '@/views/AlcoholView.vue'
 import FoodView from '@/views/FoodView.vue'
 import FriendView from '@/views/FriendView.vue'
 import NoticeView from '@/views/NoticeView.vue'
-
+import AlcoholList from '@/components/alcohol/AlcoholList.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -17,6 +17,13 @@ const router = createRouter({
       path: '/alcohol',
       name: 'alcohol',
       component: AlcoholView,
+      children:[
+        {
+          path: ':name',
+          name: 'alcohol-list',
+          component: AlcoholList,
+        }
+      ]
     },
     {
       path: '/food',
