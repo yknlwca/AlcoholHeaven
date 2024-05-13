@@ -1,9 +1,12 @@
 <template>
   <div id="map"></div>
+  <router-view></router-view>
 </template>
 <script setup>
 import * as d3 from "d3";
 import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 onMounted(() => {
   drawMap("#map");
 });
@@ -39,7 +42,6 @@ function drawMap(target) {
     .attr("height", height + "px")
     .attr("fill", "white");
 
-  
   d3.json("/src/assets/json/korea.json")
     .then(function (json) {
       // console.log(json); // 데이터 로드 확인
@@ -57,6 +59,10 @@ function drawMap(target) {
           // console.log(d)
           // console.log(d.target.__data__.properties.name)
           handleRegionClick(d.target.__data__.properties.name); // 클릭 이벤트 핸들러
+          router.push({
+            name: "alcohol-list",
+            params: { name: d.target.__data__.properties.name },
+          });
         });
 
       // 텍스트 레이블을 위한 Enter 선택자
@@ -93,7 +99,6 @@ function drawMap(target) {
   function handleRegionClick(regionName) {
     console.log("Clicked on region:", regionName); // 클릭된 지역 이름 로깅
   }
-  
 }
 </script>
 <style scoped>
