@@ -3,19 +3,42 @@ USE alcohol_heaven;
 
 
 CREATE TABLE IF NOT EXISTS alcohol(
-
 name VARCHAR(20) NOT NULL,
 detailRegion VARCHAR(20) ,
 kindOf VARCHAR(20),
 content TEXT,
-region VARCHAR(20) NOT NULL
+region VARCHAR(20) NOT NULL,
+image TEXT,
+PRIMARY KEY(name, kindOf, detailRegion)
+	);
+    
+CREATE TABLE IF NOT EXISTS food(
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+menu VARCHAR(20) NOT NULL,
+writer VARCHAR(20) NOT NULL,
+kindOf VARCHAR(20),
+content TEXT,
+region VARCHAR(20) NOT NULL,
+image TEXT
+	);
+    
+CREATE TABLE IF NOT EXISTS friend(
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+userId VARCHAR(20) NOT NULL ,
+name VARCHAR(20) NOT NULL,
+sex BOOLEAN NOT NULL,
+age INT NOT NULL,
+kindOf VARCHAR(20),
+region VARCHAR(20) NOT NULL,
+intro VARCHAR(20) NOT NULL
 	);
     
     DESC alcohol;
     
     
     INSERT INTO alcohol (name, detailRegion, kindOf, content, region)
-    VALUES ("삼해주", "서울특별시" ,"약주", "서울무형문화재 제8호로 지정되어 있다. 쌀과 누룩을 원료로 하여 술을 세번 발효시켜 걸러내는 삼양주라 쌀이 많이 드는 대신 맛과 향이 뛰어나다.", "서울"),
+    VALUES 
+("삼해주", "서울특별시" ,"약주", "서울무형문화재 제8호로 지정되어 있다. 쌀과 누룩을 원료로 하여 술을 세번 발효시켜 걸러내는 삼양주라 쌀이 많이 드는 대신 맛과 향이 뛰어나다.", "서울"),
 ("삼해소주", "서울특별시","증류식소주", "식품명인 제69호였던 고 김택상 명인에 의해 빚어졌다. 조선시대 중엽부터 삼해주를 증류하여 만들기 시작한 고급소주다. 쌀 소모가 많은 삼해주를 증류시켜 원래 양의 30%밖에 얻지 못해 상당한 사치품이었다고 한다.", "서울"),
 ("송절주", "서울특별시", "약주", "서울무형문화재 제2호로 지정되어 있으며 전승자는 이성자 명인이다. 16세기 정도부터 시작된 것으로 추정되고 있으며 서울 부근의 중산층과 양반가에서 약용으로 빚어진 술이다.", "서울"),
 ("향온주", "서울특별시", "증류식소주", "서울무형문화재 제9호이며 전승자는 박현숙 명인이다. 녹두누룩으로 빚는게 특징으로 본래 왕이 마시던 어주였다. 이후 인현왕후를 통해 하동정씨 집안에 전해져 가양주가 되었다.", "서울"),
@@ -83,7 +106,7 @@ region VARCHAR(20) NOT NULL
 ("강술", "제주시", "기타주류", "차조가루를 뜨거운 물로 반죽하여 도넛 모양으로 빚은 다음 삶아서 만드는 오메기떡에 누룩가루를 섞어 반죽상태로 발효시켜 만들기 때문에 반고체 상태를 가지는 술이다. 야외에 휴대하여 가져가 마실 때 물을 타서 마시는 일종의 인스턴트식 전통주다." , "제주도"),
 ("허벅술", "서귀포시", "청주", "제주도에서 유일하게 논농사가 가능하던 오조리 마을에서 마을 축제에 사용하기 위해 쌀로 빚은 술. 제주도에서 물을 길을 때 사용하던 항아리인 허벅에 넣고 후숙시킨다고 해서 허벅술이다." , "제주도"),
 ("마농술", "제주시", "담금주", "마늘주라고도 하며 소주(고소리술)에 마늘을 넣어 만드는 술이다. 완성된 후에 마늘을 여과하지 않고 넣은 채 마시는게 특징이다." , "제주도"),
-("가야곡 왕주", "논산시"," 약주", "대한민국식품명인 제13호 남상란 선생에 의해 제조되고 있다. 명성황후의 친정에서 빚던 가양주이자 궁중 진상주로 국화, 구기자, 솔잎 등의 약재를 이용하여 제조된다.", "충청도"),
+("가야곡 왕주", "논산시","약주", "대한민국식품명인 제13호 남상란 선생에 의해 제조되고 있다. 명성황후의 친정에서 빚던 가양주이자 궁중 진상주로 국화, 구기자, 솔잎 등의 약재를 이용하여 제조된다.", "충청도"),
 ("계룡백일주", "공주시", "약주", "충청남도 무형문화재 제7호, 전승자는 대한민국식품명인 제4-가호 이성우 선생. 본래 왕실에서만 빚어지던 궁중술이었으나 인조가 당시 일등공신이였던 연평부원군 이귀에게 술의 제조기법을 하사해서 그 가문이 대대로 주조하였다고 한다." , "충청도"),
 ("구기자주", "청양군", "약주", "'청양 둔송 구기주'라는 명칭으로 판매한다. 하동정씨 집안의 가양주로 구기자의 열매, 잎, 뿌리가 모두 들어간다. 충청남도 무형문화재 제30호, 전승자는 대한민국식품명인 제11호 임영순 선생." , "충청도"),
 ("금산인삼주", "금산군", "기타주류", "충청남도 무형문화재 제19호, 전승자는 대한민국식품명인 제2호 김창수 선생. 1399년 도승지와 이조판서를 지낸 김문기 가문에서 전해내려오는 술로 담금주가 아니라 주조과정 중 인삼을 갈아넣어 술 원료와 같이 발효시키는게 특징이다." , "충청도"),
@@ -121,23 +144,3 @@ region VARCHAR(20) NOT NULL
     
     
 SELECT * FROM alcohol;
-
-CREATE TABLE IF NOT EXISTS food(
-id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-menu VARCHAR(20) NOT NULL,
-kindOf VARCHAR(20),
-content TEXT,
-region VARCHAR(20) NOT NULL,
-file TEXT
-	);
-    
-CREATE TABLE IF NOT EXISTS food(
-id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-name VARCHAR(20) NOT NULL,
-sex BOOLEAN NOT NULL,
-age INT NOT NULL,
-kindOf VARCHAR(20),
-region VARCHAR(20) NOT NULL,
-intro VARCHAR(20) NOT NULL,
-	);
-    

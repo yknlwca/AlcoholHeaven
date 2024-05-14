@@ -5,47 +5,43 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.alcohol.model.dao.FriendDao;
 import com.ssafy.alcohol.model.dto.Friend;
 import com.ssafy.alcohol.model.dto.SearchCondition;
 
 @Service
 public class FriendServiceImpl implements FriendService {
 
-	private FriendService fService;
-
+	private FriendDao fDao;
+	
 	@Autowired
-	public FriendServiceImpl(FriendService fService) {
-		this.fService = fService;
+	public FriendServiceImpl(FriendDao fDao) {
+		this.fDao = fDao;
 	}
 
 	@Override
 	public List<Friend> searchFriend(SearchCondition condition) {
-		// TODO Auto-generated method stub
-		return null;
+		return fDao.search(condition);
 	}
 
 	@Override
 	public Friend readFriend(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return fDao.selectOne(id);
 	}
 
 	@Override
 	public boolean writeFriend(Friend friend) {
-		// TODO Auto-generated method stub
-		return false;
+		return fDao.insertFriend(friend) == 1;
 	}
 
 	@Override
 	public boolean removeFriend(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		return fDao.deleteFriend(id) == 1;
 	}
 
 	@Override
 	public boolean modifyFriend(Friend friend) {
-		// TODO Auto-generated method stub
-		return false;
+		return fDao.updateFriend(friend) == 1;
 	}
 
 }
