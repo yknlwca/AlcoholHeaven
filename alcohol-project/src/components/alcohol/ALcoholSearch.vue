@@ -12,10 +12,8 @@
       <div class="col-6">
         <input type="text" class="form-control" v-model="searchInfo.word" />
       </div>
-      <div class="col-1">
-        <button class="btn btn-outline-warning" @click="searchAlcoholList">
-          검색
-        </button>
+      <div class="col-2">
+        <button class="btn btn-success" @click="searchAlcoholList">검색</button>
       </div>
     </div>
   </div>
