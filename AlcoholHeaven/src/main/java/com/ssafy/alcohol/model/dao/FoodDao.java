@@ -6,6 +6,11 @@ import com.ssafy.alcohol.model.dto.Food;
 import com.ssafy.alcohol.model.dto.SearchCondition;
 
 public interface FoodDao {
+//	<!-- 지역 / 메뉴 / 어울리는 술 -->
+	
+	public List<Food> searchRegion(String Region);
+	
+	public List<Food> searchMenu(String menu);
 	
 	public List<Food> search(SearchCondition condition);
 	

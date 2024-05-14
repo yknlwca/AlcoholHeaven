@@ -31,6 +31,24 @@ public class FoodRestController {
 		this.fService = fService;
 	}
 	
+	@GetMapping("/food/menu/{menu}")
+	public ResponseEntity<?> menuCommand(@PathVariable("menu") String menu){
+		List<Food> list = fService.searchMenu(menu);
+		if(list == null || list.size() == 0) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Food>>(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/food/region/{region}")
+	public ResponseEntity<?> regionList(@PathVariable("region") String region){
+		List<Food> list = fService.searchRegion(region);
+		if(list == null || list.size() == 0) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Food>>(list, HttpStatus.OK);
+	}
+	
 	@GetMapping("/food")
 	public ResponseEntity<?> list(SearchCondition condition){
 		List<Food> list= fService.searchFood(condition);
@@ -40,7 +58,7 @@ public class FoodRestController {
 		return new ResponseEntity<List<Food>>(list, HttpStatus.OK);
 	}
 	
-	@GetMapping("/food/{id}")
+	@GetMapping("/food/id/{id}")
 	public ResponseEntity<?> detail(@PathVariable("id") int id){
 		Food food = fService.readFood(id);
 		if(food != null) {

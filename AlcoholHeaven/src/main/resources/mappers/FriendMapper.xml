@@ -10,7 +10,15 @@
 	</if>
 </select>
 
+<!-- 성별 / 지역  -->
 
+<select id="searchRegion" resultType="Friend" parameterType="String">
+	SELECT * FROM friend WHERE region LIKE CONCAT('%', #{region}, '%');
+</select>
+
+<select id="searchSex" resultType="Friend" parameterType="boolean">
+	SELECT * FROM friend WHERE sex = #{sex};
+</select>
 
 <select id="selectOne" resultType="Friend" parameterType="int">
 	SELECT * FROM friend WHERE id = #{id};

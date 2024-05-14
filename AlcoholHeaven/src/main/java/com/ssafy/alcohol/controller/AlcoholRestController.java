@@ -33,7 +33,6 @@ public class AlcoholRestController {
 	}
 
 
-
 	@GetMapping("/alcohol")
 	public ResponseEntity<?> list(@ModelAttribute SearchCondition condition) {
 		List<Alcohol> list = alService.searchBoard(condition);

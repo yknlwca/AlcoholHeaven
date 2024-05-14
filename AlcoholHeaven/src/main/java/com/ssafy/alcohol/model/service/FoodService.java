@@ -8,6 +8,10 @@ import com.ssafy.alcohol.model.dto.SearchCondition;
 public interface FoodService {
 
 	public List<Food> searchFood(SearchCondition condition);
+	
+	public List<Food> searchRegion(String Region);
+	
+	public List<Food> searchMenu(String menu);
 
 	public Food readFood(int id);
 

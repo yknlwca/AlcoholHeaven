@@ -44,4 +44,14 @@ public class FriendServiceImpl implements FriendService {
 		return fDao.updateFriend(friend) == 1;
 	}
 
+	@Override
+	public List<Friend> searchRegion(String region) {
+		return fDao.searchRegion(region);
+	}
+
+	@Override
+	public List<Friend> searchSex(boolean sex) {
+		return fDao.searchSex(sex);
+	}
+
 }
