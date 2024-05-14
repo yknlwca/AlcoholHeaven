@@ -1,16 +1,20 @@
 <template>
   <div class="container">
     <div class="alcohol">
-      <div id="map"></div>
+      <div id="map" class="text-center">
+        <h1>{{ name }}</h1>
+      </div>
       <router-view></router-view>
     </div>
   </div>
 </template>
 <script setup>
 import * as d3 from "d3";
-import { onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
+const name = ref("");
+name.value = localStorage.getItem("name");
 onMounted(() => {
   drawMap("#map");
 });
@@ -63,6 +67,8 @@ function drawMap(target) {
           // console.log(d)
           // console.log(d.target.__data__.properties.name)
           handleRegionClick(d.target.__data__.properties.name); // 클릭 이벤트 핸들러
+          localStorage.setItem("name", d.target.__data__.properties.name);
+          name.value = localStorage.getItem("name");
           router.push({
             name: "alcohol-list",
             params: { name: d.target.__data__.properties.name },
@@ -113,10 +119,21 @@ function drawMap(target) {
     console.log("Clicked on region:", regionName); // 클릭된 지역 이름 로깅
   }
 }
+onUnmounted(() => {
+  localStorage.removeItem("name");
+});
 </script>
 <style scoped>
 .alcohol {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  padding-top: 30px;
+}
+
+@media (max-width: 1200px) {
+  .alcohol {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>
