@@ -20,7 +20,7 @@ function drawMap(target) {
   var width = 700; //지도의 넓이
   var height = 700; //지도의 높이
   var initialScale = 5500; //확대시킬 값
-  var initialX = -11900; //초기 위치값 X
+  var initialX = -12000; //초기 위치값 X
   var initialY = 4050; //초기 위치값 Y
   var labels;
 
@@ -79,7 +79,16 @@ function drawMap(target) {
         .attr("id", (d) => "label-" + d.properties.name_eng)
         .attr("text-anchor", "middle")
         .attr("dy", ".35em")
-        .text((d) => d.properties.name);
+        .text((d) => d.properties.name)
+        .on("click", (d) => {
+          // console.log(d)
+          // console.log(d.target.__data__.properties.name)
+          handleRegionClick(d.target.__data__.properties.name); // 클릭 이벤트 핸들러
+          router.push({
+            name: "alcohol-list",
+            params: { name: d.target.__data__.properties.name },
+          });
+        });
     })
     .catch(function (error) {
       console.error("Error loading the JSON data: ", error); // 오류 로깅
@@ -106,43 +115,8 @@ function drawMap(target) {
 }
 </script>
 <style scoped>
-@charset "UTF-8";
-
-#container {
-  width: 700px;
-  min-height: 700px;
-  float: left;
-  margin: 15px 35px;
-}
-
-#states path {
-  fill: #585858;
-  stroke: #000000;
-  stroke-width: 1.5px;
-}
-
-#states path:hover {
-  fill: #009300;
-}
-
-#states .active {
-  fill: #00b700;
-}
-
-#states .activeDetail {
-  fill: #00b700;
-}
-
-#states path {
-  cursor: pointer;
-}
-
-#states text {
-  cursor: pointer;
-  font-size: 12px;
-  fill: #fff;
-}
 .alcohol {
   display: flex;
+  justify-content: center;
 }
 </style>

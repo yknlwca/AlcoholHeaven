@@ -42,8 +42,16 @@ public class AlcoholRestController {
 		}
 		return new ResponseEntity<List<Alcohol>>(list, HttpStatus.OK);
 	}
+	@GetMapping("/alcohol/{region}")
+	public ResponseEntity<?> listByRegion(@PathVariable("region") String region) {
+		List<Alcohol> alcohols = alService.selectAlcohol(region);
+		if (alcohols != null) {
+			return new ResponseEntity<>(alcohols, HttpStatus.OK);
+		}
+		return new ResponseEntity<Alcohol>(HttpStatus.NOT_FOUND);
+	}
 
-	@GetMapping("/alcohol/{name}")
+	@GetMapping("/alcohol/detail/{name}")
 	public ResponseEntity<Alcohol> detail(@PathVariable("name") String name) {
 		Alcohol alcohol = alService.readAlcohol(name);
 		if (alcohol != null) {

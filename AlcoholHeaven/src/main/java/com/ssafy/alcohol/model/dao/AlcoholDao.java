@@ -17,5 +17,7 @@ public interface AlcoholDao {
 	public int deleteAlcohol(String name);
 	
 	public int updateAlcohol(Alcohol alcohol);
+
+	public List<Alcohol> selectAlcohol(String region);
 	
 }

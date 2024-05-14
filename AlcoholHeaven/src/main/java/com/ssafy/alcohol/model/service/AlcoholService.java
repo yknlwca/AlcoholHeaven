@@ -17,4 +17,6 @@ public interface AlcoholService {
 	public boolean removeAlcohol(String name);
 
 	public boolean modifyAlcohol(Alcohol alcohol);
+
+	public List<Alcohol> selectAlcohol(String region);
 }
