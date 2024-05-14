@@ -7,6 +7,11 @@ import com.ssafy.alcohol.model.dto.SearchCondition;
 
 public interface FriendService {
 
+	
+	public List<Friend> searchRegion(String region);
+
+	public List<Friend> searchSex(boolean sex);
+	
 	public List<Friend> searchFriend(SearchCondition condition);
 
 	public Friend readFriend(int id);

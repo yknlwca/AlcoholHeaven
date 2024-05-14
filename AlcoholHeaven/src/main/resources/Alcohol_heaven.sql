@@ -24,7 +24,7 @@ image TEXT
 	);
     
 INSERT INTO food (menu, writer, kindOf, content, region)
-VALUES ("asfd","asfasf","asdf","Asfd","sadf");
+VALUES ("전","글쓴이","소주","파전에는 소주죠","서울");
     
 CREATE TABLE IF NOT EXISTS friend(
 id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -38,7 +38,7 @@ intro VARCHAR(20) NOT NULL
 	);
     
 INSERT INTO friend (userId, name, sex, age, region, intro)
-VALUES ("asfd","asfasf",true,25,"sadf","QWG");
+VALUES ("현태씨","이쁜이",true,25,"서울","술 한잔 해요");
 
 DESC alcohol;
 

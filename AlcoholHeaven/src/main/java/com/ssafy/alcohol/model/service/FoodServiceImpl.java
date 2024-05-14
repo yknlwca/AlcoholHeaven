@@ -44,4 +44,14 @@ public class FoodServiceImpl implements FoodService {
 		return fDao.updateFood(food) == 1;
 	}
 
+	@Override
+	public List<Food> searchRegion(String Region) {
+		return fDao.searchRegion(Region);
+	}
+
+	@Override
+	public List<Food> searchMenu(String menu) {
+		return fDao.searchMenu(menu);
+	}
+
 }

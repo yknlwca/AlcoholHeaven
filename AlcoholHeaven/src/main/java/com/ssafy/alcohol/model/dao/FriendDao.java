@@ -6,6 +6,12 @@ import com.ssafy.alcohol.model.dto.Friend;
 import com.ssafy.alcohol.model.dto.SearchCondition;
 
 public interface FriendDao {
+	
+//	<!-- 성별 / 지역  -->
+	
+	public List<Friend> searchRegion(String region);
+
+	public List<Friend> searchSex(boolean sex);
 
 	public List<Friend> search(SearchCondition condition);
 	

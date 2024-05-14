@@ -31,6 +31,24 @@ public class FriendRestController {
 		this.fService = fService;
 	}
 
+	@GetMapping("/friend/region/{region}")
+	public ResponseEntity<?> regionSearch(@PathVariable("region") String region) {
+		List<Friend> list = fService.searchRegion(region);
+		if (list == null || list.size() == 0) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Friend>>(list, HttpStatus.OK);
+	}
+
+	@GetMapping("/friend/sex/{sex}")
+	public ResponseEntity<?> sexByGender(@PathVariable boolean sex) {
+		List<Friend> list = fService.searchSex(sex);
+		if (list == null || list.size() == 0) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Friend>>(list, HttpStatus.OK);
+	}
+
 	@GetMapping("/friend")
 	public ResponseEntity<?> list(SearchCondition condtion) {
 		List<Friend> list = fService.searchFriend(condtion);
@@ -40,7 +58,7 @@ public class FriendRestController {
 		return new ResponseEntity<List<Friend>>(list, HttpStatus.OK);
 	}
 
-	@GetMapping("/friend/{id}")
+	@GetMapping("/friend/id/{id}")
 	public ResponseEntity<?> detail(@PathVariable("id") int id) {
 		Friend friend = fService.readFriend(id);
 		if (friend != null) {

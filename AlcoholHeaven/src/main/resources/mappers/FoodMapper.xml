@@ -9,12 +9,19 @@
 	</if>
 </select>
 
-
+<!-- 지역 / 메뉴 / 어울리는 술 -->
 
 <select id="selectOne" resultType="Food" parameterType="int">
 	SELECT * FROM food WHERE id = #{id};
 </select>
 
+<select id="searchRegion" resultType="Food" parameterType="String" >
+	SELECT * FROM food WHERE region LIKE CONCAT('%', #{region}, '%');
+</select>
+
+<select id="searchMenu" resultType="Food" parameterType="String">
+	SELECT * FROM food WHERE menu LIKE CONCAT('%', #{menu}, '%');
+</select>
 
 <!-- <insert id="insertFood" parameterType="Food">
     INSERT INTO food (name
