@@ -5,47 +5,43 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.alcohol.model.dao.FoodDao;
 import com.ssafy.alcohol.model.dto.Food;
 import com.ssafy.alcohol.model.dto.SearchCondition;
 
 @Service
 public class FoodServiceImpl implements FoodService {
 
-	private FoodService fService;
+	private FoodDao fDao;
 	
 	@Autowired
-	public FoodServiceImpl(FoodService fService) {
-		this.fService = fService;
+	public FoodServiceImpl(FoodDao fDao) {
+		this.fDao = fDao;
 	}
 	
 	@Override
 	public List<Food> searchFood(SearchCondition condition) {
-		// TODO Auto-generated method stub
-		return null;
+		return fDao.search(condition);
 	}
 
 	@Override
 	public Food readFood(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return fDao.selectOne(id);
 	}
 
 	@Override
 	public boolean writeFood(Food food) {
-		// TODO Auto-generated method stub
-		return false;
+		return fDao.insertFood(food) == 1;
 	}
 
 	@Override
 	public boolean removeFood(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		return fDao.deleteFood(id) == 1;
 	}
 
 	@Override
 	public boolean modifyFood(Food food) {
-		// TODO Auto-generated method stub
-		return false;
+		return fDao.updateFood(food) == 1;
 	}
 
 }

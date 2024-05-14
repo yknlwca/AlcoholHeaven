@@ -18,10 +18,10 @@ public class AlcoholServiceImpl implements AlcoholService {
 	public AlcoholServiceImpl(AlcoholDao alDao) {
 		this.alDao = alDao;
 	}
-
+	
 	@Override
-	public List<Alcohol> searchBoard(String region) {
-		return alDao.search(region);
+	public List<Alcohol> searchBoard(SearchCondition condition) {
+		return alDao.search(condition);
 	}
 
 	@Override
@@ -43,6 +43,7 @@ public class AlcoholServiceImpl implements AlcoholService {
 	public boolean modifyAlcohol(Alcohol alcohol) {
 		return alDao.updateAlcohol(alcohol) == 1;
 	}
+
 	
 	
 }

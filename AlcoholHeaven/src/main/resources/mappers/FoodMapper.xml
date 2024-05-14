@@ -2,11 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.alcohol.model.dao.FoodDao">
 
-
 <select id="search" resultType="Food" parameterType="SearchCondition">
 	SELECT * FROM food
-	WHERE region LIKE CONCAT('%',#{region},'%') 
+	<if test="key != 'none'">
+			WHERE ${key} LIKE CONCAT('%', #{word}, '%')
+	</if>
 </select>
+
 
 
 <select id="selectOne" resultType="Food" parameterType="int">
@@ -14,20 +16,31 @@
 </select>
 
 
-<insert id="insertFood" parameterType="Food">
-
-</insert>
+<!-- <insert id="insertFood" parameterType="Food">
+    INSERT INTO food (name
+        <if test="detailRegion != null">, detailRegion</if>
+        <if test="kindOf != null">, kindOf</if>
+        <if test="content != null">, content</if>
+        , region
+    )
+    VALUES (#{name}
+        <if test="detailRegion != null">, #{detailRegion}</if>
+        <if test="kindOf != null">, #{kindOf}</if>
+        <if test="content != null">, #{content}</if>
+        , #{region}
+    );
+</insert> -->
 
 <delete id="deleteFood" parameterType="int">
 	DELETE FROM food
 	WHERE id = #{id};
 </delete>
 
-<update id="updateFood" parameterType="Food">
-	UPDATE food
+<!-- <update id="updateFood" parameterType="Food">
+	UPDATE alcohol
 	SET name = #{name}, detailRegion = #{detailRegion}, kindOf = #{kindOf}, content = #{content},
 	region = #{region};
-</update>
+</update> -->
 
 
 

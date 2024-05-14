@@ -19,7 +19,7 @@ import com.ssafy.alcohol.model.service.FriendService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("/friend")
+@RequestMapping("/with")
 public class FriendRestController {
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";

@@ -19,7 +19,7 @@ import com.ssafy.alcohol.model.service.FoodService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("/food")
+@RequestMapping("/eat")
 public class FoodRestController {
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
