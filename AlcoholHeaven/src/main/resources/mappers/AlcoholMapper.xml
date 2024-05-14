@@ -9,7 +9,10 @@
 	</if>
 </select>
 
-
+<select id="selectAlcohol" resultType="Alcohol" parameterType="String">
+	SELECT * FROM alcohol
+	WHERE region = #{region}
+</select>
 
 <select id="selectOne" resultType="Alcohol" parameterType="String">
 	SELECT * FROM alcohol WHERE name = #{name};

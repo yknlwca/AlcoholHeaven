@@ -44,6 +44,12 @@ public class AlcoholServiceImpl implements AlcoholService {
 		return alDao.updateAlcohol(alcohol) == 1;
 	}
 
+	@Override
+	public List<Alcohol> selectAlcohol(String region) {
+		// TODO Auto-generated method stub
+		return alDao.selectAlcohol(region);
+	}
+
 	
 	
 }

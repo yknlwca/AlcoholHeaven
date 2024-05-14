@@ -1,7 +1,16 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import router from '@/router'
+import axios from 'axios'
 
 export const useAlcoholStore = defineStore('alcohol', () => {
- 
-  return {}
+  const REST_ALCOHOL_API = 'http://localhost:8080/drink/alcohol'
+  const alcoholList = ref([])
+  const getAlcoholList = function(region){
+    axios.get(`${REST_ALCOHOL_API}/${region}`)
+    .then((response)=>{
+      alcoholList.value = response.data
+    })
+  }
+  return {alcoholList,getAlcoholList}
 })
