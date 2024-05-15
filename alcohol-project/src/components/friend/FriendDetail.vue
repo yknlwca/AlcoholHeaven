@@ -6,14 +6,14 @@
             <div class="card" style="width: 30rem">
                 <div class="card-body">
                     <div class="mb-3 d-flex justify-content-between align-items-center">
-                        <h4 class="card-title">{{ store.friend.menu }}</h4>
+                        <h4 class="card-title">{{ store.friend.name }}</h4>
                         <div class="d-flex justify-content-end">
-                            <h6 class="card-subtitle mx-3 text-body-secondary">{{ store.friend.writer }}</h6>
+                            <h6 class="card-subtitle mx-3 text-body-secondary">{{ store.friend.age }}</h6>
                             <h6 class="card-subtitle text-body-secondary">{{ store.friend.region }}</h6>
                         </div>
                     </div>
                     <p class="card-text ">
-                        {{ store.friend.content }}
+                        {{ store.friend.intro }}
                     </p>
                     <div class="d-flex justify-content-center">
                         <button class="mx-3 btn btn-outline-success" @click="moveUpdate">수정</button>
