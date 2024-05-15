@@ -9,7 +9,7 @@
           <option value="kindOf">종류</option>
         </select>
       </div>
-      <div class="col-6">
+      <div class="col-8">
         <input type="text" class="form-control" v-model="searchInfo.word" />
       </div>
       <div class="col-2">
@@ -31,7 +31,7 @@ const searchInfo = ref({
   word: "",
 });
 const searchAlcoholList = function () {
-    store.searchAlcoholList(searchInfo.value, route.params.name);
+    store.searchAlcoholList(searchInfo.value);
   };
 </script>
 
