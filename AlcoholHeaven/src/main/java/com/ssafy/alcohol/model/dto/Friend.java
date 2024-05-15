@@ -8,6 +8,7 @@ public class Friend {
 //	region VARCHAR(20) NOT NULL,
 //	intro TEXT NOT NULL
 	private int id;
+	private String userId;
 	private String name;
 	private Boolean sex;
 	private int age;
@@ -59,10 +60,17 @@ public class Friend {
 		this.intro = intro;
 	}
 	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
 	@Override
 	public String toString() {
-		return "Friend [id=" + id + ", name=" + name + ", sex=" + sex + ", age=" + age + ", kindOf=" + kindOf
-				+ ", region=" + region + ", intro=" + intro + "]";
+		return "Friend [id=" + id + ", userId=" + userId + ", name=" + name + ", sex=" + sex + ", age=" + age
+				+ ", kindOf=" + kindOf + ", region=" + region + ", intro=" + intro + "]";
 	}
 	
 	

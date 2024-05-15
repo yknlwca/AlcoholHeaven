@@ -12,7 +12,7 @@
       <RouterLink :to="{ name: 'food' }">안주 찾기</RouterLink>
     </div>
     <div :class="friend">
-      <RouterLink :to="{ name: 'friend' }">친구 찾기</RouterLink>
+      <RouterLink :to="{ name: 'friendList' }">친구 찾기</RouterLink>
     </div>
     <div :class="notice">
       <RouterLink :to="{ name: 'notice' }">공지사항</RouterLink>
