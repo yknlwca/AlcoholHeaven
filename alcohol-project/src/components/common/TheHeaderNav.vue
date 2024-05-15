@@ -9,7 +9,7 @@
       <RouterLink to="/alcohol">지역별 술 찾기</RouterLink>
     </div>
     <div :class="food">
-      <RouterLink :to="{ name: 'food' }">안주 찾기</RouterLink>
+      <RouterLink :to="{ name: 'foodList' }">안주 찾기</RouterLink>
     </div>
     <div :class="friend">
       <RouterLink :to="{ name: 'friendList' }">친구 찾기</RouterLink>

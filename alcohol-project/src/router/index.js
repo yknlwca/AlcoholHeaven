@@ -11,6 +11,10 @@ import FriendList from '@/components/friend/FriendList.vue'
 import FriendDetail from '@/components/friend/FriendDetail.vue'
 import FriendCreate from '@/components/friend/FriendCreate.vue'
 
+import FoodList from '@/components/food/FoodList.vue';
+import FoodDetail from '@/components/food/FoodDetail.vue';
+import FoodCreate from '@/components/food/FoodCreate.vue';
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -35,6 +39,23 @@ const router = createRouter({
       path: '/food',
       name: 'food',
       component: FoodView,
+      children: [
+        {
+          path: '',
+          name: 'foodList',
+          component: FoodList
+        },
+        {
+          path: 'create',
+          name: 'foodCreate',
+          component: FoodCreate
+        },
+        {
+          path: ':id',
+          name: 'foodDetail',
+          component: FoodDetail
+        },
+      ]
     },
     {
       path: '/friend',

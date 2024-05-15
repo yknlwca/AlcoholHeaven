@@ -31,7 +31,8 @@ export const useFriendStore = defineStore('friend', () => {
   const friend = ref({});
 
   const getFriend = function (id) {
-    axios.get(`${REST_FRIEND_API}/${id}`)
+    // 경로 정리 필요
+    axios.get(REST_FRIEND_API + "/id/" + `${id}`)
       .then((response) => {
         friend.value = response.data;
       })
