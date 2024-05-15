@@ -1,9 +1,8 @@
 
 <template>
   <div>
-    <h1>친구찾기뷰</h1>
+    <RouterView />
   </div>
-  <RouterView />
 </template>
 
 <script setup></script>
