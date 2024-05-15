@@ -20,17 +20,19 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useAlcoholStore } from "@/stores/alcohol";
+import { useRoute } from "vue-router";
 
+const route = useRoute();
 const store = useAlcoholStore();
 const searchInfo = ref({
   key: "none",
   word: "",
 });
-const getAlcoholList = function () {
-  store.getAlcoholList(searchInfo.value);
-};
+const searchAlcoholList = function () {
+    store.searchAlcoholList(searchInfo.value, route.params.name);
+  };
 </script>
 
 <style scoped></style>

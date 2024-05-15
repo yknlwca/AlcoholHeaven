@@ -12,5 +12,12 @@ export const useAlcoholStore = defineStore('alcohol', () => {
       alcoholList.value = response.data
     })
   }
-  return {alcoholList,getAlcoholList}
+  const searchAlcoholList= function(condition){
+    axios.get(REST_ALCOHOL_API,{
+      params: condition
+    }).then((response)=>{
+      alcoholList.value = response.data.filter((alcohol)=>alcohol.region===localStorage.getItem('name'))
+    })
+  }
+  return {alcoholList,getAlcoholList,searchAlcoholList}
 })
