@@ -1,8 +1,9 @@
 <template>
-  <div class="container">
+  <div class="container"
+  style="padding-top: 15px;">
     <ALcoholSearch />
     <br />
-    <div class="row">
+    <div class="row d-flex justify-content-center">
       <div
         class="card mx-2 my-2 col-12 col-sm-6 col-md-3"
         v-for="alcohol in currentPageAlcoholList"
@@ -110,8 +111,5 @@ const currentPageAlcoholList = computed(() => {
 </script>
 
 <style scoped>
-.pagination{
-  display: flex;
-  justify-content: center;
-}
+
 </style>

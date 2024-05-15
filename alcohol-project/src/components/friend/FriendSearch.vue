@@ -9,11 +9,11 @@
           <option value="kindOf">주종</option>
         </select>
       </div>
-      <div class="col-6">
+      <div class="col-8">
         <input type="text" class="form-control" v-model="searchInfo.word" />
       </div>
       <div class="col-2">
-        <button class="btn btn-success" @click="searchAlcoholList">검색</button>
+        <button class="btn btn-success" @click="searchFriendlList">검색</button>
       </div>
     </div>
   </div>
@@ -29,8 +29,8 @@ const searchInfo = ref({
     word: "",
 });
 
-const getFriendList = function () {
-    store.getFriendList(searchInfo.value);
+const searchFriendList = function () {
+    store.searchFriendList(searchInfo.value);
 };
 
 </script>

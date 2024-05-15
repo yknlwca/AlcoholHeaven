@@ -1,30 +1,33 @@
 <template>
-<div class="container">
-    <h2>술 친구 목록</h2>
+  <div class="container my-2">
+    <h2>술 친구 찾기</h2>
     <hr />
-    <FriendSearch />
-    <table class="table table-hover text-center">
+    <div class="container d-flex justify-content-center">
+      <FriendSearch style="width: 80%;" />
+    </div>
+    <br>
+    <table class="table text-center p-2 ">
       <tr>
-        <th>번호</th>
-        <th>닉네임</th>
-        <th>아이디</th>
-        <th>성별</th>
-        <th>나이</th>
-        <th>주종</th>
-        <th>지역</th>
-        <th>자기소개</th>
+        <th style="width: 5%;border-right: 1px solid black;border-bottom: 1px solid black">번호</th>
+        <th style="width: 15%;border-right: 1px solid black;border-bottom: 1px solid black">닉네임</th>
+        <th style="width: 15%;border-right: 1px solid black;border-bottom: 1px solid black">아이디</th>
+        <th style="width: 5%;border-right: 1px solid black;border-bottom: 1px solid black">성별</th>
+        <th style="width: 30%;border-right: 1px solid black;border-bottom: 1px solid black">자기소개</th>
+        <th style="width: 15%;border-right: 1px solid black;border-bottom: 1px solid black">주종</th>
+        <th style="width: 15%;border-bottom: 1px solid black;">지역</th>
       </tr>
       <tr v-for="friend in currentPageFriendList" :key="friend.id">
-        <td>{{ friend.id }}</td>
-        <td>
-          <RouterLink :to="`/friend/${friend.id}`">{{ friend.name }}</RouterLink>
+        <td style="width: 5%;border-right: 1px solid black;">{{ friend.id }}</td>
+        <td class="p-2" style="width: 15%;border-right: 1px solid black;">
+          <RouterLink :to="`/friend/${friend.id}`">{{
+            friend.name
+          }}</RouterLink>
         </td>
-        <td>{{ friend.userId }}</td>
-        <td>{{ friend.sex }}</td>
-        <td>{{ friend.age }}</td>
-        <td>{{ friend.kindOf }}</td>
-        <td>{{ friend.region }}</td>
-        <td>{{ friend.intro }}</td>
+        <td style="width: 15%;border-right: 1px solid black;">{{ friend.userId }}</td>
+        <td style="width: 5%;border-right: 1px solid black;">{{ friend.sex }}</td>
+        <td style="width: 30%;border-right: 1px solid black;">{{ friend.intro }}</td>
+        <td style="width: 15%;border-right: 1px solid black;">{{ friend.kindOf }}</td>
+        <td style="width: 15%;">{{ friend.region }}</td>
       </tr>
     </table>
     <nav aria-label="Page navigation">
@@ -63,36 +66,33 @@
 </template>
 
 <script setup>
-import { useFriendStore } from '@/stores/friend';
-import { computed, onMounted, ref } from 'vue';
-import FriendSearch from '@/components/friend/FriendSearch.vue';
+import { useFriendStore } from "@/stores/friend";
+import { computed, onMounted, ref } from "vue";
+import FriendSearch from "@/components/friend/FriendSearch.vue";
 
 const store = useFriendStore();
 
 onMounted(() => {
-    store.getFriendList();
+  store.getFriendList();
 });
 
 const perPage = 10;
 const currentPage = ref(1);
 
 const pageCount = computed(() => {
-    return Math.ceil(store.friendList.length / perPage);
+  return Math.ceil(store.friendList.length / perPage);
 });
 
 const clickPage = function (page) {
-    currentPage.value = page;
+  currentPage.value = page;
 };
 
 const currentPageFriendList = computed(() => {
-    return store.friendList.slice(
-        (currentPage.value - 1) * perPage,
-        currentPage.value * perPage
-    );
+  return store.friendList.slice(
+    (currentPage.value - 1) * perPage,
+    currentPage.value * perPage
+  );
 });
-
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
