@@ -2,6 +2,6 @@
 
 <template>
   <div>
-    <h1>안주뷰</h1>
+    <RouterView />
   </div>
 </template>

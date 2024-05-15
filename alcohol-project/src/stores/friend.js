@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const REST_FRIEND_API = `http://localhost:8080/with/friend`;
 
-export const useFriendStore = defineStore('alcohol', () => {
+export const useFriendStore = defineStore('friend', () => {
 
   const createFriend = function (friend) {
     axios({
