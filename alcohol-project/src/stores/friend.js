@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import axios from 'axios';
 
 const REST_FRIEND_API = `http://localhost:8080/api/friend`;
+const REST_REVIEW_API = `http://localhost:8080/api/review`;
 
 export const useFriendStore = defineStore('friend', () => {
 
@@ -54,6 +55,50 @@ export const useFriendStore = defineStore('friend', () => {
       })
   };
 
+  // 리뷰
+  const reviewList = ref([]);
+
+  const review = ref({});
+
+  const getReviewList = function (id) {
+    // 친구리뷰는 type 3로 할게
+    axios.get(REST_REVIEW_API + "/3/" + `${id}`)
+      .then((response) => {
+        console.log(response);
+        reviewList.value = response.data;
+
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  };
+
+  const deleteReview = function (userId, id) {
+    axios
+      .delete(`${REST_REVIEW_API}/${id}`)
+      .then(() => {
+        // 삭제 후 리뷰 목록 갱신
+        getReviewList(id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const createReview = function (review, curr) {
+    axios({
+      url: REST_REVIEW_API,
+      method: 'POST',
+      data: review
+    })
+      .then(() => {
+        getReviewList(curr);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  };
+
   return {
     friend,
     friendList,
@@ -62,6 +107,11 @@ export const useFriendStore = defineStore('friend', () => {
     updateFriend,
     createFriend,
     getFriendList,
+    reviewList,
+    review,
+    getReviewList,
+    deleteReview,
+    createReview
 
   }
 });

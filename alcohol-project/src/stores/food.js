@@ -3,8 +3,10 @@ import { defineStore } from 'pinia'
 import axios from 'axios';
 
 const REST_FOOD_API = `http://localhost:8080/api/food`;
+const REST_REVIEW_API = `http://localhost:8080/api/review`;
 
 export const useFoodStore = defineStore('food', () => {
+  // food
   const createFood = function (food) {
     axios({
       url: REST_FOOD_API,
@@ -58,6 +60,55 @@ export const useFoodStore = defineStore('food', () => {
       })
   };
 
+
+  // review
+  const reviewList = ref([]);
+
+  const review = ref({});
+
+  const getReviewList = function (id) {
+    // 음식리뷰는 type 2로 할게
+    axios.get(REST_REVIEW_API + "/2/" + `${id}`)
+      .then((response) => {
+        console.log(response);
+        reviewList.value = response.data;
+
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  };
+
+  const createReview = function (review, curr) {
+    axios({
+      url: REST_REVIEW_API,
+      method: 'POST',
+      data: review
+    })
+      .then(() => {
+        getReviewList(curr);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  };
+
+
+
+  const deleteReview = function (userId, id) {
+    axios
+      .delete(`${REST_REVIEW_API}/${id}`)
+      .then(() => {
+        // 삭제 후 리뷰 목록 갱신
+        getReviewList(id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+
   return {
     food,
     foodList,
@@ -65,6 +116,11 @@ export const useFoodStore = defineStore('food', () => {
     searchFoodList,
     getFoodList,
     createFood,
-    getFood
+    getFood,
+    reviewList,
+    review,
+    getReviewList,
+    createReview,
+    deleteReview
   }
 });

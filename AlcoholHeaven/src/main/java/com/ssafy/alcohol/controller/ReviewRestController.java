@@ -35,7 +35,7 @@ public class ReviewRestController {
 	public ResponseEntity<?> write(@RequestBody Review review){
 		int result = rService.write(review);
 		return new ResponseEntity<>(result, HttpStatus.OK);
-	}
+	}	
 	@DeleteMapping("/{reviewId}")
 	public ResponseEntity<?> delete(@PathVariable("reviewId") int reviewId){
 		int result = rService.delete(reviewId);
