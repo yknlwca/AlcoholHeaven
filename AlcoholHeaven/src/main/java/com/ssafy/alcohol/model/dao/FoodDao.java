@@ -23,4 +23,8 @@ public interface FoodDao {
 	public int updateFood(Food food);
 
 	public List<Food> selectAll();
+	
+	public int likeUp(int id);
+	
+	public int likeDown(int id);
 }

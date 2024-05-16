@@ -23,8 +23,8 @@
 
 
 <insert id="insertAlcohol" parameterType="Alcohol">
-    INSERT INTO alcohol (name, detailRegion, kindOf, content, region)
-    VALUES (#{name}, #{detailRegion}, #{kindOf}, #{content}, #{region});
+    INSERT INTO alcohol (name, detailRegion, kindOf, content, region, weight, img)
+    VALUES (#{name}, #{detailRegion}, #{kindOf}, #{content}, #{region}, #{weight}, #{img});
 </insert>
 
 <delete id="deleteAlcohol" parameterType="int">
@@ -35,7 +35,22 @@
 <update id="updateAlcohol" parameterType="Alcohol">
 	UPDATE alcohol
 	SET name = #{name}, detailRegion = #{detailRegion}, kindOf = #{kindOf}, content = #{content},
-	region = #{region};
+	region = #{region}, weight= #{weight}, img = #{img}
+	WHERE id = #{id};
 </update>
+
+
+
+  <update id="likeUp" parameterType="int">
+    UPDATE alcohol
+    SET heart = heart + 1
+    WHERE id = #{id};
+  </update>
+
+  <update id="likeDown" parameterType="int">
+    UPDATE alcohol
+    SET heart = heart - 1
+    WHERE id = #{id};
+  </update>
 
 </mapper>

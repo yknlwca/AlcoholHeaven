@@ -56,8 +56,17 @@ public class FoodServiceImpl implements FoodService {
 
 	@Override
 	public List<Food> selectAll() {
-		// TODO Auto-generated method stub
 		return fDao.selectAll();
+	}
+
+	@Override
+	public boolean likeUp(int id) {
+		return fDao.likeUp(id) == 1;
+	}
+
+	@Override
+	public boolean likeDown(int id) {
+		return fDao.likeDown(id) == 1;
 	}
 
 }

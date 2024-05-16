@@ -18,7 +18,7 @@ public class AlcoholServiceImpl implements AlcoholService {
 	public AlcoholServiceImpl(AlcoholDao alDao) {
 		this.alDao = alDao;
 	}
-	
+
 	@Override
 	public List<Alcohol> searchBoard(SearchCondition condition) {
 		return alDao.search(condition);
@@ -40,11 +40,6 @@ public class AlcoholServiceImpl implements AlcoholService {
 	}
 
 	@Override
-	public boolean modifyAlcohol(Alcohol alcohol) {
-		return alDao.updateAlcohol(alcohol) == 1;
-	}
-
-	@Override
 	public List<Alcohol> selectAlcohol(String region) {
 		// TODO Auto-generated method stub
 		return alDao.selectAlcohol(region);
@@ -52,10 +47,22 @@ public class AlcoholServiceImpl implements AlcoholService {
 
 	@Override
 	public List<Alcohol> selectAll() {
-		// TODO Auto-generated method stub
 		return alDao.selectAll();
 	}
 
-	
-	
+	@Override
+	public boolean modifyAlcohol(Alcohol alcohol) {
+		return alDao.updateAlcohol(alcohol) == 1;
+	}
+
+	@Override
+	public boolean likeUp(int id) {
+		return alDao.likeUp(id) == 1;
+	}
+
+	@Override
+	public boolean likeDown(int id) {
+		return alDao.likeDown(id) == 1;
+	}
+
 }
