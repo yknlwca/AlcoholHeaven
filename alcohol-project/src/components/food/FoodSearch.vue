@@ -5,8 +5,8 @@
         <select class="form-select" v-model="searchInfo.key">
           <option value="none">전체</option>
           <option value="menu">메뉴</option>
-          <option value="Region">세부 지역</option>
-          <option value="kindOf">주종</option>
+          <option value="region">세부 지역</option>
+          <option value="kindOf">어울리는 술</option>
         </select>
       </div>
       <div class="col-8">
@@ -31,7 +31,7 @@ const searchInfo = ref({
   word: "",
 });
 const searchFoodList = function () {
-  store.searchFoodList(searchInfo.value, route.params.name);
+  store.searchFoodList(searchInfo.value);
 };
 </script>
 

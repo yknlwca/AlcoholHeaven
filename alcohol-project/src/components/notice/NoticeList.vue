@@ -1,15 +1,15 @@
 <template>
-  <br>
+  <br />
   <div class="container my-2">
     <div class="container d-flex justify-content-center">
-      <FriendSearch style="width: 80%" />
+      <NoticeSearch style="width: 60%" />
     </div>
     <br />
     <table class="table text-center p-2">
       <tr>
         <th
           style="
-            width: 5%;
+            width: 20%;
             border-right: 1px solid black;
             border-bottom: 1px solid black;
           "
@@ -18,64 +18,29 @@
         </th>
         <th
           style="
-            width: 15%;
+            width: 60%;
             border-right: 1px solid black;
             border-bottom: 1px solid black;
           "
         >
-          작성자
+          내용
         </th>
-       
-        <th
-          style="
-            width: 30%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          제목
-        </th>
-        <th
-          style="
-            width: 15%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          지역
-        </th>
-        <th
-          style="
-            width: 15%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          좋아하는 술
-        </th>
-        <th style="width: 15%; border-bottom: 1px solid black">좋아요</th>
+
+        <th style="width: 20%; border-bottom: 1px solid black">작성자</th>
       </tr>
-      <tr v-for="friend in currentPageFriendList" :key="friend.id">
-        <td style=" border-right: 1px solid black">
-          {{ friend.id }}
+      <tr v-for="notice in currentPageNoticeList" :key="notice.id">
+        <td style="border-right: 1px solid black">
+          {{ notice.id }}
         </td>
         <td class="p-2" style="border-right: 1px solid black">
-          {{friend.userId }}
+          <RouterLink :to="`/notice/${notice.id}`" class="text-truncate">
+            {{ notice.content }}
+          </RouterLink>
         </td>
         <td style="border-right: 1px solid black">
-          <RouterLink :to="`/friend/${friend.id}`">
-          {{ friend.title }}
-        </RouterLink>
+          {{ notice.userId }}
         </td>
-        <td style="border-right: 1px solid black">
-            {{ friend.region }}
-        </td>
-        <td style="border-right: 1px solid black">
-          {{ friend.kindOf }}
-        </td>
-        <td style="width: 15%">{{ friend.heart }}</td>
       </tr>
-
     </table>
     <nav aria-label="Page navigation">
       <ul class="pagination d-flex justify-content-center">
@@ -113,29 +78,29 @@
 </template>
 
 <script setup>
-import { useFriendStore } from "@/stores/friend";
+import { useNoticeStore } from "@/stores/notice";
 import { computed, onMounted, ref } from "vue";
-import FriendSearch from "@/components/friend/FriendSearch.vue";
+import NoticeSearch from "@/components/notice/NoticeSearch.vue";
 
-const store = useFriendStore();
+const store = useNoticeStore();
 
 onMounted(() => {
-  store.getFriendList();
+  store.getNoticeList();
 });
 
 const perPage = 10;
 const currentPage = ref(1);
 
 const pageCount = computed(() => {
-  return Math.ceil(store.friendList.length / perPage);
+  return Math.ceil(store.noticeList.length / perPage);
 });
 
 const clickPage = function (page) {
   currentPage.value = page;
 };
 
-const currentPageFriendList = computed(() => {
-  return store.friendList.slice(
+const currentPageNoticeList = computed(() => {
+  return store.noticeList.slice(
     (currentPage.value - 1) * perPage,
     currentPage.value * perPage
   );

@@ -68,7 +68,7 @@ DESC alcohol;
 
 
 INSERT INTO friend (userId, title, intro, region, kindOf, img)
-VALUES ("현태씨","이쁜이",true,25,"서울","술 한잔 해요");
+VALUES ("ssafy","저랑 노실 분","서울 27살 남자입니다.","서울","위스키","img");
 
 INSERT INTO food (userId, menu, content, title, region,kindOf, img)
 	VALUES ("ssafy","김치찌개","삼겹살과 묵은지를 넣어서 끓인 김치찌개입니다.","저의 김치찌개를 소개합니다.","역삼동","소주","img");

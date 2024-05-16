@@ -4,9 +4,9 @@
       <div class="col-2">
         <select class="form-select" v-model="searchInfo.key">
           <option value="none">전체</option>
-          <option value="name">이름</option>
+          <option value="userId">아이디</option>
           <option value="region">세부 지역</option>
-          <option value="kindOf">주종</option>
+          <option value="kindOf">좋아하는 술</option>
         </select>
       </div>
       <div class="col-8">
