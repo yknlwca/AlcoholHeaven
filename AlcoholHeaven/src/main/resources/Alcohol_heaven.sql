@@ -62,7 +62,11 @@ CREATE TABLE IF NOT EXISTS `REVIEW` (
     `type` INT NOT NULL
 );
 
+INSERT INTO review (id, writer, content, type)
+VALUES (1, "ssafy", "1위 맛집!!", 2),
+(1, "ssafy", "코드가 잘 맞는 친구", 3);
 
+SELECT * FROM review;
 
 DESC alcohol;
 
