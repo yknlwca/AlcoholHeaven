@@ -19,7 +19,14 @@
           style="height: 150px; width: 150px"
         />
         <div class="card-body">
-          <h5 class="card-title">{{ alcohol.name }}</h5>
+          <RouterLink
+            :to="{
+              name: 'alcohol-detail',
+              params: { name: alcohol.region, id: alcohol.id },
+            }"
+          >
+            <h5 class="card-title">{{ alcohol.name }}</h5>
+          </RouterLink>
           <p class="card-text text-truncate">
             {{ alcohol.content }}
           </p>
@@ -30,6 +37,11 @@
             </li>
             <li class="list-group-item">종류 : {{ alcohol.kindOf }}</li>
             <li class="list-group-item">좋아요 : {{ alcohol.heart }}</li>
+            <i
+              class="bi bi-heart"
+              :class="{ red: like }"
+              @click="clickHeart(alcohol.id)"
+            ></i>
           </ul>
         </div>
       </div>
@@ -69,6 +81,7 @@
       </nav>
     </div>
   </div>
+  <!-- <router-view></router-view> -->
 </template>
 
 <script setup>
@@ -76,6 +89,7 @@ import { useRoute } from "vue-router";
 import { onMounted, ref, watch, computed } from "vue";
 import { useAlcoholStore } from "@/stores/alcohol";
 import ALcoholSearch from "./ALcoholSearch.vue";
+import { active } from "d3";
 const route = useRoute();
 const name = ref(route.params.name);
 const store = useAlcoholStore();
@@ -111,6 +125,21 @@ const currentPageAlcoholList = computed(() => {
     currentPage.value * perPage
   );
 });
+const like = ref(false);
+
+const clickHeart = function (id) {
+  if (like.value) {
+    like.value = false;
+    store.likedown(id);
+  } else {
+    like.value = true;
+    store.likeup(id);
+  }
+};
 </script>
 
-<style scoped></style>
+<style scoped>
+.red {
+  color: red;
+}
+</style>

@@ -1,12 +1,7 @@
-<script setup>
-const handleInputChange = () => {
-  console.log(1);
-};
-</script>
+<script setup></script>
 
 <template>
   <div>
     <h1>홈뷰</h1>
-    <input @change="handleInputChange" />
   </div>
 </template>

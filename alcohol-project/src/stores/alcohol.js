@@ -33,11 +33,29 @@ export const useAlcoholStore = defineStore('alcohol', () => {
       data: alcohol,
     })
     .then(()=>{
-      router.push({name:'alcohol-list'})
+      router.push({name:'alcohol-list',params:alcohol.value.region})
     })
-    .catch(err)=>{
+    .catch((err)=>{
       console.log(err)
-    }
+    })
   }
-  return {alcoholList,getAlcoholList,searchAlcoholList}
+  const likeup = function(id){
+    axios.put(`${REST_ALCOHOL_API}/likeup/${id}`)
+    .then((response)=>{
+      console.log(id)
+    })
+  }
+  const likedown = function(id){
+    axios.put(`${REST_ALCOHOL_API}/likedown/${id}`)
+    .then(()=>{
+      console.log(alcohol.value)
+    })
+  }
+  const update = function(id){
+    axios.put(`${REST_ALCOHOL_API}/update/${id}`,alcohol.value)
+    .then(()=>{
+      router.push({name:'alcohol-list',params:alcohol.value.region})
+    })
+  }
+  return {alcoholList,getAlcoholList,searchAlcoholList,alcohol,createAlcohol,likeup,likedown, update}
 })
