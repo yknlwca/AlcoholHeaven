@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS  `FOOD` (
     `content`    TEXT    NOT NULL,
     `title`    VARCHAR(50)    NOT NULL,
     `region`    VARCHAR(20)    NOT NULL,
+    `kindOf`	VARCHAR(20)	 NOT NULL,
     `img`    TEXT NOT NULL,
     `heart` INT NOT NULL DEFAULT 0 
 );
@@ -69,6 +70,8 @@ DESC alcohol;
 INSERT INTO friend (userId, title, intro, region, kindOf, img)
 VALUES ("현태씨","이쁜이",true,25,"서울","술 한잔 해요");
 
+INSERT INTO food (userId, menu, content, title, region,kindOf, img)
+	VALUES ("ssafy","김치찌개","삼겹살과 묵은지를 넣어서 끓인 김치찌개입니다.","저의 김치찌개를 소개합니다.","역삼동","소주","img");
 
 
 INSERT INTO alcohol (name, detailRegion, kindOf, content, region, weight, img)

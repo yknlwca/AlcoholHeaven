@@ -20,8 +20,8 @@
 </select>
 
 <insert id="insertFood" parameterType="Food">
-	INSERT INTO food (userId, menu, content, title, region, img)
-	VALUES (#{userId}, #{menu}, #{content}, #{title}, #{region}, #{img});
+	INSERT INTO food (userId, menu, content, title, region,kindOf, img)
+	VALUES (#{userId}, #{menu}, #{content}, #{title}, #{region},#{kindOf}, #{img});
 </insert>
 
 
