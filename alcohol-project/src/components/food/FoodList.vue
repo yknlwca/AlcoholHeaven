@@ -27,7 +27,7 @@
         </th>
         <th
           style="
-            width: 15%;
+            width:30%;
             border-right: 1px solid black;
             border-bottom: 1px solid black;
           "
@@ -41,7 +41,7 @@
             border-bottom: 1px solid black;
           "
         >
-          번호
+          어울리는 술
         </th>
 
         <th
@@ -53,29 +53,29 @@
         >
           지역
         </th>
-        <th style="width: 15%; border-bottom: 1px solid black">좋아요</th>
+        <th style="width: 5%; border-bottom: 1px solid black">좋아요</th>
         <!-- 이미지는 디테일에서 -->
       </tr>
       <tr v-for="food in currentPageFoodList" :key="food.id">
-        <td style="width: 5%; border-right: 1px solid black">
+        <td style="border-right: 1px solid black">
           {{ food.id }}
         </td>
-        <td style="width: 15%; border-right: 1px solid black">
+        <td style=" border-right: 1px solid black">
           {{ food.userId }}
         </td>
-        <td class="p-2" style="width: 15%; border-right: 1px solid black">
+        <td class="p-2" style="border-right: 1px solid black">
           <RouterLink :to="`/food/${food.id}`">
             {{ food.title }}
           </RouterLink>
         </td>
-        <td style="width: 15%; border-right: 1px solid black">
+        <td style="border-right: 1px solid black">
           <!-- menu 지우고 kindOf 어울리는 술로 바꿔야 한다 백엔드까지 -->
-          {{ food.menu }}
+          {{ food.kindOf }}
         </td>
-        <td style="width: 15%; border-right: 1px solid black">
+        <td style="border-right: 1px solid black">
           {{ food.region }}
         </td>
-        <td style="width: 15%">
+        <td >
           {{ food.heart }}
         </td>
       </tr>
@@ -145,4 +145,9 @@ const currentPageFoodList = computed(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+a{
+  color: rgb(3, 130, 84);
+  text-decoration: none;
+}
+</style>

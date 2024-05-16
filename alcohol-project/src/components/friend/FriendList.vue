@@ -24,17 +24,9 @@
             border-bottom: 1px solid black;
           "
         >
-          유저아이디
+          작성자
         </th>
-        <th
-          style="
-            width: 15%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          지역
-        </th>
+       
         <th
           style="
             width: 30%;
@@ -51,26 +43,35 @@
             border-bottom: 1px solid black;
           "
         >
+          지역
+        </th>
+        <th
+          style="
+            width: 15%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          "
+        >
           좋아하는 술
         </th>
         <th style="width: 15%; border-bottom: 1px solid black">좋아요</th>
       </tr>
       <tr v-for="friend in currentPageFriendList" :key="friend.id">
-        <td style="width: 5%; border-right: 1px solid black">
+        <td style=" border-right: 1px solid black">
           {{ friend.id }}
         </td>
-        <td class="p-2" style="width: 15%; border-right: 1px solid black">
+        <td class="p-2" style="border-right: 1px solid black">
           {{friend.userId }}
         </td>
-        <td style="width: 15%; border-right: 1px solid black">
-          {{ friend.region }}
-        </td>
-        <td style="width: 5%; border-right: 1px solid black">
+        <td style="border-right: 1px solid black">
           <RouterLink :to="`/friend/${friend.id}`">
           {{ friend.title }}
-          </RouterLink>
+        </RouterLink>
         </td>
-        <td style="width: 15%; border-right: 1px solid black">
+        <td style="border-right: 1px solid black">
+            {{ friend.region }}
+        </td>
+        <td style="border-right: 1px solid black">
           {{ friend.kindOf }}
         </td>
         <td style="width: 15%">{{ friend.heart }}</td>
