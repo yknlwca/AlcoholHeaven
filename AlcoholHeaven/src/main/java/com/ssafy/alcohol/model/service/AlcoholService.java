@@ -8,15 +8,17 @@ import com.ssafy.alcohol.model.dto.SearchCondition;
 public interface AlcoholService {
 	
 	
-	public List<Alcohol> searchBoard(SearchCondition condition);
+	List<Alcohol> searchBoard(SearchCondition condition);
 
-	public Alcohol readAlcohol(String name);
+	Alcohol readAlcohol(int id);
 
-	public boolean writeAlcohol(Alcohol alcohol);
+	boolean writeAlcohol(Alcohol alcohol);
 
-	public boolean removeAlcohol(String name);
+	boolean removeAlcohol(int id);
 
-	public boolean modifyAlcohol(Alcohol alcohol);
+	boolean modifyAlcohol(Alcohol alcohol);
 
-	public List<Alcohol> selectAlcohol(String region);
+	List<Alcohol> selectAlcohol(String region);
+
+	List<Alcohol> selectAll();
 }

@@ -19,7 +19,7 @@ import com.ssafy.alcohol.model.service.FoodService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("/eat")
+@RequestMapping("/api/food")
 public class FoodRestController {
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
@@ -31,7 +31,7 @@ public class FoodRestController {
 		this.fService = fService;
 	}
 	
-	@GetMapping("/food/menu/{menu}")
+	@GetMapping("/menu/{menu}")
 	public ResponseEntity<?> menuCommand(@PathVariable("menu") String menu){
 		List<Food> list = fService.searchMenu(menu);
 		if(list == null || list.size() == 0) {
@@ -40,7 +40,7 @@ public class FoodRestController {
 		return new ResponseEntity<List<Food>>(list, HttpStatus.OK);
 	}
 	
-	@GetMapping("/food/region/{region}")
+	@GetMapping("/region/{region}")
 	public ResponseEntity<?> regionList(@PathVariable("region") String region){
 		List<Food> list = fService.searchRegion(region);
 		if(list == null || list.size() == 0) {
@@ -49,7 +49,18 @@ public class FoodRestController {
 		return new ResponseEntity<List<Food>>(list, HttpStatus.OK);
 	}
 	
-	@GetMapping("/food")
+	@GetMapping("")
+	public ResponseEntity<?> selectAll(){
+		List<Food> list = fService.selectAll();
+		if(list == null || list.size() == 0) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+		
+	
+		return new ResponseEntity<List<Food>>(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/search")
 	public ResponseEntity<?> list(SearchCondition condition){
 		List<Food> list= fService.searchFood(condition);
 		if(list == null || list.size() == 0) {
@@ -58,7 +69,7 @@ public class FoodRestController {
 		return new ResponseEntity<List<Food>>(list, HttpStatus.OK);
 	}
 	
-	@GetMapping("/food/id/{id}")
+	@GetMapping("/detail/{id}")
 	public ResponseEntity<?> detail(@PathVariable("id") int id){
 		Food food = fService.readFood(id);
 		if(food != null) {
@@ -67,13 +78,13 @@ public class FoodRestController {
 		return new ResponseEntity<Food>(HttpStatus.NOT_FOUND);
 	}
 	
-	@PostMapping("/food")
+	@PostMapping("")
 	public ResponseEntity<?> write(@RequestBody Food food){
 		fService.writeFood(food);
 		return new ResponseEntity<Food>(food, HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/food/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id){
 		if(fService.removeFood(id)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);

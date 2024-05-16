@@ -1,28 +1,67 @@
 <template>
-<div class="container">
-    <h2>안주 목록</h2>
+  <div class="container d-flex flex-column align-items-center">
     <hr />
-    <FoodSearch />
-    <table class="table table-hover text-center">
+    <div class="container d-flex justify-content-center">
+      <FoodSearch style="width: 80%" />
+    </div>
+    <br />
+    <table class="table table-hover text-center" style="width: 70%">
       <tr>
-        <th>번호</th>
-        <th>메뉴</th>
-        <th>작성자</th>
-        <th>주종</th>
-        <th>내용</th>
-        <th>지역</th>
+        <th
+          style="
+            width: 15%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          "
+        >
+          번호
+        </th>
+        <th
+          style="
+            width: 15%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          "
+        >
+          작성자
+        </th>
+        <th
+          style="
+            width: 40%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          "
+        >
+          제목
+        </th>
+        <th
+          style="
+            width: 15%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          "
+        >
+          어울리는 술
+        </th>
+        <th style="width: 15%; border-bottom: 1px solid black">지역</th>
         <!-- 이미지는 디테일에서 -->
       </tr>
       <tr v-for="food in currentPageFoodList" :key="food.id">
-        <td>{{ food.id }}</td>
-        <td>{{ food.menu }}</td>
-        <td>
-          <RouterLink :to="`/food/${food.id}`">{{ food.content }}</RouterLink>
+        <td style="width: 15%; border-right: 1px solid black">
+          {{ food.id }}
         </td>
-        <td>{{ food.writer }}</td>
-        <td>{{ food.region }}</td>
-        <td>{{ food.kindOf }}</td>
-
+        <td style="width: 15%; border-right: 1px solid black">
+          {{ food.writer }}
+        </td>
+        <td class="p-2" style="width: 15%; border-right: 1px solid black">
+          <RouterLink :to="`/food/${food.id}`">{{ food.menu }}</RouterLink>
+        </td>
+        <td style="width: 15%; border-right: 1px solid black">
+          {{ food.kindOf }}
+        </td>
+        <td style="width: 15%">
+          {{ food.region }}
+        </td>
       </tr>
     </table>
     <nav aria-label="Page navigation">
@@ -61,36 +100,33 @@
 </template>
 
 <script setup>
-import { useFoodStore } from '@/stores/food';
-import { computed, ref, onMounted } from 'vue';
-import FoodSearch from '@/components/food/FoodSearch.vue';
+import { useFoodStore } from "@/stores/food";
+import { computed, ref, onMounted } from "vue";
+import FoodSearch from "@/components/food/FoodSearch.vue";
 
 const store = useFoodStore();
 
 onMounted(() => {
-    store.getFoodList();
+  store.getFoodList();
 });
 
 const perPage = 10;
 const currentPage = ref(1);
 
 const pageCount = computed(() => {
-    return Math.ceil(store.foodList.length / perPage);
+  return Math.ceil(store.foodList.length / perPage);
 });
 
 const clickPage = function (page) {
-    currentPage.value = page;
+  currentPage.value = page;
 };
-
+console.log(store.foodList);
 const currentPageFoodList = computed(() => {
-    return store.foodList.slice(
-        (currentPage.vlaue - 1) * perPage,
-        currentPage.value * perPage
-    );
+  return store.foodList.slice(
+    (currentPage.value - 1) * perPage,
+    currentPage.value * perPage
+  );
 });
-
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

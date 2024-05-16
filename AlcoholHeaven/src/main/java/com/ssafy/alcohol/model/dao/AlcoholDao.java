@@ -8,16 +8,18 @@ import com.ssafy.alcohol.model.dto.SearchCondition;
 public interface AlcoholDao {
 	
 
-	public List<Alcohol> search(SearchCondition conditon);
+	List<Alcohol> search(SearchCondition conditon);
 	
-	public Alcohol selectOne(String name);
+	Alcohol selectOne(int id);
 	
-	public int insertAlcohol(Alcohol alcohol);
+	int insertAlcohol(Alcohol alcohol);
 	
-	public int deleteAlcohol(String name);
+	int deleteAlcohol(int id);
 	
-	public int updateAlcohol(Alcohol alcohol);
+	int updateAlcohol(Alcohol alcohol);
 
-	public List<Alcohol> selectAlcohol(String region);
+	List<Alcohol> selectAlcohol(String region);
+
+	List<Alcohol> selectAll();
 	
 }

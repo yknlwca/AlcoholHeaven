@@ -31,8 +31,8 @@ const searchInfo = ref({
   word: "",
 });
 const searchAlcoholList = function () {
-    store.searchAlcoholList(searchInfo.value);
-  };
+  store.searchAlcoholList(searchInfo.value);
+};
 </script>
 
 <style scoped></style>

@@ -25,8 +25,8 @@ public class AlcoholServiceImpl implements AlcoholService {
 	}
 
 	@Override
-	public Alcohol readAlcohol(String name) {
-		return alDao.selectOne(name);
+	public Alcohol readAlcohol(int id) {
+		return alDao.selectOne(id);
 	}
 
 	@Override
@@ -35,8 +35,8 @@ public class AlcoholServiceImpl implements AlcoholService {
 	}
 
 	@Override
-	public boolean removeAlcohol(String name) {
-		return alDao.deleteAlcohol(name) == 1;
+	public boolean removeAlcohol(int id) {
+		return alDao.deleteAlcohol(id) == 1;
 	}
 
 	@Override
@@ -48,6 +48,12 @@ public class AlcoholServiceImpl implements AlcoholService {
 	public List<Alcohol> selectAlcohol(String region) {
 		// TODO Auto-generated method stub
 		return alDao.selectAlcohol(region);
+	}
+
+	@Override
+	public List<Alcohol> selectAll() {
+		// TODO Auto-generated method stub
+		return alDao.selectAll();
 	}
 
 	

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="alcohol">
       <div id="map" class="text-center">
-        <h1>{{ name }}</h1>
+        <h1 v-if="name !== null">현재 지역 : {{ name }}</h1>
       </div>
       <router-view></router-view>
     </div>
@@ -90,6 +90,8 @@ function drawMap(target) {
           // console.log(d)
           // console.log(d.target.__data__.properties.name)
           handleRegionClick(d.target.__data__.properties.name); // 클릭 이벤트 핸들러
+          localStorage.setItem("name", d.target.__data__.properties.name);
+          name.value = localStorage.getItem("name");
           router.push({
             name: "alcohol-list",
             params: { name: d.target.__data__.properties.name },
