@@ -2,7 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios';
 
-const REST_FRIEND_API = `http://localhost:8080/with/friend`;
+const REST_FRIEND_API = `http://localhost:8080/api/friend`;
 
 export const useFriendStore = defineStore('friend', () => {
 

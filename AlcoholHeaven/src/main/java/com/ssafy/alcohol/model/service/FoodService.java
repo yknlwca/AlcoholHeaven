@@ -20,4 +20,6 @@ public interface FoodService {
 	public boolean removeFood(int id);
 
 	public boolean modifyFood(Food food);
+
+	public List<Food> selectAll();
 }

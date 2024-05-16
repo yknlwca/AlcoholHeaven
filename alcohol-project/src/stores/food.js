@@ -2,7 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios';
 
-const REST_FOOD_API = `http://localhost:8080/eat/food`;
+const REST_FOOD_API = `http://localhost:8080/api/food`;
 
 export const useFoodStore = defineStore('food', () => {
   const createFood = function (food) {
@@ -23,6 +23,7 @@ export const useFoodStore = defineStore('food', () => {
   const getFoodList = function () {
     axios.get(REST_FOOD_API)
       .then((response) => {
+        console.log(response);
         foodList.value = response.data;
       })
       .catch((error) => {

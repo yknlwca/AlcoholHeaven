@@ -3,31 +3,89 @@
     <h2>술 친구 찾기</h2>
     <hr />
     <div class="container d-flex justify-content-center">
-      <FriendSearch style="width: 80%;" />
+      <FriendSearch style="width: 80%" />
     </div>
-    <br>
-    <table class="table text-center p-2 ">
+    <br />
+    <table class="table text-center p-2">
       <tr>
-        <th style="width: 5%;border-right: 1px solid black;border-bottom: 1px solid black">번호</th>
-        <th style="width: 15%;border-right: 1px solid black;border-bottom: 1px solid black">닉네임</th>
-        <th style="width: 15%;border-right: 1px solid black;border-bottom: 1px solid black">아이디</th>
-        <th style="width: 5%;border-right: 1px solid black;border-bottom: 1px solid black">성별</th>
-        <th style="width: 30%;border-right: 1px solid black;border-bottom: 1px solid black">자기소개</th>
-        <th style="width: 15%;border-right: 1px solid black;border-bottom: 1px solid black">주종</th>
-        <th style="width: 15%;border-bottom: 1px solid black;">지역</th>
+        <th
+          style="
+            width: 5%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          "
+        >
+          번호
+        </th>
+        <th
+          style="
+            width: 15%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          "
+        >
+          닉네임
+        </th>
+        <th
+          style="
+            width: 15%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          "
+        >
+          아이디
+        </th>
+        <th
+          style="
+            width: 5%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          "
+        >
+          성별
+        </th>
+        <th
+          style="
+            width: 30%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          "
+        >
+          자기소개
+        </th>
+        <th
+          style="
+            width: 15%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          "
+        >
+          좋아하는 술
+        </th>
+        <th style="width: 15%; border-bottom: 1px solid black">지역</th>
       </tr>
       <tr v-for="friend in currentPageFriendList" :key="friend.id">
-        <td style="width: 5%;border-right: 1px solid black;">{{ friend.id }}</td>
-        <td class="p-2" style="width: 15%;border-right: 1px solid black;">
+        <td style="width: 5%; border-right: 1px solid black">
+          {{ friend.id }}
+        </td>
+        <td class="p-2" style="width: 15%; border-right: 1px solid black">
           <RouterLink :to="`/friend/${friend.id}`">{{
             friend.name
           }}</RouterLink>
         </td>
-        <td style="width: 15%;border-right: 1px solid black;">{{ friend.userId }}</td>
-        <td style="width: 5%;border-right: 1px solid black;">{{ friend.sex }}</td>
-        <td style="width: 30%;border-right: 1px solid black;">{{ friend.intro }}</td>
-        <td style="width: 15%;border-right: 1px solid black;">{{ friend.kindOf }}</td>
-        <td style="width: 15%;">{{ friend.region }}</td>
+        <td style="width: 15%; border-right: 1px solid black">
+          {{ friend.userId }}
+        </td>
+        <td style="width: 5%; border-right: 1px solid black">
+          {{ friend.sex }}
+        </td>
+        <td style="width: 30%; border-right: 1px solid black">
+          {{ friend.intro }}
+        </td>
+        <td style="width: 15%; border-right: 1px solid black">
+          {{ friend.kindOf }}
+        </td>
+        <td style="width: 15%">{{ friend.region }}</td>
       </tr>
     </table>
     <nav aria-label="Page navigation">

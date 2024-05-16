@@ -21,4 +21,6 @@ public interface FoodDao {
 	public int deleteFood(int id);
 	
 	public int updateFood(Food food);
+
+	public List<Food> selectAll();
 }

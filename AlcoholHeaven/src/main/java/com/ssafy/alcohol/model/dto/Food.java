@@ -13,7 +13,17 @@ public class Food {
 	private String content;
 	private String region;
 	private String file;
-	
+	private String writer;
+	public Food(int id, String menu, String kindOf, String content, String region, String file, String writer) {
+		super();
+		this.id = id;
+		this.menu = menu;
+		this.kindOf = kindOf;
+		this.content = content;
+		this.region = region;
+		this.file = file;
+		this.writer = writer;
+	}
 	public int getId() {
 		return id;
 	}
@@ -50,12 +60,18 @@ public class Food {
 	public void setFile(String file) {
 		this.file = file;
 	}
-	
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 	@Override
 	public String toString() {
 		return "Food [id=" + id + ", menu=" + menu + ", kindOf=" + kindOf + ", content=" + content + ", region="
-				+ region + ", file=" + file + "]";
+				+ region + ", file=" + file + ", writer=" + writer + "]";
 	}
+	
 	
 	
 	

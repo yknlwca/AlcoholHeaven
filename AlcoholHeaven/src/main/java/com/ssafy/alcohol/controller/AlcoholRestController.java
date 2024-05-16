@@ -20,7 +20,7 @@ import com.ssafy.alcohol.model.service.AlcoholService;
 
 
 @RestController
-@RequestMapping("/drink")
+@RequestMapping("/api/alcohol")
 public class AlcoholRestController {
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
@@ -32,17 +32,24 @@ public class AlcoholRestController {
 		this.alService = alService;
 	}
 
-
-	@GetMapping("/alcohol")
-	public ResponseEntity<?> list(@ModelAttribute SearchCondition condition) {
+	@GetMapping("")
+	public ResponseEntity<?> selectAll() {
+		List<Alcohol> list = alService.selectAll();
+		if (list == null || list.size() == 0) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Alcohol>>(list, HttpStatus.OK);
+	}
+	@GetMapping("/search")
+	public ResponseEntity<?> search(@RequestBody SearchCondition condition) {
 		List<Alcohol> list = alService.searchBoard(condition);
 		if (list == null || list.size() == 0) {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Alcohol>>(list, HttpStatus.OK);
 	}
-	@GetMapping("/alcohol/{region}")
-	public ResponseEntity<?> listByRegion(@PathVariable("region") String region) {
+	@GetMapping("/{region}")
+	public ResponseEntity<?> selectByRegion(@PathVariable("region") String region) {
 		List<Alcohol> alcohols = alService.selectAlcohol(region);
 		if (alcohols != null) {
 			return new ResponseEntity<>(alcohols, HttpStatus.OK);
@@ -50,24 +57,24 @@ public class AlcoholRestController {
 		return new ResponseEntity<Alcohol>(HttpStatus.NOT_FOUND);
 	}
 
-	@GetMapping("/alcohol/detail/{name}")
-	public ResponseEntity<Alcohol> detail(@PathVariable("name") String name) {
-		Alcohol alcohol = alService.readAlcohol(name);
+	@GetMapping("/detail/{id}")
+	public ResponseEntity<Alcohol> detail(@PathVariable("id") int id) {
+		Alcohol alcohol = alService.readAlcohol(id);
 		if (alcohol != null) {
 			return new ResponseEntity<Alcohol>(alcohol, HttpStatus.OK);
 		}
 		return new ResponseEntity<Alcohol>(HttpStatus.NOT_FOUND);
 	}
 
-	@PostMapping("/alcohol")
+	@PostMapping("")
 	public ResponseEntity<?> write(@RequestBody Alcohol alcohol) {
 		alService.writeAlcohol(alcohol);
 		return new ResponseEntity<Alcohol>(alcohol, HttpStatus.CREATED);
 	}
 
-	@DeleteMapping("/alcohol/{name}")
-	public ResponseEntity<?> delete(@PathVariable("name") String name) {
-		if (alService.removeAlcohol(name)) {
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable("id") int id) {
+		if (alService.removeAlcohol(id)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);

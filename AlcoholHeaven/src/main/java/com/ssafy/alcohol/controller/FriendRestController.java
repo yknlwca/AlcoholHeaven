@@ -19,7 +19,7 @@ import com.ssafy.alcohol.model.service.FriendService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("/with")
+@RequestMapping("/api/friend")
 public class FriendRestController {
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
@@ -31,7 +31,7 @@ public class FriendRestController {
 		this.fService = fService;
 	}
 
-	@GetMapping("/friend/region/{region}")
+	@GetMapping("/region/{region}")
 	public ResponseEntity<?> regionSearch(@PathVariable("region") String region) {
 		List<Friend> list = fService.searchRegion(region);
 		if (list == null || list.size() == 0) {
@@ -40,7 +40,7 @@ public class FriendRestController {
 		return new ResponseEntity<List<Friend>>(list, HttpStatus.OK);
 	}
 
-	@GetMapping("/friend/sex/{sex}")
+	@GetMapping("/sex/{sex}")
 	public ResponseEntity<?> sexByGender(@PathVariable boolean sex) {
 		List<Friend> list = fService.searchSex(sex);
 		if (list == null || list.size() == 0) {
@@ -49,7 +49,7 @@ public class FriendRestController {
 		return new ResponseEntity<List<Friend>>(list, HttpStatus.OK);
 	}
 
-	@GetMapping("/friend")
+	@GetMapping("")
 	public ResponseEntity<?> list(SearchCondition condtion) {
 		List<Friend> list = fService.searchFriend(condtion);
 		if (list == null || list.size() == 0) {
@@ -58,7 +58,7 @@ public class FriendRestController {
 		return new ResponseEntity<List<Friend>>(list, HttpStatus.OK);
 	}
 
-	@GetMapping("/friend/id/{id}")
+	@GetMapping("/id/{id}")
 	public ResponseEntity<?> detail(@PathVariable("id") int id) {
 		Friend friend = fService.readFriend(id);
 		if (friend != null) {
@@ -67,13 +67,13 @@ public class FriendRestController {
 		return new ResponseEntity<Friend>(HttpStatus.NOT_FOUND);
 	}
 
-	@PostMapping("/friend")
+	@PostMapping("")
 	public ResponseEntity<?> write(@RequestBody Friend friend) {
 		fService.writeFriend(friend);
 		return new ResponseEntity<Friend>(friend, HttpStatus.CREATED);
 	}
 
-	@DeleteMapping("/friend/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id) {
 		if (fService.removeFriend(id)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);

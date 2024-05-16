@@ -54,4 +54,10 @@ public class FoodServiceImpl implements FoodService {
 		return fDao.searchMenu(menu);
 	}
 
+	@Override
+	public List<Food> selectAll() {
+		// TODO Auto-generated method stub
+		return fDao.selectAll();
+	}
+
 }

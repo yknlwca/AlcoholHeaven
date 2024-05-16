@@ -9,6 +9,10 @@
 	</if>
 </select>
 
+<select id="selectAll" resultType= "Food">
+	SELECT * FROM food
+</select>
+
 <!-- 지역 / 메뉴 / 어울리는 술 -->
 
 <select id="selectOne" resultType="Food" parameterType="int">

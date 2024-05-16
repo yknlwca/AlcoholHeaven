@@ -1,9 +1,11 @@
 <template>
-  <div class="container"
-  style="padding-top: 15px;">
-    <ALcoholSearch />
+  <div
+    class="container d-flex flex-column align-items-center"
+    style="padding-top: 15px"
+  >
+    <ALcoholSearch style="width: 37rem" />
     <br />
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex" style="width: 38rem">
       <div
         class="card mx-2 my-2 col-12 col-sm-6 col-md-3"
         v-for="alcohol in currentPageAlcoholList"
@@ -110,6 +112,4 @@ const currentPageAlcoholList = computed(() => {
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

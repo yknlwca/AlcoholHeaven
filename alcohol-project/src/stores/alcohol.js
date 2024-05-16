@@ -4,7 +4,7 @@ import router from '@/router'
 import axios from 'axios'
 
 export const useAlcoholStore = defineStore('alcohol', () => {
-  const REST_ALCOHOL_API = 'http://localhost:8080/drink/alcohol'
+  const REST_ALCOHOL_API = 'http://localhost:8080/api/alcohol'
   const alcoholList = ref([])
   const getAlcoholList = function(region){
     axios.get(`${REST_ALCOHOL_API}/${region}`)
@@ -13,7 +13,7 @@ export const useAlcoholStore = defineStore('alcohol', () => {
     })
   }
   const searchAlcoholList= function(condition){
-    axios.get(REST_ALCOHOL_API,{
+    axios.get(`${REST_ALCOHOL_API}/search`,{
       params: condition
     }).then((response)=>{
       alcoholList.value = response.data.filter((alcohol)=>alcohol.region===localStorage.getItem('name'))
