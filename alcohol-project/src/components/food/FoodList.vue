@@ -32,7 +32,7 @@
             border-bottom: 1px solid black;
           "
         >
-          메뉴
+          제목
         </th>
         <th
           style="
@@ -41,7 +41,7 @@
             border-bottom: 1px solid black;
           "
         >
-          제목
+          번호
         </th>
 
         <th
@@ -64,12 +64,13 @@
           {{ food.userId }}
         </td>
         <td class="p-2" style="width: 15%; border-right: 1px solid black">
-          {{ food.menu }}
+          <RouterLink :to="`/food/${food.id}`">
+            {{ food.title }}
+          </RouterLink>
         </td>
         <td style="width: 15%; border-right: 1px solid black">
-          <RouterLink :to="`/food/${food.id}`">
-          {{ food.title }}
-          </RouterLink>
+          <!-- menu 지우고 kindOf 어울리는 술로 바꿔야 한다 백엔드까지 -->
+          {{ food.menu }}
         </td>
         <td style="width: 15%; border-right: 1px solid black">
           {{ food.region }}
