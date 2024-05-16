@@ -22,4 +22,8 @@ public interface FoodService {
 	public boolean modifyFood(Food food);
 
 	public List<Food> selectAll();
+	
+	public boolean likeUp(int id);
+	
+	public boolean likeDown(int id);
 }

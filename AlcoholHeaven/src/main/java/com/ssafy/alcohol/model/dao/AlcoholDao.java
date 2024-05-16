@@ -22,4 +22,8 @@ public interface AlcoholDao {
 
 	List<Alcohol> selectAll();
 	
+	int likeUp(int id);
+	
+	int likeDown(int id);
+	
 }

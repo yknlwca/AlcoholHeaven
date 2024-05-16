@@ -21,4 +21,8 @@ public interface AlcoholService {
 	List<Alcohol> selectAlcohol(String region);
 
 	List<Alcohol> selectAll();
+	
+	boolean likeUp(int id);
+	
+	boolean likeDown(int id);
 }

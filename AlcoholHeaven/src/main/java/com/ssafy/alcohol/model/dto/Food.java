@@ -7,23 +7,15 @@ public class Food {
 //	region VARCHAR(20) NOT NULL,
 //	file TEXT
 	private int id;
-
+	private String userId;
 	private String menu;
-	private String kindOf;
 	private String content;
+	private String title;
 	private String region;
-	private String file;
-	private String writer;
-	public Food(int id, String menu, String kindOf, String content, String region, String file, String writer) {
-		super();
-		this.id = id;
-		this.menu = menu;
-		this.kindOf = kindOf;
-		this.content = content;
-		this.region = region;
-		this.file = file;
-		this.writer = writer;
-	}
+	private String img;
+	private String heart;
+	
+
 	public int getId() {
 		return id;
 	}
@@ -36,12 +28,7 @@ public class Food {
 	public void setMenu(String menu) {
 		this.menu = menu;
 	}
-	public String getKindOf() {
-		return kindOf;
-	}
-	public void setKindOf(String kindOf) {
-		this.kindOf = kindOf;
-	}
+
 	public String getContent() {
 		return content;
 	}
@@ -54,25 +41,53 @@ public class Food {
 	public void setRegion(String region) {
 		this.region = region;
 	}
-	public String getFile() {
-		return file;
+	public String getUserId() {
+		return userId;
 	}
-	public void setFile(String file) {
-		this.file = file;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getWriter() {
-		return writer;
+	public String getTitle() {
+		return title;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setTitle(String title) {
+		this.title = title;
 	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	
+	public String getHeart() {
+		return heart;
+	}
+	public void setHeart(String heart) {
+		this.heart = heart;
+	}
+	public Food(int id, String userId, String menu, String content, String title, String region, String img,
+			String heart) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.menu = menu;
+		this.content = content;
+		this.title = title;
+		this.region = region;
+		this.img = img;
+		this.heart = heart;
+	}
+	
+	public Food() {
+		super();
+	}
+	
 	@Override
 	public String toString() {
-		return "Food [id=" + id + ", menu=" + menu + ", kindOf=" + kindOf + ", content=" + content + ", region="
-				+ region + ", file=" + file + ", writer=" + writer + "]";
+		return "Food [id=" + id + ", userId=" + userId + ", menu=" + menu + ", content=" + content + ", title=" + title
+				+ ", region=" + region + ", img=" + img + ", like=" + heart + "]";
 	}
-	
-	
-	
 	
 }

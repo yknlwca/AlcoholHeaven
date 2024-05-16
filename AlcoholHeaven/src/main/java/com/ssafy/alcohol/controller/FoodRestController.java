@@ -7,16 +7,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.alcohol.model.dto.Food;
 import com.ssafy.alcohol.model.dto.SearchCondition;
 import com.ssafy.alcohol.model.service.FoodService;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/api/food")
@@ -31,24 +32,6 @@ public class FoodRestController {
 		this.fService = fService;
 	}
 	
-	@GetMapping("/menu/{menu}")
-	public ResponseEntity<?> menuCommand(@PathVariable("menu") String menu){
-		List<Food> list = fService.searchMenu(menu);
-		if(list == null || list.size() == 0) {
-			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<List<Food>>(list, HttpStatus.OK);
-	}
-	
-	@GetMapping("/region/{region}")
-	public ResponseEntity<?> regionList(@PathVariable("region") String region){
-		List<Food> list = fService.searchRegion(region);
-		if(list == null || list.size() == 0) {
-			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<List<Food>>(list, HttpStatus.OK);
-	}
-	
 	@GetMapping("")
 	public ResponseEntity<?> selectAll(){
 		List<Food> list = fService.selectAll();
@@ -61,7 +44,7 @@ public class FoodRestController {
 	}
 	
 	@GetMapping("/search")
-	public ResponseEntity<?> list(SearchCondition condition){
+	public ResponseEntity<?> list(@ModelAttribute SearchCondition condition){
 		List<Food> list= fService.searchFood(condition);
 		if(list == null || list.size() == 0) {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
@@ -84,10 +67,35 @@ public class FoodRestController {
 		return new ResponseEntity<Food>(food, HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/detail/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id){
 		if(fService.removeFood(id)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}
+		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody Food food){
+		food.setId(id);
+		if(fService.modifyFood(food)) {
+			return new ResponseEntity<Food>(food, HttpStatus.OK);
+		}
+		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
+	}
+	
+	@PutMapping("/likeup/{id}")
+	public ResponseEntity<?> likeUp(@PathVariable("id") int id){
+		if(fService.likeUp(id)) {
+			return new ResponseEntity<Integer>(id, HttpStatus.OK);
+		}
+		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
+	}
+	
+	@PutMapping("/likedown/{id}")
+	public ResponseEntity<?> likeDown(@PathVariable("id") int id){
+		if(fService.likeDown(id)) {
+			return new ResponseEntity<Integer>(id, HttpStatus.OK);
 		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
 	}
