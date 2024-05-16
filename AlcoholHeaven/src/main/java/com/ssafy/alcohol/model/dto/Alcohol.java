@@ -6,13 +6,48 @@ public class Alcohol {
 //	kindOf VARCHAR(20),
 //	content TEXT,
 //	region VARCHAR(20) NOT NULL
-	
+	private int id;
 	private String name;
 	private String detailRegion;
 	private String kindOf;
 	private String content;
 	private String region;
+	private float weight;
+	private String img;
+	private int heart;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public float getWeight() {
+		return weight;
+	}
+
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public int getHeart() {
+		return heart;
+	}
+
+	public void setHeart(int heart) {
+		this.heart = heart;
+	}
+
 	public Alcohol() {
 		
 	}
@@ -59,9 +94,24 @@ public class Alcohol {
 
 	@Override
 	public String toString() {
-		return "Alcohol [name=" + name + ", detailRegion=" + detailRegion + ", kindOf=" + kindOf + ", content="
-				+ content + ", region=" + region + "]";
+		return "Alcohol [id=" + id + ", name=" + name + ", detailRegion=" + detailRegion + ", kindOf=" + kindOf
+				+ ", content=" + content + ", region=" + region + ", weight=" + weight + ", img=" + img + ", like="
+				+ heart + "]";
 	}
-	
+
+	public Alcohol(int id, String name, String detailRegion, String kindOf, String content, String region, float weight,
+			String img, int heart) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.detailRegion = detailRegion;
+		this.kindOf = kindOf;
+		this.content = content;
+		this.region = region;
+		this.weight = weight;
+		this.img = img;
+		this.heart = heart;
+	}
+
 	
 }

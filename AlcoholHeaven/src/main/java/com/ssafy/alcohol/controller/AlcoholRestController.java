@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,14 +42,16 @@ public class AlcoholRestController {
 		}
 		return new ResponseEntity<List<Alcohol>>(list, HttpStatus.OK);
 	}
+	
 	@GetMapping("/search")
-	public ResponseEntity<?> search(@RequestBody SearchCondition condition) {
+	public ResponseEntity<?> search(@ModelAttribute SearchCondition condition) {
 		List<Alcohol> list = alService.searchBoard(condition);
 		if (list == null || list.size() == 0) {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Alcohol>>(list, HttpStatus.OK);
 	}
+	
 	@GetMapping("/{region}")
 	public ResponseEntity<?> selectByRegion(@PathVariable("region") String region) {
 		List<Alcohol> alcohols = alService.selectAlcohol(region);
@@ -72,10 +76,36 @@ public class AlcoholRestController {
 		return new ResponseEntity<Alcohol>(alcohol, HttpStatus.CREATED);
 	}
 
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id) {
 		if (alService.removeAlcohol(id)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}
+		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody Alcohol al){
+		al.setId(id);
+		if(alService.modifyAlcohol(al)) {
+			return new ResponseEntity<Alcohol>(al, HttpStatus.OK);
+		}
+		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
+	}
+	
+	@PutMapping("/likeup/{id}")
+	public ResponseEntity<?> likeUp(@PathVariable("id") int id){
+		if(alService.likeUp(id)) {
+			return new ResponseEntity<Integer>(id, HttpStatus.OK);
+		}
+		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
+	}
+	
+	@PutMapping("/likedown/{id}")
+	public ResponseEntity<?> likeDown(@PathVariable("id") int id){
+		if(alService.likeDown(id)) {
+			return new ResponseEntity<Integer>(id, HttpStatus.OK);
 		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
 	}

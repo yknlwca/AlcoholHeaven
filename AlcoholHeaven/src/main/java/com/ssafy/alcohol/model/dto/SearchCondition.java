@@ -7,6 +7,14 @@ public class SearchCondition {
 
 	public SearchCondition() {
 	}
+	
+
+	public SearchCondition(String key, String word) {
+		super();
+		this.key = key;
+		this.word = word;
+	}
+
 
 	public String getKey() {
 		return key;

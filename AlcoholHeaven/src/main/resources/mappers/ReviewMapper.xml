@@ -8,8 +8,8 @@
 		AND type = #{type}
 	</select>
 	<insert id="write" parameterType="Review">
-		INSERT INTO review (id, writer, content)
-		VALUES(#{id}, #{writer}, #{content})
+		INSERT INTO review (id, writer, content, type)
+		VALUES(#{id}, #{writer}, #{content}, #{type})
 	</insert>
 	<delete id="delete" parameterType="int">
 		DELETE FROM review

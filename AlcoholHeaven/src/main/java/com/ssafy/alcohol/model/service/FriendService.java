@@ -7,10 +7,9 @@ import com.ssafy.alcohol.model.dto.SearchCondition;
 
 public interface FriendService {
 
-	
-	public List<Friend> searchRegion(String region);
 
-	public List<Friend> searchSex(boolean sex);
+
+	public List<Friend> selectAll();
 	
 	public List<Friend> searchFriend(SearchCondition condition);
 
@@ -22,4 +21,8 @@ public interface FriendService {
 
 	public boolean modifyFriend(Friend friend);
 
+	public boolean likeUp(int id);
+	
+	public boolean likeDown(int id);
+	
 }

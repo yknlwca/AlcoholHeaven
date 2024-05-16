@@ -8,11 +8,8 @@ import com.ssafy.alcohol.model.dto.SearchCondition;
 public interface FriendDao {
 	
 //	<!-- 성별 / 지역  -->
+	public List<Friend> selectAll();
 	
-	public List<Friend> searchRegion(String region);
-
-	public List<Friend> searchSex(boolean sex);
-
 	public List<Friend> search(SearchCondition condition);
 	
 	public Friend selectOne(int id);
@@ -22,5 +19,9 @@ public interface FriendDao {
 	public int deleteFriend(int id);
 	
 	public int updateFriend(Friend friend);
+	
+	public int likeUp(int id);
+	
+	public int likeDown(int id);
 	
 }
