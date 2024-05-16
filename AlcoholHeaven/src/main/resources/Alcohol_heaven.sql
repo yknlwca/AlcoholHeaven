@@ -1,63 +1,63 @@
+DROP DATABASE IF EXISTS alcohol_heaven;
 CREATE DATABASE IF NOT EXISTS alcohol_heaven;
 
 USE alcohol_heaven;
 
 CREATE TABLE IF NOT EXISTS `ALCOHOL` (
-	`id`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	`name`	VARCHAR(20)	NOT NULL,
-	`detailRegion`	VARCHAR(20)	NOT NULL,
-	`kindOf`	VARCHAR(20)	NOT NULL,
-	`content`	TEXT NOT NULL,
-	`region`	VARCHAR(20) NOT	NULL,
-	`weight`	FLOAT NOT NULL,
-	`img`	TEXT NOT NULL,
-    `like` INT NOT NULL DEFAULT 0 
+    `id`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name`    VARCHAR(20)    NOT NULL,
+    `detailRegion`    VARCHAR(20)    NOT NULL,
+    `kindOf`    VARCHAR(20)    NOT NULL,
+    `content`    TEXT NOT NULL,
+    `region`    VARCHAR(20) NOT    NULL,
+    `weight`    FLOAT NOT NULL,
+    `img`    TEXT NOT NULL,
+    `heart` INT NOT NULL DEFAULT 0 
 );
-
 CREATE TABLE IF NOT EXISTS `friend` (
-	`id`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	`userId`	VARCHAR(20)	NOT NULL,
-	`title`	VARCHAR(20)	NOT NULL,
-	`intro`	TEXT	NOT NULL,
-	`region`	VARCHAR(20) NOT NULL,
-	`kindOf`	VARCHAR(20)	NOT NULL,
-	`img`	TEXT NOT NULL,
-    `like` INT NOT NULL DEFAULT 0 
+    `id`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `userId`    VARCHAR(20)    NOT NULL,
+    `title`    VARCHAR(20)    NOT NULL,
+    `intro`    TEXT    NOT NULL,
+    `region`    VARCHAR(20) NOT NULL,
+    `kindOf`    VARCHAR(20)    NOT NULL,
+    `img`    TEXT NOT NULL,
+    `heart` INT NOT NULL DEFAULT 0 
 );
 
 CREATE TABLE IF NOT EXISTS  `FOOD` (
-	`id`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	`userId`	VARCHAR(20)	NOT NULL,
-    `menu`	VARCHAR(20)	NOT NULL,
-	`content`	TEXT	NOT NULL,
-	`title`	VARCHAR(50)	NOT NULL,
-	`region`	VARCHAR(20)	NOT NULL,
-	`img`	TEXT NOT NULL,
-    `like` INT NOT NULL DEFAULT 0 
+    `id`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `userId`    VARCHAR(20)    NOT NULL,
+    `menu`    VARCHAR(20)    NOT NULL,
+    `content`    TEXT    NOT NULL,
+    `title`    VARCHAR(50)    NOT NULL,
+    `region`    VARCHAR(20)    NOT NULL,
+    `img`    TEXT NOT NULL,
+    `heart` INT NOT NULL DEFAULT 0 
 );
 
 CREATE TABLE IF NOT EXISTS  `notice` (
-	`id`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	`userId`	VARCHAR(20)	NOT NULL,
-	`content`	VARCHAR(20)	NOT NULL,
-	`title`	VARCHAR(20)	NOT NULL,
-	`password`	INT(4)	NOT NULL
+    `id`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `userId`    VARCHAR(20)    NOT NULL,
+    `content`    VARCHAR(20)    NOT NULL,
+    `title`    VARCHAR(20)    NOT NULL,
+    `password`    INT(4)    NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS  `USER` (
-	`userId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	`password`	VARCHAR(20)	NOT NULL,
-	`name`	VARCHAR(20)	NOT NULL,
-	`idNumber`	INT(13)	NOT NULL,
-	`email`	VARCHAR(50)	NOT NULL,
-	`phoneNumber`	INT(11)	NOT NULL
+    `userId`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `password`    VARCHAR(20)    NOT NULL,
+    `name`    VARCHAR(20)    NOT NULL,
+    `idNumber`    INT(13)    NOT NULL,
+    `email`    VARCHAR(50)    NOT NULL,
+    `phoneNumber`    INT(11)    NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `REVIEW` (
-	`reviewId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	`id`	INT	NOT NULL,
-	`writer`	VARCHAR(20)	NOT NULL,
-	`content`	TEXT NOT NULL,
+    `reviewId`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id`    INT    NOT NULL,
+    `writer`    VARCHAR(20)    NOT NULL,
+    `content`    TEXT NOT NULL,
     `type` INT NOT NULL
 );
 
