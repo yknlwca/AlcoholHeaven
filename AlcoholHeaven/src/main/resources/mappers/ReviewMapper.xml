@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.alcohol.model.dao.ReviewDao">
+	
+	<select id="selectReview" resultType = "Review" parameterType="int">
+		SELECT * FROM review
+		WHERE id = #{id}
+		AND type = #{type}
+	</select>
+	<insert id="write" parameterType="Review">
+		INSERT INTO review (id, writer, content)
+		VALUES(#{id}, #{writer}, #{content})
+	</insert>
+	<delete id="delete" parameterType="int">
+		DELETE FROM review
+		WHERE reviewId = #{reviewId}
+	</delete>
+</mapper>
