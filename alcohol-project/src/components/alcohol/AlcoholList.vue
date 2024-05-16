@@ -29,6 +29,7 @@
               세부 지역 : {{ alcohol.detailRegion }}
             </li>
             <li class="list-group-item">종류 : {{ alcohol.kindOf }}</li>
+            <li class="list-group-item">좋아요 : {{ alcohol.heart }}</li>
           </ul>
         </div>
       </div>
