@@ -9,7 +9,7 @@
       <tr>
         <th
           style="
-            width: 15%;
+            width: 5%;
             border-right: 1px solid black;
             border-bottom: 1px solid black;
           "
@@ -27,12 +27,12 @@
         </th>
         <th
           style="
-            width: 40%;
+            width: 15%;
             border-right: 1px solid black;
             border-bottom: 1px solid black;
           "
         >
-          제목
+          메뉴
         </th>
         <th
           style="
@@ -41,26 +41,41 @@
             border-bottom: 1px solid black;
           "
         >
-          어울리는 술
+          제목
         </th>
-        <th style="width: 15%; border-bottom: 1px solid black">지역</th>
+
+        <th
+          style="
+            width: 15%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          "
+        >
+          지역
+        </th>
+        <th style="width: 15%; border-bottom: 1px solid black">좋아요</th>
         <!-- 이미지는 디테일에서 -->
       </tr>
       <tr v-for="food in currentPageFoodList" :key="food.id">
-        <td style="width: 15%; border-right: 1px solid black">
+        <td style="width: 5%; border-right: 1px solid black">
           {{ food.id }}
         </td>
         <td style="width: 15%; border-right: 1px solid black">
-          {{ food.writer }}
+          {{ food.userId }}
         </td>
         <td class="p-2" style="width: 15%; border-right: 1px solid black">
-          <RouterLink :to="`/food/${food.id}`">{{ food.menu }}</RouterLink>
+          {{ food.menu }}
         </td>
         <td style="width: 15%; border-right: 1px solid black">
-          {{ food.kindOf }}
+          <RouterLink :to="`/food/${food.id}`">
+          {{ food.title }}
+          </RouterLink>
+        </td>
+        <td style="width: 15%; border-right: 1px solid black">
+          {{ food.region }}
         </td>
         <td style="width: 15%">
-          {{ food.region }}
+          {{ food.heart }}
         </td>
       </tr>
     </table>

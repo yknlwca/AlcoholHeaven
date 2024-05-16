@@ -24,7 +24,7 @@
             border-bottom: 1px solid black;
           "
         >
-          닉네임
+          유저아이디
         </th>
         <th
           style="
@@ -33,16 +33,7 @@
             border-bottom: 1px solid black;
           "
         >
-          아이디
-        </th>
-        <th
-          style="
-            width: 5%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          성별
+          지역
         </th>
         <th
           style="
@@ -51,7 +42,7 @@
             border-bottom: 1px solid black;
           "
         >
-          자기소개
+          제목
         </th>
         <th
           style="
@@ -62,31 +53,29 @@
         >
           좋아하는 술
         </th>
-        <th style="width: 15%; border-bottom: 1px solid black">지역</th>
+        <th style="width: 15%; border-bottom: 1px solid black">좋아요</th>
       </tr>
       <tr v-for="friend in currentPageFriendList" :key="friend.id">
         <td style="width: 5%; border-right: 1px solid black">
           {{ friend.id }}
         </td>
         <td class="p-2" style="width: 15%; border-right: 1px solid black">
-          <RouterLink :to="`/friend/${friend.id}`">{{
-            friend.name
-          }}</RouterLink>
+          {{friend.userId }}
         </td>
         <td style="width: 15%; border-right: 1px solid black">
-          {{ friend.userId }}
+          {{ friend.region }}
         </td>
         <td style="width: 5%; border-right: 1px solid black">
-          {{ friend.sex }}
-        </td>
-        <td style="width: 30%; border-right: 1px solid black">
-          {{ friend.intro }}
+          <RouterLink :to="`/friend/${friend.id}`">
+          {{ friend.title }}
+          </RouterLink>
         </td>
         <td style="width: 15%; border-right: 1px solid black">
           {{ friend.kindOf }}
         </td>
-        <td style="width: 15%">{{ friend.region }}</td>
+        <td style="width: 15%">{{ friend.heart }}</td>
       </tr>
+
     </table>
     <nav aria-label="Page navigation">
       <ul class="pagination d-flex justify-content-center">

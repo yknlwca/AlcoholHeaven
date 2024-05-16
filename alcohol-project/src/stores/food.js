@@ -44,7 +44,7 @@ export const useFoodStore = defineStore('food', () => {
 
   const getFood = function (id) {
     // 경로 정리 필요
-    axios.get(REST_FOOD_API + "/id/" + `${id}`)
+    axios.get(REST_FOOD_API + "/detail/" + `${id}`)
       .then((response) => {
         food.value = response.data;
       })
