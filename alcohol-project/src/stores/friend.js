@@ -32,7 +32,7 @@ export const useFriendStore = defineStore('friend', () => {
 
   const getFriend = function (id) {
     // 경로 정리 필요
-    axios.get(REST_FRIEND_API + "/id/" + `${id}`)
+    axios.get(REST_FRIEND_API + "/detail/" + `${id}`)
       .then((response) => {
         friend.value = response.data;
       })
