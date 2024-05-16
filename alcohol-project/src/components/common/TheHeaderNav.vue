@@ -4,6 +4,7 @@
       ><img src="@/assets/img/알코올천국로고_최종.png" alt="알코올천국입니다!"
     /></RouterLink>
   </div>
+  <!--로그인유저가 null이면 안뜨게 할것임-->
   <nav>
     <div :class="alcohol">
       <RouterLink to="/alcohol">지역별 술 찾기</RouterLink>
@@ -15,7 +16,7 @@
       <RouterLink :to="{ name: 'friendList' }">친구 찾기</RouterLink>
     </div>
     <div :class="notice">
-      <RouterLink :to="{ name: 'notice' }">공지사항</RouterLink>
+      <RouterLink :to="{ name: 'noticeList' }">공지사항</RouterLink>
     </div>
   </nav>
 </template>

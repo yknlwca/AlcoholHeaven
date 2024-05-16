@@ -7,6 +7,12 @@
 	<select id="detail" resultType="Notice" parameterType="int">
 		SELECT * FROM notice WHERE id = #{id}
 	</select>
+	<select id="search" resultType="Notice" parameterType="SearchCondition">
+		SELECT * FROM notice 
+		<if test="key!='none'">
+			WHERE ${key} like concat('%',#{word},'%')
+		</if>
+	</select>
 	<insert id="write" parameterType="Notice">
 		INSERT INTO notice (userId, content, title, password)
 		VALUES (#{userId}, #{content}, #{title}, #{password})
