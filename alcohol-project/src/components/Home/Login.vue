@@ -33,26 +33,22 @@ const id = ref('');
 const password = ref('');
 const signIn = ref(false);
 
+
 const login = async () => {
   try {
-    const user = await store.getUser(id.value);
-    if (user) {
-      if (user.password === password.value) {
-        store.setSignIn(true);
-        alert('로그인 성공');
-        console.log('로그인 성공:', signIn.value);
-        router.push({ name: 'alcohol' });
-      } else {
-        alert('비밀번호가 틀렸습니다.');
-      }
-    } else {
-      alert('사용자 ID가 존재하지 않습니다.');
-    }
+    const userCredentials = { id: id.value, password: password.value };
+    await store.login(userCredentials);
+    router.push({ name: 'alcohol' });
   } catch (error) {
-    console.error('로그인 중 오류 발생:', error);
-    alert('로그인 중 오류가 발생했습니다.');
+    if (error.message === 'ID or password') {
+      alert('아이디 또는 비밀번호가 잘못되었습니다.');
+    } else {
+      console.error('로그인 중 오류 발생:', error);
+      alert('로그인 중 오류가 발생했습니다.');
+    }
   }
 };
+
 
 onMounted(() => {
   store.setSignIn(sessionStorage.getItem('signIn') === 'true');
