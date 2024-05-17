@@ -22,6 +22,7 @@
           <button
               class="btn btn-outline-success"
               @click="deleteReview(review)"
+              v-if="loginUser.id === review.writer"
             >
               삭제
             </button>
@@ -35,7 +36,7 @@
         <form @submit.prevent="createReview">
           <div>
             <label for="writer">작성자</label>
-            <input class="form-control" v-model="newReview.writer" required />
+            <input class="form-control" :value="loginUser.id" readonly/>
           </div>
           <br />
           <div>
@@ -67,6 +68,8 @@ onMounted(() => {
   console.log(props.reviewType.id);
   console.log(props.reviewType.type);
 });
+//현재 로그인한 유저
+const loginUser = ref(JSON.parse(sessionStorage.getItem("loginUser")))
 // 리뷰
 const deleteReview = (review) => {
   store.deleteReview(review);
@@ -77,13 +80,13 @@ const isModalOpen = ref(false);
 
 const newReview = ref({
   id: props.reviewType.id,
-  writer: "",
+  writer: loginUser.value.id,
   content: "",
   type: props.reviewType.type,
 });
 
 const createReview = () => {
-  console.log("잘되나요", newReview.value);
+  // console.log("잘되나요", newReview.value);/
   store.createReview(newReview.value);
   newReview.value.writer = "";
   newReview.value.content = "";
@@ -91,6 +94,7 @@ const createReview = () => {
 };
 
 const openModal = () => {
+  // console.log(loginUser.value.id)
   isModalOpen.value = true;
 };
 

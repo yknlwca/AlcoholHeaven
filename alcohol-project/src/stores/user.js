@@ -69,7 +69,7 @@ export const useUserstore = defineStore('user', () => {
       const response = await axios.post(`${REST_USER_API}/login`, userInfo);
       user.value = response.data;
       setSignIn(true);
-      sessionStorage.setItem('user', JSON.stringify(response.data));
+      sessionStorage.setItem('loginUser', JSON.stringify(response.data));
       return user.value;
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -84,7 +84,7 @@ export const useUserstore = defineStore('user', () => {
     const storedSignIn = sessionStorage.getItem('signIn');
     if (storedSignIn === 'true') {
       signIn.value = true;
-      user.value = JSON.parse(sessionStorage.getItem('user'));
+      user.value = JSON.parse(sessionStorage.getItem('loginUser'));
     }
   }
 
@@ -92,7 +92,7 @@ export const useUserstore = defineStore('user', () => {
     signIn.value = false;
     user.value = {};
     sessionStorage.removeItem('signIn');
-    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('loginUser');
     router.push({ name: 'home' });
   };
 

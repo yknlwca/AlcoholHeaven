@@ -16,9 +16,9 @@
         style="width: 50%"
         type="text"
         class="form-control"
-        placeholder="작성자는 로그인 구현되면 고정시켜놓을거"
-        v-model="newFood.userId"
-      />
+        :value="loginUser.id"
+        readonly
+        />
     </div>
     <div class="mb-3">
       <b class="form-label">세부 사항</b>
@@ -72,12 +72,10 @@
 <script setup>
 import { useFoodStore } from "@/stores/food";
 import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
-const route = useRoute();
-const router = useRouter();
+const loginUser = ref(JSON.parse(sessionStorage.getItem("loginUser")));
 const store = useFoodStore();
 const newFood = ref({
-  userId: "",
+  userId: loginUser.value.id,
   menu: "",
   content: "",
   title: "",

@@ -81,7 +81,7 @@ public class UserRestController {
     public ResponseEntity<?> login(@RequestBody User user, HttpSession session) {
         User loggedInUser = uService.login(user.getId(), user.getPassword());
         if (loggedInUser != null) {
-            session.setAttribute("user", loggedInUser);
+            session.setAttribute("loginUser", loggedInUser);
             return new ResponseEntity<User>(loggedInUser, HttpStatus.OK);
         } else {
             return new ResponseEntity<String>("실패", HttpStatus.UNAUTHORIZED);
