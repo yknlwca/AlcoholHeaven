@@ -15,5 +15,7 @@ public interface UserService {
 	boolean removeUser(String id);
 	
 	boolean modifyUser(User user);
+
+	User login(String id, String password);
 	
 }

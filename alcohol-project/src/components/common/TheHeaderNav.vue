@@ -3,6 +3,10 @@
     <RouterLink to="/"
       ><img src="@/assets/img/알코올천국로고_최종.png" alt="알코올천국입니다!"
     /></RouterLink>
+    <div v-if="store.signIn">
+      <span>{{ store.user.name }}님 안녕하세요!</span>
+      <button @click="store.logout">로그아웃</button>
+    </div>
   </div>
   <!--로그인유저가 null이면 안뜨게 할것임-->
 
@@ -44,9 +48,9 @@ const notice = computed(() => {
   if (route.name === "notice") return { active: true };
 });
 
+
 onMounted(() => {
-  store.setSignIn(sessionStorage.getItem('signIn') === 'true');
-  console.log(store.signIn)
+  store.checkSignIn();
 });
 
 </script>
