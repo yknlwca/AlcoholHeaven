@@ -43,6 +43,7 @@
             --bs-btn-padding-x: 0.5rem;
             --bs-btn-font-size: 0.75rem;
           "
+          @click="foodDelete"
         >
           삭제
         </button>
@@ -79,8 +80,11 @@ onMounted(() => {
 });
 
 const moveUpdate = function () {
-  router.push({ name: "foodUpdate" });
+  router.push({ name: "foodUpdate", params:{id: id.value} });
 };
+const foodDelete = function(){
+  store.deleteFood(id.value)
+}
 
 // 지도
 </script>

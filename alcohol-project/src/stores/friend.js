@@ -40,7 +40,7 @@ export const useFriendStore = defineStore('friend', () => {
   };
 
   const searchFriendList = function (searchCondition) {
-    axios.get(REST_FRIEND_API, {
+    axios.get(`${REST_FRIEND_API}/search`, {
       params: searchCondition
     })
       .then((response) => {
@@ -48,12 +48,18 @@ export const useFriendStore = defineStore('friend', () => {
       })
   };
 
-  const updateFriend = function () {
-    axios.put(REST_FRIEND_API, friend.value)
+  const updateFriend = function (id, friend) {
+    axios.put(`${REST_FRIEND_API}/${id}`, friend)
       .then(() => {
-        router.push({ name: 'friendDetail', params:{id: friend.value.id} })
+        router.push({ name: 'friendDetail', params:{id: id} })
       })
   };
+  const deleteFriend = function(id){
+    axios.delete(`${REST_FRIEND_API}/${id}`)
+    .then(()=>{
+      router.push({name:'friendList'})
+    })
+  }
 
   return {
     friend,
@@ -63,5 +69,6 @@ export const useFriendStore = defineStore('friend', () => {
     updateFriend,
     createFriend,
     getFriendList,
+    deleteFriend,
   }
 });

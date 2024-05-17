@@ -67,7 +67,7 @@ public class FoodRestController {
 		return new ResponseEntity<Food>(food, HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/detail/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id){
 		if(fService.removeFood(id)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);

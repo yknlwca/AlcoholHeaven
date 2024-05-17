@@ -4,6 +4,7 @@
       <div class="col-2">
         <select class="form-select" v-model="searchInfo.key">
           <option value="none">전체</option>
+          <option value="title">제목</option>
           <option value="menu">메뉴</option>
           <option value="region">세부 지역</option>
           <option value="kindOf">어울리는 술</option>
