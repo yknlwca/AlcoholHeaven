@@ -42,4 +42,14 @@ public class UserServiceImpl implements UserService {
 	public boolean modifyUser(User user) {
 		return uDao.updateUser(user) == 1;
 	}
+	
+	
+	@Override
+    public User login(String id, String password) {
+        User user = uDao.selectOne(id);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
+    }
 }

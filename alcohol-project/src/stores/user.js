@@ -9,21 +9,6 @@ export const useUserstore = defineStore('user', () => {
 
   const signIn = ref(false);
 
-  // const createUser = function (user) {
-  //   axios({
-  //     url: REST_USER_API,
-  //     method: 'POST',
-  //     data: user
-  //   })
-  //     .then(() => {
-  //       alert('회원가입 성공!!')
-  //       router.push({ name: `home` })
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       alert('가입정보를 다시 확인해주세요.');
-  //     })
-  // };
 
   const createUser = async (user) => {
     try {
@@ -78,6 +63,41 @@ export const useUserstore = defineStore('user', () => {
     sessionStorage.setItem('signIn', status.toString());
   }
 
+
+  const login = async (userInfo) => {
+    try {
+      const response = await axios.post(`${REST_USER_API}/login`, userInfo);
+      user.value = response.data;
+      setSignIn(true);
+      sessionStorage.setItem('user', JSON.stringify(response.data));
+      return user.value;
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        throw new Error('ID or password');
+      } else {
+        throw new Error('time out');
+      }
+    }
+  };
+
+  const checkSignIn = () => {
+    const storedSignIn = sessionStorage.getItem('signIn');
+    if (storedSignIn === 'true') {
+      signIn.value = true;
+      user.value = JSON.parse(sessionStorage.getItem('user'));
+    }
+  }
+
+  const logout = () => {
+    signIn.value = false;
+    user.value = {};
+    sessionStorage.removeItem('signIn');
+    sessionStorage.removeItem('user');
+    router.push({ name: 'home' });
+  };
+
+
+
   return {
     updateUser,
     userList,
@@ -87,6 +107,8 @@ export const useUserstore = defineStore('user', () => {
     getUser,
     signIn,
     setSignIn,
-
+    login,
+    checkSignIn,
+    logout
   }
 })

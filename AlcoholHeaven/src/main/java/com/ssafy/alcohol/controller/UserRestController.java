@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.alcohol.model.dto.User;
 import com.ssafy.alcohol.model.service.UserServiceImpl;
 
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/api/user")
 public class UserRestController {
@@ -74,4 +76,15 @@ public class UserRestController {
 		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
 	}
+	
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User user, HttpSession session) {
+        User loggedInUser = uService.login(user.getId(), user.getPassword());
+        if (loggedInUser != null) {
+            session.setAttribute("user", loggedInUser);
+            return new ResponseEntity<User>(loggedInUser, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("실패", HttpStatus.UNAUTHORIZED);
+        }
+    }
 }
