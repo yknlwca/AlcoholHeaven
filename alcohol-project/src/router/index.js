@@ -5,6 +5,7 @@ import AlcoholView from '@/views/AlcoholView.vue'
 import FoodView from '@/views/FoodView.vue'
 import FriendView from '@/views/FriendView.vue'
 import NoticeView from '@/views/NoticeView.vue'
+import Register from '@/views/Register.vue';
 import AlcoholList from '@/components/alcohol/AlcoholList.vue'
 
 import FriendList from '@/components/friend/FriendList.vue'
@@ -27,6 +28,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register
     },
     {
       path: '/alcohol',
@@ -113,5 +119,22 @@ const router = createRouter({
     },
   ]
 })
+
+
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const signIn = sessionStorage.getItem('signIn') === 'true';
+    if (!signIn) {
+      next({ name: 'Home' });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
+
 
 export default router
