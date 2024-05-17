@@ -5,7 +5,9 @@
     /></RouterLink>
   </div>
   <!--로그인유저가 null이면 안뜨게 할것임-->
+
   <nav v-if="store.signIn">
+
     <div :class="alcohol">
       <RouterLink to="/alcohol">지역별 술 찾기</RouterLink>
     </div>

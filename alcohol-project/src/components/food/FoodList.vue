@@ -2,84 +2,50 @@
   <div class="container d-flex flex-column align-items-center">
     <hr />
     <div class="container d-flex justify-content-center">
-      <FoodSearch style="width: 80%" />
+      <FoodSearch style="width: 70%" />
     </div>
     <br />
-    <table class="table table-hover text-center" style="width: 70%">
-      <tr>
-        <th
-          style="
-            width: 5%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          번호
-        </th>
-        <th
-          style="
-            width: 15%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          작성자
-        </th>
-        <th
-          style="
-            width:30%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          제목
-        </th>
-        <th
-          style="
-            width: 15%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          어울리는 술
-        </th>
+    <table class="table" style="width: 70%">
+      <thead>
+        <tr>
+          <th scope="col">번호</th>
+          <th scope="col">작성자</th>
+          <th scope="col">제목</th>
+          <th scope="col">어울리는 술</th>
 
-        <th
-          style="
-            width: 15%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          지역
-        </th>
-        <th style="width: 5%; border-bottom: 1px solid black">좋아요</th>
-        <!-- 이미지는 디테일에서 -->
-      </tr>
-      <tr v-for="food in currentPageFoodList" :key="food.id">
-        <td style="border-right: 1px solid black">
-          {{ food.id }}
-        </td>
-        <td style=" border-right: 1px solid black">
-          {{ food.userId }}
-        </td>
-        <td class="p-2" style="border-right: 1px solid black">
-          <RouterLink :to="`/food/${food.id}`">
-            {{ food.title }}
-          </RouterLink>
-        </td>
-        <td style="border-right: 1px solid black">
-          <!-- menu 지우고 kindOf 어울리는 술로 바꿔야 한다 백엔드까지 -->
-          {{ food.kindOf }}
-        </td>
-        <td style="border-right: 1px solid black">
-          {{ food.region }}
-        </td>
-        <td >
-          {{ food.heart }}
-        </td>
-      </tr>
+          <th scope="col">지역</th>
+          <th scope="col">좋아요</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(food,index) in currentPageFoodList" :key="food.id">
+          <td scope="row">
+            {{ index+1 }}
+          </td>
+          <td>
+            {{ food.userId }}
+          </td>
+          <td>
+            <RouterLink :to="`/food/${food.id}`">
+              <b>{{ food.title }}</b>
+            </RouterLink>
+          </td>
+          <td>
+            <!-- menu 지우고 kindOf 어울리는 술로 바꿔야 한다 백엔드까지 -->
+            {{ food.kindOf }}
+          </td>
+          <td>
+            {{ food.region }}
+          </td>
+          <td>
+            {{ food.heart }}
+          </td>
+        </tr>
+      </tbody>
     </table>
+    <div style="width: 70%;">
+    <button class="btn btn-outline-success" @click="createFood">안주 추천하기</button>
+  </div>
     <nav aria-label="Page navigation">
       <ul class="pagination d-flex justify-content-center">
         <li class="page-item">
@@ -118,9 +84,11 @@
 <script setup>
 import { useFoodStore } from "@/stores/food";
 import { computed, ref, onMounted } from "vue";
+import {useRouter, useRoute} from 'vue-router'
 import FoodSearch from "@/components/food/FoodSearch.vue";
 
 const store = useFoodStore();
+const router = useRouter();
 
 onMounted(() => {
   store.getFoodList();
@@ -143,10 +111,13 @@ const currentPageFoodList = computed(() => {
     currentPage.value * perPage
   );
 });
+const createFood = function(){
+  router.push({name: 'foodCreate'})
+}
 </script>
 
 <style scoped>
-a{
+a {
   color: rgb(3, 130, 84);
   text-decoration: none;
 }
