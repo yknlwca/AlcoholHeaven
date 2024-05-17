@@ -16,8 +16,8 @@
         style="width: 50%"
         type="text"
         class="form-control"
-        placeholder="작성자는 로그인 구현되면 고정시켜놓을거"
-        v-model="newFriend.userId"
+        :value="loginUser.id"
+        readonly
       />
     </div>
     <div class="mb-3">
@@ -64,9 +64,11 @@
 <script setup>
 import { useFriendStore } from "@/stores/friend";
 import { ref } from "vue";
+import Login from "../Home/Login.vue";
+const loginUser = ref(JSON.parse(sessionStorage.getItem("loginUser")));
 const store = useFriendStore();
 const newFriend = ref({
-  userId: "",
+  userId: loginUser.value.id,
   title: "",
   intro: "",
   region: "",
@@ -76,6 +78,7 @@ const newFriend = ref({
 const createFriend = function () {
   store.createFriend(newFriend.value);
 };
+
 </script>
 
 <style scoped></style>

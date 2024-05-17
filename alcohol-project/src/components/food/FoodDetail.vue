@@ -22,31 +22,33 @@
       <br />
       <div>
         <h3>제목 : {{ store.food.title }}</h3>
-        <button
-          type="button"
-          class="btn btn-outline-success"
-          style="
-            --bs-btn-padding-y: 0.25rem;
-            --bs-btn-padding-x: 0.5rem;
-            --bs-btn-font-size: 0.75rem;
-          "
-          @click="moveUpdate"
-        >
-          수정
-        </button>
-        <span>&nbsp;</span>
-        <button
-          type="button"
-          class="btn btn-outline-success"
-          style="
-            --bs-btn-padding-y: 0.25rem;
-            --bs-btn-padding-x: 0.5rem;
-            --bs-btn-font-size: 0.75rem;
-          "
-          @click="foodDelete"
-        >
-          삭제
-        </button>
+        <div v-if="store.food.userId === loginUser.id">
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            style="
+              --bs-btn-padding-y: 0.25rem;
+              --bs-btn-padding-x: 0.5rem;
+              --bs-btn-font-size: 0.75rem;
+            "
+            @click="moveUpdate"
+          >
+            수정
+          </button>
+          <span>&nbsp;</span>
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            style="
+              --bs-btn-padding-y: 0.25rem;
+              --bs-btn-padding-x: 0.5rem;
+              --bs-btn-font-size: 0.75rem;
+            "
+            @click="foodDelete"
+          >
+            삭제
+          </button>
+        </div>
       </div>
       <hr />
       <div>
@@ -78,13 +80,13 @@ const id = ref(route.params.id);
 onMounted(() => {
   store.getFood(id.value);
 });
-
+const loginUser = ref(JSON.parse(sessionStorage.getItem("loginUser")));
 const moveUpdate = function () {
-  router.push({ name: "foodUpdate", params:{id: id.value} });
+  router.push({ name: "foodUpdate", params: { id: id.value } });
 };
-const foodDelete = function(){
-  store.deleteFood(id.value)
-}
+const foodDelete = function () {
+  store.deleteFood(id.value);
+};
 
 // 지도
 </script>
