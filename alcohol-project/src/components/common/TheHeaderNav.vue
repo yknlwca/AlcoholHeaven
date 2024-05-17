@@ -5,7 +5,7 @@
     /></RouterLink>
   </div>
   <!--로그인유저가 null이면 안뜨게 할것임-->
-  <nav>
+  <nav v-if="store.signIn">
     <div :class="alcohol">
       <RouterLink to="/alcohol">지역별 술 찾기</RouterLink>
     </div>
@@ -22,9 +22,13 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { useUserstore } from "@/stores/user";
+
+const store = useUserstore();
 const route = useRoute();
+
 const alcohol = computed(() => {
   if (route.name === "alcohol") return { active: true };
 });
@@ -37,6 +41,12 @@ const friend = computed(() => {
 const notice = computed(() => {
   if (route.name === "notice") return { active: true };
 });
+
+onMounted(() => {
+  store.setSignIn(sessionStorage.getItem('signIn') === 'true');
+  console.log(store.signIn)
+});
+
 </script>
 
 <style scoped>

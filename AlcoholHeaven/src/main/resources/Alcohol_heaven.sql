@@ -46,13 +46,17 @@ CREATE TABLE IF NOT EXISTS  `notice` (
 );
 
 CREATE TABLE IF NOT EXISTS  `USER` (
-    `userId`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `userKey`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`id` VARCHAR(20) NOT NULL UNIQUE,
     `password`    VARCHAR(20)    NOT NULL,
     `name`    VARCHAR(20)    NOT NULL,
-    `idNumber`    INT(13)    NOT NULL,
+    `idNumber`    BIGINT    NOT NULL,
     `email`    VARCHAR(50)    NOT NULL,
-    `phoneNumber`    INT(11)    NOT NULL
+    `phoneNumber`    BIGINT    NOT NULL
 );
+select * from user;
+
+
 
 CREATE TABLE IF NOT EXISTS `REVIEW` (
     `reviewId`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,

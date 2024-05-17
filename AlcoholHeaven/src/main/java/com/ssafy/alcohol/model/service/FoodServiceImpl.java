@@ -45,16 +45,6 @@ public class FoodServiceImpl implements FoodService {
 	}
 
 	@Override
-	public List<Food> searchRegion(String Region) {
-		return fDao.searchRegion(Region);
-	}
-
-	@Override
-	public List<Food> searchMenu(String menu) {
-		return fDao.searchMenu(menu);
-	}
-
-	@Override
 	public List<Food> selectAll() {
 		return fDao.selectAll();
 	}
@@ -67,6 +57,18 @@ public class FoodServiceImpl implements FoodService {
 	@Override
 	public boolean likeDown(int id) {
 		return fDao.likeDown(id) == 1;
+	}
+
+	@Override
+	public List<Food> searchRegion(String Region) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Food> searchMenu(String menu) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

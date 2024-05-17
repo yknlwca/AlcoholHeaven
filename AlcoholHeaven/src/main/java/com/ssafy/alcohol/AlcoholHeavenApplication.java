@@ -9,5 +9,4 @@ public class AlcoholHeavenApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AlcoholHeavenApplication.class, args);
 	}
-
 }
