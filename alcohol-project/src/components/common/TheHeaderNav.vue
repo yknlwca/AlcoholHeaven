@@ -1,16 +1,17 @@
 <template>
+
   <div class="container text-center">
     <RouterLink to="/"
       ><img src="@/assets/img/알코올천국로고_최종.png" alt="알코올천국입니다!"
     /></RouterLink>
-    <div v-if="store.signIn">
-      <span>{{ store.user.name }}님 안녕하세요!</span>
-      <button @click="store.logout">로그아웃</button>
-    </div>
+  </div>
+  <div class="container text-end" v-if="store.signIn">
+    <b>{{ store.user.name }}님 안녕하세요! </b>
+    <button @click="store.logout" class="btn btn-outline-success  btn-sm">로그아웃</button>
   </div>
   <!--로그인유저가 null이면 안뜨게 할것임-->
 
-  <nav v-if="store.signIn">
+  <nav class="my-2" v-if="store.signIn">
 
     <div :class="alcohol">
       <RouterLink to="/alcohol">지역별 술 찾기</RouterLink>
