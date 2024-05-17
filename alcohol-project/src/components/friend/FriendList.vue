@@ -1,82 +1,58 @@
 <template>
-  <br>
-  <div class="container my-2">
+  <br />
+  <div class="container d-flex flex-column align-items-center">
     <div class="container d-flex justify-content-center">
-      <FriendSearch style="width: 80%" />
+      <FriendSearch style="width: 70%" />
     </div>
     <br />
-    <table class="table text-center p-2">
-      <tr>
-        <th
-          style="
-            width: 5%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          번호
-        </th>
-        <th
-          style="
-            width: 15%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          작성자
-        </th>
-       
-        <th
-          style="
-            width: 30%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          제목
-        </th>
-        <th
-          style="
-            width: 15%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          지역
-        </th>
-        <th
-          style="
-            width: 15%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          좋아하는 술
-        </th>
-        <th style="width: 15%; border-bottom: 1px solid black">좋아요</th>
-      </tr>
-      <tr v-for="friend in currentPageFriendList" :key="friend.id">
-        <td style=" border-right: 1px solid black">
-          {{ friend.id }}
+    <table class="table" style="width: 70%">
+      <thead>
+        <tr>
+          <th scope="col">
+            번호
+          </th>
+          <th scope="col">
+            작성자
+          </th>
+
+          <th scope="col">
+            제목
+          </th>
+          <th scope="col">
+            지역
+          </th>
+          <th scope="col">
+            좋아하는 술
+          </th>
+          <th scope="col">좋아요</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr v-for="(friend,index) in currentPageFriendList" :key="friend.id">
+        <td scope="row">
+          {{ index+1 }}
         </td>
-        <td class="p-2" style="border-right: 1px solid black">
-          {{friend.userId }}
+        <td>
+          {{ friend.userId }}
         </td>
-        <td style="border-right: 1px solid black">
+        <td>
           <RouterLink :to="`/friend/${friend.id}`">
-          {{ friend.title }}
-        </RouterLink>
+           <b>{{ friend.title }}</b>
+          </RouterLink>
         </td>
-        <td style="border-right: 1px solid black">
-            {{ friend.region }}
+        <td>
+          {{ friend.region }}
         </td>
-        <td style="border-right: 1px solid black">
+        <td>
           {{ friend.kindOf }}
         </td>
-        <td style="width: 15%">{{ friend.heart }}</td>
+        <td>{{ friend.heart }}</td>
       </tr>
-
+    </tbody>
     </table>
+    <div style="width: 70%;">
+    <button class="btn btn-outline-success" @click="createFriend">소개하기</button>
+  </div>
     <nav aria-label="Page navigation">
       <ul class="pagination d-flex justify-content-center">
         <li class="page-item">
@@ -116,6 +92,8 @@
 import { useFriendStore } from "@/stores/friend";
 import { computed, onMounted, ref } from "vue";
 import FriendSearch from "@/components/friend/FriendSearch.vue";
+import {useRouter, useRoute} from 'vue-router'
+const router = useRouter();
 
 const store = useFriendStore();
 
@@ -140,6 +118,14 @@ const currentPageFriendList = computed(() => {
     currentPage.value * perPage
   );
 });
+const createFriend = function(){
+  router.push({name: 'friendCreate'})
+}
 </script>
 
-<style scoped></style>
+<style scoped>
+a {
+  color: rgb(3, 130, 84);
+  text-decoration: none;
+}
+</style>

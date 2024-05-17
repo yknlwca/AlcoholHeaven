@@ -1,12 +1,12 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 const REST_FRIEND_API = `http://localhost:8080/api/friend`;
-const REST_REVIEW_API = `http://localhost:8080/api/review`;
 
 export const useFriendStore = defineStore('friend', () => {
-
+  const router = useRouter();
   const createFriend = function (friend) {
     axios({
       url: REST_FRIEND_API,
@@ -51,51 +51,7 @@ export const useFriendStore = defineStore('friend', () => {
   const updateFriend = function () {
     axios.put(REST_FRIEND_API, friend.value)
       .then(() => {
-        router.push({ name: 'friendList' })
-      })
-  };
-
-  // 리뷰
-  const reviewList = ref([]);
-
-  const review = ref({});
-
-  const getReviewList = function (id) {
-    // 친구리뷰는 type 3로 할게
-    axios.get(REST_REVIEW_API + "/3/" + `${id}`)
-      .then((response) => {
-        console.log(response);
-        reviewList.value = response.data;
-
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  };
-
-  const deleteReview = function (id,reviewId) {
-    axios
-      .delete(`${REST_REVIEW_API}/${reviewId}`)
-      .then(() => {
-        // 삭제 후 리뷰 목록 갱신
-        getReviewList(id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const createReview = function (review, curr) {
-    axios({
-      url: REST_REVIEW_API,
-      method: 'POST',
-      data: review
-    })
-      .then(() => {
-        getReviewList(curr);
-      })
-      .catch((error) => {
-        console.log(error);
+        router.push({ name: 'friendDetail', params:{id: friend.value.id} })
       })
   };
 
@@ -107,11 +63,5 @@ export const useFriendStore = defineStore('friend', () => {
     updateFriend,
     createFriend,
     getFriendList,
-    reviewList,
-    review,
-    getReviewList,
-    deleteReview,
-    createReview
-
   }
 });

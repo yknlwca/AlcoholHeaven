@@ -6,6 +6,6 @@ import Home from "@/components/Home/Home.vue"
 <template>
   <!--세션에 로그인 유저가 null이면 로그인창-->
   <Login/>
-  <!--로그인 유저가 null이면 다른 창-->
+  <!--로그인 유저가 null이 아니면 다른 창-->
   <Home/>
 </template>

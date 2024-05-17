@@ -1,11 +1,14 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+
 import axios from 'axios';
+import { useRouter } from 'vue-router';
+
 
 const REST_FOOD_API = `http://localhost:8080/api/food`;
-const REST_REVIEW_API = `http://localhost:8080/api/review`;
 
 export const useFoodStore = defineStore('food', () => {
+  const router = useRouter();
   // food
   const createFood = function (food) {
     axios({
@@ -45,7 +48,6 @@ export const useFoodStore = defineStore('food', () => {
   const food = ref({});
 
   const getFood = function (id) {
-    // 경로 정리 필요
     axios.get(REST_FOOD_API + "/detail/" + `${id}`)
       .then((response) => {
         food.value = response.data;
@@ -56,55 +58,8 @@ export const useFoodStore = defineStore('food', () => {
   const updateFood = function () {
     axios.put(REST_FOOD_API, food.value)
       .then(() => {
-        router.push({ name: 'foodList' })
+        router.push({ name: 'foodDetail', params:{id: food.value.id} })
       })
-  };
-
-
-  // review
-  const reviewList = ref([]);
-
-  const review = ref({});
-
-  const getReviewList = function (id) {
-    // 음식리뷰는 type 2로 할게
-    axios.get(REST_REVIEW_API + "/2/" + `${id}`)
-      .then((response) => {
-        console.log(response);
-        reviewList.value = response.data;
-
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  };
-
-  const createReview = function (review, curr) {
-    axios({
-      url: REST_REVIEW_API,
-      method: 'POST',
-      data: review
-    })
-      .then(() => {
-        getReviewList(curr);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  };
-
-
-
-  const deleteReview = function (id, reviewId) {
-    axios
-      .delete(`${REST_REVIEW_API}/${reviewId}`)
-      .then(() => {
-        // 삭제 후 리뷰 목록 갱신
-        getReviewList(id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
 
@@ -117,10 +72,5 @@ export const useFoodStore = defineStore('food', () => {
     getFoodList,
     createFood,
     getFood,
-    reviewList,
-    review,
-    getReviewList,
-    createReview,
-    deleteReview
   }
 });

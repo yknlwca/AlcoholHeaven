@@ -1,13 +1,93 @@
 <template>
-    <div>
-
+  <br />
+  <div class="container" style="width: 70%">
+    <div class="mb-3">
+      <b class="form-label">제목</b>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="제목을 입력해주세요."
+        v-model="newFood.title"
+      />
     </div>
+    <div class="mb-3">
+      <b class="form-label">작성자</b>
+      <input
+        style="width: 50%"
+        type="text"
+        class="form-control"
+        placeholder="작성자는 로그인 구현되면 고정시켜놓을거"
+        v-model="newFood.userId"
+      />
+    </div>
+    <div class="mb-3">
+      <b class="form-label">세부 사항</b>
+      <input
+        style="width: 30%"
+        type="text"
+        class="form-control"
+        placeholder="메뉴이름"
+        v-model="newFood.menu"
+      /><input
+        style="width: 30%"
+        type="text"
+        class="form-control my-2"
+        placeholder="지역(ex.강남구)"
+        v-model="newFood.region"
+      /><input
+        style="width: 30%"
+        type="text"
+        class="form-control my-2"
+        placeholder="어울리는 술"
+        v-model="newFood.kindOf"
+      />
+    </div>
+    <div class="mb-3">
+      <b for="exampleFormControlTextarea1" class="form-label">안주 소개</b>
+      <textarea
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        rows="3"
+        placeholder="나만의 안주를 소개해주세요."
+        v-model="newFood.content"
+      ></textarea>
+      <div class="mb-3 my-2">
+        <b for="formFileMultiple" class="form-label"
+          >안주 사진</b
+        >
+        <input
+          class="form-control"
+          type="file"
+          id="formFileMultiple"
+          multiple
+        />
+      </div>
+    </div>
+    <button type="button" class="btn btn-outline-success" @click="createFood">
+      추천하기
+    </button>
+  </div>
 </template>
 
 <script setup>
-
+import { useFoodStore } from "@/stores/food";
+import { ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
+const route = useRoute();
+const router = useRouter();
+const store = useFoodStore();
+const newFood = ref({
+  userId: "",
+  menu: "",
+  content: "",
+  title: "",
+  region: "",
+  kindOf: "",
+  img: "null",
+});
+const createFood = function () {
+  store.createFood(newFood.value);
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
