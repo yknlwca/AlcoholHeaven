@@ -34,6 +34,7 @@
             --bs-btn-padding-x: 0.5rem;
             --bs-btn-font-size: 0.75rem;
           "
+          @click="deleteFriend"
         >
           삭제
         </button>
@@ -66,13 +67,16 @@ const router = useRouter();
 const store = useFriendStore();
 const id = ref(route.params.id);
 onMounted(() => {
-  console.log(id.value)
+  // console.log(id.value)
   store.getFriend(id.value);
 });
 
 const moveUpdate = function () {
-  router.push({ name: "friendUpdate" });
+  router.push({ name: "friendUpdate", params:{id:id.value} });
 };
+const deleteFriend = function(){
+  store.deleteFriend(id.value)
+}
 
 </script>
 

@@ -5,6 +5,7 @@
         <select class="form-select" v-model="searchInfo.key">
           <option value="none">전체</option>
           <option value="userId">아이디</option>
+          <option value="title">제목</option>
           <option value="region">세부 지역</option>
           <option value="kindOf">좋아하는 술</option>
         </select>
@@ -13,7 +14,7 @@
         <input type="text" class="form-control" v-model="searchInfo.word" />
       </div>
       <div class="col-2">
-        <button class="btn btn-success" @click="searchFriendlList">검색</button>
+        <button class="btn btn-success" @click="searchFriendList">검색</button>
       </div>
     </div>
   </div>

@@ -37,7 +37,7 @@ export const useFoodStore = defineStore('food', () => {
   };
 
   const searchFoodList = function (searchCondition) {
-    axios.get(REST_FOOD_API, {
+    axios.get(`${REST_FOOD_API}/search`, {
       params: searchCondition
     })
       .then((response) => {
@@ -55,12 +55,19 @@ export const useFoodStore = defineStore('food', () => {
   };
 
 
-  const updateFood = function () {
-    axios.put(REST_FOOD_API, food.value)
-      .then(() => {
-        router.push({ name: 'foodDetail', params:{id: food.value.id} })
-      })
+  const updateFood = function (id, food) {
+    axios.put(`${REST_FOOD_API}/${id}`, food).then(() => {
+        router.push({ name: 'foodDetail', params:{id: id} })
+      }).catch((error) => {
+        console.error("There was an error updating the food item:", error);
+      });
   };
+  const deleteFood = function(id){
+    axios.delete(`${REST_FOOD_API}/${id}`)
+    .then(()=>{
+      router.push({name:'foodList'})
+    })
+  }
 
 
 
@@ -72,5 +79,6 @@ export const useFoodStore = defineStore('food', () => {
     getFoodList,
     createFood,
     getFood,
+    deleteFood,
   }
 });
