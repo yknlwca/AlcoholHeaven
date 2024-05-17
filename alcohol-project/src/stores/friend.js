@@ -73,9 +73,9 @@ export const useFriendStore = defineStore('friend', () => {
       })
   };
 
-  const deleteReview = function (userId, id) {
+  const deleteReview = function (id,reviewId) {
     axios
-      .delete(`${REST_REVIEW_API}/${id}`)
+      .delete(`${REST_REVIEW_API}/${reviewId}`)
       .then(() => {
         // 삭제 후 리뷰 목록 갱신
         getReviewList(id);

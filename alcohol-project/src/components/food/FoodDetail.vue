@@ -30,7 +30,7 @@
             <td>{{ review.writer }}</td>
             <td>{{ review.content }}</td>
             <td>
-              <button @click="deleteReview(current, review.reviewId)">삭제</button>
+              <button @click="deleteReview(review.id, review.reviewId)">삭제</button>
             </td>
           </tr>
         </table>
@@ -101,8 +101,8 @@ const moveUpdate = function () {
 
 
 // 리뷰
-const deleteReview = (current, reviewId) => {
-  store.deleteReview(current, reviewId);
+const deleteReview = (id, reviewId) => {
+  store.deleteReview(id, reviewId);
 };
 
 // 모달창
