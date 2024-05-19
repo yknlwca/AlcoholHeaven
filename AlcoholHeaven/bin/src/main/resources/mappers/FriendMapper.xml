@@ -11,34 +11,38 @@
 </select>
 
 <!-- 성별 / 지역  -->
-
-<select id="searchRegion" resultType="Friend" parameterType="String">
-	SELECT * FROM friend WHERE region LIKE CONCAT('%', #{region}, '%');
+<select id="selectAll" resultType="Friend">
+	SELECT * FROM friend;
 </select>
 
-<select id="searchSex" resultType="Friend" parameterType="boolean">
-	SELECT * FROM friend WHERE sex = #{sex};
-</select>
 
 <select id="selectOne" resultType="Friend" parameterType="int">
 	SELECT * FROM friend WHERE id = #{id};
 </select>
+<update id="updateFriend" parameterType="Friend">
+	UPDATE friend
+	SET userId = #{userId}, title= #{title}, intro= #{intro}, region= #{region},
+	kindOf = #{kindOf}, img= #{img}
+	WHERE id = #{id};
+</update>
+
+<insert id="insertFriend" parameterType="Friend">
+	INSERT INTO friend (userId, title, intro, region, kindOf, img)
+	VALUES (#{userId}, #{title}, #{intro}, #{region}, #{kindOf}, #{img});
+</insert>
 
 
-<!-- <insert id="insertFood" parameterType="Food">
-    INSERT INTO food (name
-        <if test="detailRegion != null">, detailRegion</if>
-        <if test="kindOf != null">, kindOf</if>
-        <if test="content != null">, content</if>
-        , region
-    )
-    VALUES (#{name}
-        <if test="detailRegion != null">, #{detailRegion}</if>
-        <if test="kindOf != null">, #{kindOf}</if>
-        <if test="content != null">, #{content}</if>
-        , #{region}
-    );
-</insert> -->
+  <update id="likeUp" parameterType="int">
+    UPDATE friend
+    SET heart = heart + 1
+    WHERE id = #{id};
+  </update>
+
+  <update id="likeDown" parameterType="int">
+    UPDATE friend
+    SET heart = heart - 1
+    WHERE id = #{id};
+  </update>
 
 <delete id="deleteFriend" parameterType="int">
 	DELETE FROM friend

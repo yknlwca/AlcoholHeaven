@@ -1,48 +1,88 @@
+DROP DATABASE IF EXISTS alcohol_heaven;
 CREATE DATABASE IF NOT EXISTS alcohol_heaven;
 
 USE alcohol_heaven;
 
-CREATE TABLE IF NOT EXISTS alcohol(
-name VARCHAR(20) NOT NULL,
-detailRegion VARCHAR(20) ,
-kindOf VARCHAR(20),
-content TEXT,
-region VARCHAR(20) NOT NULL,
-weight Float,
-image TEXT,
-PRIMARY KEY(name, kindOf, detailRegion)
-	);
-    
-CREATE TABLE IF NOT EXISTS food(
-id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-menu VARCHAR(20) NOT NULL,
-writer VARCHAR(20) NOT NULL,
-kindOf VARCHAR(20),
-content TEXT,
-region VARCHAR(20) NOT NULL,
-image TEXT
-	);
-    
-INSERT INTO food (menu, writer, kindOf, content, region)
-VALUES ("전","글쓴이","소주","파전에는 소주죠","서울");
-    
-CREATE TABLE IF NOT EXISTS friend(
-id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-userId VARCHAR(20) NOT NULL ,
-name VARCHAR(20) NOT NULL,
-sex BOOLEAN NOT NULL,
-age INT NOT NULL,
-kindOf VARCHAR(20),
-region VARCHAR(20) NOT NULL,
-intro VARCHAR(20) NOT NULL
-	);
-    
-INSERT INTO friend (userId, name, sex, age, region, intro)
-VALUES ("현태씨","이쁜이",true,25,"서울","술 한잔 해요");
+CREATE TABLE IF NOT EXISTS `ALCOHOL` (
+    `id`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name`    VARCHAR(20)    NOT NULL,
+    `detailRegion`    VARCHAR(20)    NOT NULL,
+    `kindOf`    VARCHAR(20)    NOT NULL,
+    `content`    TEXT NOT NULL,
+    `region`    VARCHAR(20) NOT    NULL,
+    `weight`    FLOAT NOT NULL,
+    `img`    TEXT NOT NULL,
+    `heart` INT NOT NULL DEFAULT 0 
+);
+CREATE TABLE IF NOT EXISTS `friend` (
+    `id`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `userId`    VARCHAR(20)    NOT NULL,
+    `title`    VARCHAR(20)    NOT NULL,
+    `intro`    TEXT    NOT NULL,
+    `region`    VARCHAR(20) NOT NULL,
+    `kindOf`    VARCHAR(20)    NOT NULL,
+    `img`    TEXT NOT NULL,
+    `heart` INT NOT NULL DEFAULT 0 
+);
+
+CREATE TABLE IF NOT EXISTS  `FOOD` (
+    `id`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `userId`    VARCHAR(20)    NOT NULL,
+    `menu`    VARCHAR(20)    NOT NULL,
+    `content`    TEXT    NOT NULL,
+    `title`    VARCHAR(50)    NOT NULL,
+    `region`    VARCHAR(20)    NOT NULL,
+    `kindOf`	VARCHAR(20)	 NOT NULL,
+    `img`    TEXT NOT NULL,
+    `heart` INT NOT NULL DEFAULT 0 
+);
+
+CREATE TABLE IF NOT EXISTS  `notice` (
+    `id`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `userId`    VARCHAR(20)    NOT NULL,
+    `content`    VARCHAR(20)    NOT NULL,
+    `title`    VARCHAR(20)    NOT NULL,
+    `password`    INT(4)    NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS  `USER` (
+    `userKey`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`id` VARCHAR(20) NOT NULL UNIQUE,
+    `password`    VARCHAR(20)    NOT NULL,
+    `name`    VARCHAR(20)    NOT NULL,
+    `idNumber`    BIGINT    NOT NULL,
+    `email`    VARCHAR(50)    NOT NULL,
+    `phoneNumber`    BIGINT    NOT NULL
+);
+select * from user;
+
+
+
+CREATE TABLE IF NOT EXISTS `REVIEW` (
+    `reviewId`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id`    INT    NOT NULL,
+    `writer`    VARCHAR(20)    NOT NULL,
+    `content`    TEXT NOT NULL,
+    `type` INT NOT NULL
+);
+
+INSERT INTO review (id, writer, content, type)
+VALUES (1, "ssafy", "1위 맛집!!", 2),
+(1, "ssafy", "코드가 잘 맞는 친구", 3);
+
+SELECT * FROM review;
 
 DESC alcohol;
 
-INSERT INTO alcohol (name, detailRegion, kindOf, content, region, weight, image)
+
+INSERT INTO friend (userId, title, intro, region, kindOf, img)
+VALUES ("ssafy","저랑 노실 분","서울 27살 남자입니다.","서울","위스키","img");
+
+INSERT INTO food (userId, menu, content, title, region,kindOf, img)
+	VALUES ("ssafy","김치찌개","삼겹살과 묵은지를 넣어서 끓인 김치찌개입니다.","저의 김치찌개를 소개합니다.","역삼동","소주","img");
+
+
+INSERT INTO alcohol (name, detailRegion, kindOf, content, region, weight, img)
 VALUES 
 ("삼해소주", "서울특별시","증류식소주", "식품명인 제69호였던 고 김택상 명인에 의해 빚어졌다. 조선시대 중엽부터 삼해주를 증류하여 만들기 시작한 고급소주다. 쌀 소모가 많은 삼해주를 증류시켜 원래 양의 30%밖에 얻지 못해 상당한 사치품이었다고 한다.", "서울",45,'삼해소주_서울_증류식소주.jpg'),
 ("송절주", "서울특별시", "약주", "서울무형문화재 제2호로 지정되어 있으며 전승자는 이성자 명인이다. 16세기 정도부터 시작된 것으로 추정되고 있으며 서울 부근의 중산층과 양반가에서 약용으로 빚어진 술이다.", "서울",16,'송절주_서울_약주.jpg'),
@@ -98,3 +138,4 @@ VALUES
 SELECT region, count(*) FROM alcohol GROUP BY region;
 SELECT * FROM food;
 SELECT * FROM friend;
+SELECT * FROM ALCOHOL;

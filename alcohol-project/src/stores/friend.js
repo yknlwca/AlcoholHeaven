@@ -7,11 +7,14 @@ const REST_FRIEND_API = `http://localhost:8080/api/friend`;
 
 export const useFriendStore = defineStore('friend', () => {
   const router = useRouter();
-  const createFriend = function (friend) {
+  const createFriend = function (formData) {
     axios({
-      url: REST_FRIEND_API,
+      url: `${REST_FRIEND_API}/file`,
       method: 'POST',
-      data: friend
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     })
       .then(() => {
         router.push({ name: 'friendList' })
@@ -51,14 +54,14 @@ export const useFriendStore = defineStore('friend', () => {
   const updateFriend = function (id, friend) {
     axios.put(`${REST_FRIEND_API}/${id}`, friend)
       .then(() => {
-        router.push({ name: 'friendDetail', params:{id: id} })
+        router.push({ name: 'friendDetail', params: { id: id } })
       })
   };
-  const deleteFriend = function(id){
+  const deleteFriend = function (id) {
     axios.delete(`${REST_FRIEND_API}/${id}`)
-    .then(()=>{
-      router.push({name:'friendList'})
-    })
+      .then(() => {
+        router.push({ name: 'friendList' })
+      })
   }
 
   return {

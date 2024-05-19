@@ -26,11 +26,10 @@
 	WHERE id = #{id};
 </update>
 
-<insert id="insertFriend" parameterType="Friend">
-	INSERT INTO friend (userId, title, intro, region, kindOf, img)
-	VALUES (#{userId}, #{title}, #{intro}, #{region}, #{kindOf}, #{img});
+<insert id="insertFriend" parameterType="Friend" keyProperty="id" useGeneratedKeys="true">
+    INSERT INTO friend (userId, title, intro, region, kindOf, img, orgImg)
+    VALUES (#{userId}, #{title}, #{intro}, #{region}, #{kindOf}, #{img}, #{orgImg})
 </insert>
-
 
   <update id="likeUp" parameterType="int">
     UPDATE friend

@@ -10,18 +10,21 @@ const REST_FOOD_API = `http://localhost:8080/api/food`;
 export const useFoodStore = defineStore('food', () => {
   const router = useRouter();
   // food
-  const createFood = function (food) {
+  const createFood = function (formData) {
     axios({
-      url: REST_FOOD_API,
+      url: `${REST_FOOD_API}/file`,
       method: 'POST',
-      data: food
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     })
       .then(() => {
-        router.push({ name: `foodList` })
+        router.push({ name: 'foodList' });
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
   };
 
   const foodList = ref([]);
@@ -57,16 +60,16 @@ export const useFoodStore = defineStore('food', () => {
 
   const updateFood = function (id, food) {
     axios.put(`${REST_FOOD_API}/${id}`, food).then(() => {
-        router.push({ name: 'foodDetail', params:{id: id} })
-      }).catch((error) => {
-        console.error("There was an error updating the food item:", error);
-      });
+      router.push({ name: 'foodDetail', params: { id: id } })
+    }).catch((error) => {
+      console.error("There was an error updating the food item:", error);
+    });
   };
-  const deleteFood = function(id){
+  const deleteFood = function (id) {
     axios.delete(`${REST_FOOD_API}/${id}`)
-    .then(()=>{
-      router.push({name:'foodList'})
-    })
+      .then(() => {
+        router.push({ name: 'foodList' })
+      })
   }
 
 

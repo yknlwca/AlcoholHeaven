@@ -1,9 +1,13 @@
 package com.ssafy.alcohol.model.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.alcohol.model.dao.FriendDao;
 import com.ssafy.alcohol.model.dto.Friend;
@@ -60,5 +64,50 @@ public class FriendServiceImpl implements FriendService {
 	public List<Friend> selectAll() {
 		return fDao.selectAll();
 	}
+
+	@Override
+	public void fileFriend(MultipartFile multipartFile, Friend friend) {
+	    if (multipartFile != null && multipartFile.getSize() > 0) {
+	        try {
+	            String fileName = multipartFile.getOriginalFilename();
+	            String fileId = UUID.randomUUID().toString();
+
+	            System.out.println("파일 이름: " + fileName);
+	            System.out.println("파일 크기: " + multipartFile.getSize());
+
+	            String[] arr = fileName.split("\\.");
+	            if (arr.length > 1) {
+	                friend.setImg(fileId + "." + arr[arr.length - 1]);
+	            } else {
+	                friend.setImg(fileId);
+	            }
+	            friend.setOrgImg(fileName);
+
+	            System.out.println("Original Image: " + friend.getOrgImg());
+	            System.out.println("Generated Image: " + friend.getImg());
+
+	            String uploadDir = System.getProperty("user.dir") + "/uploads" + "/friend";
+	            File uploadDirectory = new File(uploadDir);
+	            if (!uploadDirectory.exists()) {
+	                boolean dirCreated = uploadDirectory.mkdirs();
+	                if (dirCreated) {
+	                    System.out.println("업로드 디렉토리가 생성되었습니다: " + uploadDir);
+	                } else {
+	                    System.err.println("업로드 디렉토리 생성에 실패했습니다: " + uploadDir);
+	                }
+	            }
+
+	            File file = new File(uploadDirectory, fileId);
+	            multipartFile.transferTo(file);
+
+	            fDao.insertFriend(friend);
+	        } catch (IllegalStateException e) {
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
 
 }

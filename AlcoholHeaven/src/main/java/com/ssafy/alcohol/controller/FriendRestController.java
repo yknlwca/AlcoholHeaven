@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.alcohol.model.dto.Alcohol;
 import com.ssafy.alcohol.model.dto.Friend;
@@ -66,6 +68,13 @@ public class FriendRestController {
 	public ResponseEntity<?> write(@RequestBody Friend friend) {
 		fService.writeFriend(friend);
 		return new ResponseEntity<Friend>(friend, HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/file")
+	public ResponseEntity<Void> fileUpload(@RequestParam("file") MultipartFile multipartFile,
+			@ModelAttribute Friend friend) {
+		fService.fileFriend(multipartFile, friend);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")

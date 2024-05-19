@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.alcohol.model.dao.AlcoholDao">
+<select id="selectAll" resultType="Alcohol">
+	SELECT * FROM alcohol
+</select>
 
 <select id="search" resultType="Alcohol" parameterType="SearchCondition">
 	SELECT * FROM alcohol
@@ -14,35 +17,40 @@
 	WHERE region = #{region}
 </select>
 
-<select id="selectOne" resultType="Alcohol" parameterType="String">
-	SELECT * FROM alcohol WHERE name = #{name};
+<select id="selectOne" resultType="Alcohol" parameterType="int">
+	SELECT * FROM alcohol WHERE id = #{id};
 </select>
 
 
 <insert id="insertAlcohol" parameterType="Alcohol">
-    INSERT INTO alcohol (name
-        <if test="detailRegion != null">, detailRegion</if>
-        <if test="kindOf != null">, kindOf</if>
-        <if test="content != null">, content</if>
-        , region
-    )
-    VALUES (#{name}
-        <if test="detailRegion != null">, #{detailRegion}</if>
-        <if test="kindOf != null">, #{kindOf}</if>
-        <if test="content != null">, #{content}</if>
-        , #{region}
-    );
+    INSERT INTO alcohol (name, detailRegion, kindOf, content, region, weight, img)
+    VALUES (#{name}, #{detailRegion}, #{kindOf}, #{content}, #{region}, #{weight}, #{img});
 </insert>
 
-<delete id="deleteAlcohol" parameterType="String">
+<delete id="deleteAlcohol" parameterType="int">
 	DELETE FROM alcohol
-	WHERE name = #{name};
+	WHERE id = #{id};
 </delete>
 
 <update id="updateAlcohol" parameterType="Alcohol">
 	UPDATE alcohol
 	SET name = #{name}, detailRegion = #{detailRegion}, kindOf = #{kindOf}, content = #{content},
-	region = #{region};
+	region = #{region}, weight= #{weight}, img = #{img}
+	WHERE id = #{id};
 </update>
+
+
+
+  <update id="likeUp" parameterType="int">
+    UPDATE alcohol
+    SET heart = heart + 1
+    WHERE id = #{id};
+  </update>
+
+  <update id="likeDown" parameterType="int">
+    UPDATE alcohol
+    SET heart = heart - 1
+    WHERE id = #{id};
+  </update>
 
 </mapper>
