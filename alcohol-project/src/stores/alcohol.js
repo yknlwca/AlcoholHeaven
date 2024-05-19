@@ -19,11 +19,12 @@ export const useAlcoholStore = defineStore('alcohol', () => {
       alcoholList.value = response.data.filter((alcohol) => alcohol.region === localStorage.getItem('name'))
     })
   }
-  const alcohol = ref(null)
+  const alcohol = ref({})
   const alcoholDetail = function (id) {
     axios.get(`${REST_ALCOHOL_API}/detail/${id}`)
       .then((response) => {
         alcohol.value = response.data
+        console.log(alcohol.value)
       })
   }
   const createAlcohol = function (alcohol) {
