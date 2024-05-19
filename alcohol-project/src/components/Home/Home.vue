@@ -5,7 +5,9 @@
 </template>
 
 <script setup>
+import { useUserstore } from '@/stores/user';
 
+    const store = useUserstore()
 </script>
 
 <style scoped>
