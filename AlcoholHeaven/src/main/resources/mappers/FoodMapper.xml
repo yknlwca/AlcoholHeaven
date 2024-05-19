@@ -19,19 +19,20 @@
 	SELECT * FROM food WHERE id = #{id};
 </select>
 
-<insert id="insertFood" parameterType="Food">
-	INSERT INTO food (userId, menu, content, title, region,kindOf, img)
-	VALUES (#{userId}, #{menu}, #{content}, #{title}, #{region},#{kindOf}, #{img});
+<insert id="insertFood" parameterType="Food" keyProperty="id" useGeneratedKeys="true">
+	INSERT INTO food (userId, menu, content, title, region,kindOf, img, orgImg)
+	VALUES (#{userId}, #{menu}, #{content}, #{title}, #{region},#{kindOf}, #{img}, #{orgImg});
 </insert>
-
-
+	
 
 <update id="updateFood" parameterType="Food">
 	UPDATE food
 	SET userId = #{userId}, menu= #{menu}, content = #{content}, title = #{title},
-	region = #{region}, img= #{img}
+	region = #{region}
 	WHERE id = #{id};
 </update>
+
+
 
 
 
@@ -51,12 +52,6 @@
 	DELETE FROM food
 	WHERE id = #{id};
 </delete>
-
-<!-- <update id="updateFood" parameterType="Food">
-	UPDATE alcohol
-	SET name = #{name}, detailRegion = #{detailRegion}, kindOf = #{kindOf}, content = #{content},
-	region = #{region};
-</update> -->
 
 
 

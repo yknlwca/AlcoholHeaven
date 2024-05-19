@@ -2,16 +2,14 @@ package com.ssafy.alcohol.model.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.ssafy.alcohol.model.dto.Food;
 import com.ssafy.alcohol.model.dto.SearchCondition;
 
 public interface FoodService {
 
 	public List<Food> searchFood(SearchCondition condition);
-	
-	public List<Food> searchRegion(String Region);
-	
-	public List<Food> searchMenu(String menu);
 
 	public Food readFood(int id);
 
@@ -26,4 +24,6 @@ public interface FoodService {
 	public boolean likeUp(int id);
 	
 	public boolean likeDown(int id);
+	
+	public void fileFood(MultipartFile multipartFile, Food food);
 }

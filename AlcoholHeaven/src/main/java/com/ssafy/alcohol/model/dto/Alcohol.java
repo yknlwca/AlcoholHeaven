@@ -14,42 +14,15 @@ public class Alcohol {
 	private String region;
 	private float weight;
 	private String img;
+	private String orgImg;
 	private int heart;
-	
+
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public float getWeight() {
-		return weight;
-	}
-
-	public void setWeight(float weight) {
-		this.weight = weight;
-	}
-
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
-	}
-
-	public int getHeart() {
-		return heart;
-	}
-
-	public void setHeart(int heart) {
-		this.heart = heart;
-	}
-
-	public Alcohol() {
-		
 	}
 
 	public String getName() {
@@ -92,15 +65,47 @@ public class Alcohol {
 		this.region = region;
 	}
 
+	public float getWeight() {
+		return weight;
+	}
+
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public String getOrgImg() {
+		return orgImg;
+	}
+
+	public void setOrgImg(String orgImg) {
+		this.orgImg = orgImg;
+	}
+
+	public int getHeart() {
+		return heart;
+	}
+
+	public void setHeart(int heart) {
+		this.heart = heart;
+	}
+
 	@Override
 	public String toString() {
 		return "Alcohol [id=" + id + ", name=" + name + ", detailRegion=" + detailRegion + ", kindOf=" + kindOf
-				+ ", content=" + content + ", region=" + region + ", weight=" + weight + ", img=" + img + ", like="
-				+ heart + "]";
+				+ ", content=" + content + ", region=" + region + ", weight=" + weight + ", img=" + img + ", orgImg="
+				+ orgImg + ", heart=" + heart + "]";
 	}
 
 	public Alcohol(int id, String name, String detailRegion, String kindOf, String content, String region, float weight,
-			String img, int heart) {
+			String img, String orgImg, int heart) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -110,8 +115,13 @@ public class Alcohol {
 		this.region = region;
 		this.weight = weight;
 		this.img = img;
+		this.orgImg = orgImg;
 		this.heart = heart;
 	}
 
-	
+	public Alcohol() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 }

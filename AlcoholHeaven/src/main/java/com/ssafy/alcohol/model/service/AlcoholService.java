@@ -2,6 +2,8 @@ package com.ssafy.alcohol.model.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.ssafy.alcohol.model.dto.Alcohol;
 import com.ssafy.alcohol.model.dto.SearchCondition;
 
@@ -25,4 +27,6 @@ public interface AlcoholService {
 	boolean likeUp(int id);
 	
 	boolean likeDown(int id);
+	
+	public void fileAlcohol(MultipartFile multipartFile, Alcohol alcohol);
 }

@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.alcohol.model.dto.Alcohol;
 import com.ssafy.alcohol.model.dto.SearchCondition;
 import com.ssafy.alcohol.model.service.AlcoholService;
-
 
 @RestController
 @RequestMapping("/api/alcohol")
@@ -42,7 +43,7 @@ public class AlcoholRestController {
 		}
 		return new ResponseEntity<List<Alcohol>>(list, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/search")
 	public ResponseEntity<?> search(@ModelAttribute SearchCondition condition) {
 		List<Alcohol> list = alService.searchBoard(condition);
@@ -51,7 +52,7 @@ public class AlcoholRestController {
 		}
 		return new ResponseEntity<List<Alcohol>>(list, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{region}")
 	public ResponseEntity<?> selectByRegion(@PathVariable("region") String region) {
 		List<Alcohol> alcohols = alService.selectAlcohol(region);
@@ -76,7 +77,13 @@ public class AlcoholRestController {
 		return new ResponseEntity<Alcohol>(alcohol, HttpStatus.CREATED);
 	}
 
-	
+	@PostMapping("/file")
+	public ResponseEntity<Void> fileUpload(@RequestParam("file") MultipartFile multipartFile,
+			@ModelAttribute Alcohol alcohol) {
+		alService.fileAlcohol(multipartFile, alcohol);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id) {
 		if (alService.removeAlcohol(id)) {
@@ -84,27 +91,27 @@ public class AlcoholRestController {
 		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
 	}
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody Alcohol al){
+	public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody Alcohol al) {
 		al.setId(id);
-		if(alService.modifyAlcohol(al)) {
+		if (alService.modifyAlcohol(al)) {
 			return new ResponseEntity<Alcohol>(al, HttpStatus.OK);
 		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
 	}
-	
+
 	@PutMapping("/likeup/{id}")
-	public ResponseEntity<?> likeUp(@PathVariable("id") int id){
-		if(alService.likeUp(id)) {
+	public ResponseEntity<?> likeUp(@PathVariable("id") int id) {
+		if (alService.likeUp(id)) {
 			return new ResponseEntity<Integer>(id, HttpStatus.OK);
 		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
 	}
-	
+
 	@PutMapping("/likedown/{id}")
-	public ResponseEntity<?> likeDown(@PathVariable("id") int id){
-		if(alService.likeDown(id)) {
+	public ResponseEntity<?> likeDown(@PathVariable("id") int id) {
+		if (alService.likeDown(id)) {
 			return new ResponseEntity<Integer>(id, HttpStatus.OK);
 		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);

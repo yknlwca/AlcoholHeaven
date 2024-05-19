@@ -11,37 +11,47 @@ CREATE TABLE IF NOT EXISTS `ALCOHOL` (
     `content`    TEXT NOT NULL,
     `region`    VARCHAR(20) NOT    NULL,
     `weight`    FLOAT NOT NULL,
-    `img`    TEXT NOT NULL,
+	`img` VARCHAR(40) NOT NULL,
     `heart` INT NOT NULL DEFAULT 0 
 );
 CREATE TABLE IF NOT EXISTS `friend` (
     `id`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `userId`    VARCHAR(20)    NOT NULL,
-    `title`    VARCHAR(20)    NOT NULL,
+    `title`    TEXT   NOT NULL,
     `intro`    TEXT    NOT NULL,
     `region`    VARCHAR(20) NOT NULL,
     `kindOf`    VARCHAR(20)    NOT NULL,
-    `img`    TEXT NOT NULL,
+          `img` VARCHAR(40) NOT NULL,
+      `orgImg`  VARCHAR(40) NOT NULL,
     `heart` INT NOT NULL DEFAULT 0 
 );
 
 CREATE TABLE IF NOT EXISTS  `FOOD` (
-    `id`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id`    INT    NOT NULL AUTO_INCREMENT,
     `userId`    VARCHAR(20)    NOT NULL,
     `menu`    VARCHAR(20)    NOT NULL,
     `content`    TEXT    NOT NULL,
-    `title`    VARCHAR(50)    NOT NULL,
+    `title`    TEXT    NOT NULL,
     `region`    VARCHAR(20)    NOT NULL,
     `kindOf`	VARCHAR(20)	 NOT NULL,
-    `img`    TEXT NOT NULL,
-    `heart` INT NOT NULL DEFAULT 0 
+    `heart` INT NOT NULL DEFAULT 0 ,
+      `img` text NOT NULL,
+      `orgImg`  text NOT NULL, 
+	PRIMARY KEY(id)
 );
+INSERT INTO friend (userId, title, intro, region, kindOf, img, orgImg)
+	VALUES ("123123123", "123123123", "123123123", "123123123", "123123123", "123123123","123123123");
+SELECT * FROM food;
+
+
+SELECT * FROM friend;
+SELECT * FROM ALCOHOL;
 
 CREATE TABLE IF NOT EXISTS  `notice` (
     `id`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `userId`    VARCHAR(20)    NOT NULL,
-    `content`    VARCHAR(20)    NOT NULL,
-    `title`    VARCHAR(20)    NOT NULL,
+    `content`    TEXT    NOT NULL,
+    `title`    TEXT    NOT NULL,
     `password`    INT(4)    NOT NULL
 );
 
@@ -73,13 +83,6 @@ VALUES (1, "ssafy", "1위 맛집!!", 2),
 SELECT * FROM review;
 
 DESC alcohol;
-
-
-INSERT INTO friend (userId, title, intro, region, kindOf, img)
-VALUES ("ssafy","저랑 노실 분","서울 27살 남자입니다.","서울","위스키","img");
-
-INSERT INTO food (userId, menu, content, title, region,kindOf, img)
-	VALUES ("ssafy","김치찌개","삼겹살과 묵은지를 넣어서 끓인 김치찌개입니다.","저의 김치찌개를 소개합니다.","역삼동","소주","img");
 
 
 INSERT INTO alcohol (name, detailRegion, kindOf, content, region, weight, img)
@@ -134,8 +137,3 @@ VALUES
 ("참이슬","서울특별시","소주","주류계의 대가. 전 세계 소주 판매량 1위이며 서울을 포함한 수도권과 호남지역에서 인지도 끝판왕","서울", 16, "참이슬_소주_서울.jpg");
     
     
-    
-SELECT region, count(*) FROM alcohol GROUP BY region;
-SELECT * FROM food;
-SELECT * FROM friend;
-SELECT * FROM ALCOHOL;

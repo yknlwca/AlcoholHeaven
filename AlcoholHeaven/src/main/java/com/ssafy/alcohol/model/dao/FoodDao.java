@@ -23,4 +23,5 @@ public interface FoodDao {
 	public int likeUp(int id);
 	
 	public int likeDown(int id);
+	
 }
