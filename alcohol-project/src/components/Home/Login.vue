@@ -38,7 +38,7 @@ const login = async () => {
   try {
     const userCredentials = { id: id.value, password: password.value };
     await store.login(userCredentials);
-    router.push({ name: 'alcohol' });
+    router.push({ name: 'home' });
   } catch (error) {
     if (error.message === 'ID or password') {
       alert('아이디 또는 비밀번호가 잘못되었습니다.');
