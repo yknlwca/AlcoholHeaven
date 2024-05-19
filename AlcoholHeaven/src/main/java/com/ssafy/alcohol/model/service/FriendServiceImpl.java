@@ -97,7 +97,7 @@ public class FriendServiceImpl implements FriendService {
 	                }
 	            }
 
-	            File file = new File(uploadDirectory, fileId);
+	            File file = new File(uploadDirectory, fileId+ "." + arr[arr.length - 1]);
 	            multipartFile.transferTo(file);
 
 	            fDao.insertFriend(friend);
