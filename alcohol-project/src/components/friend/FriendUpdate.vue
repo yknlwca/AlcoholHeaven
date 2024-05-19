@@ -53,7 +53,7 @@
             class="form-control"
             type="file"
             id="formFileMultiple"
-            multiple
+            @change="handleFileUpload"
           />
         </div>
       </div>
@@ -76,12 +76,25 @@
     title: friend.value.title,
     intro: friend.value.intro,
     region: friend.value.region,
-    kindOf: friend.value.kindOf,
-    img: friend.value.img,
+    kindOf: friend.value.kindOf
   });
-  const friendUpdate = function () {
-    store.updateFriend(id.value,newFriend.value);
-  };
+  const selectedFile = ref(null);
+
+const handleFileUpload = (event) => {
+  selectedFile.value = event.target.files[0];
+};
+
+const friendUpdate = async () => {
+  const formData = new FormData();
+  formData.append('file', selectedFile.value);
+  formData.append('userId', newFriend.value.userId);
+  formData.append('title', newFriend.value.title);
+  formData.append('intro', newFriend.value.intro);
+  formData.append('region', newFriend.value.region);
+  formData.append('kindOf', newFriend.value.kindOf);
+
+  await store.updateFriend(id.value, formData);
+};
   </script>
   
   <style scoped></style>

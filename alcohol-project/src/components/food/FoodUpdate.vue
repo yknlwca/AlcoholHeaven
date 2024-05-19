@@ -59,7 +59,7 @@
             class="form-control"
             type="file"
             id="formFileMultiple"
-            multiple
+            @change="handleFileUpload"
           />
         </div>
       </div>
@@ -84,12 +84,27 @@
     content: food.value.content,
     title: food.value.title,
     region: food.value.region,
-    kindOf: food.value.kindOf,
-    img: food.value.img,
+    kindOf: food.value.kindOf
   });
-  const foodUpdate = function () {
-    store.updateFood(id.value,newFood.value);
-  };
+
+const selectedFile = ref(null);
+
+const handleFileUpload = (event) => {
+  selectedFile.value = event.target.files[0];
+};
+
+const foodUpdate = async () => {
+  const formData = new FormData();
+  formData.append('file', selectedFile.value);
+  formData.append('userId', newFood.value.userId);
+  formData.append('menu', newFood.value.menu);
+  formData.append('content', newFood.value.content);
+  formData.append('title', newFood.value.title);
+  formData.append('region', newFood.value.region);
+  formData.append('kindOf', newFood.value.kindOf);
+
+  await store.updateFood(id.value, formData);
+};
   </script>
   
   <style scoped></style>

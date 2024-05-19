@@ -28,7 +28,6 @@
 <update id="updateFood" parameterType="Food">
 	UPDATE food
 	SET userId = #{userId}, menu= #{menu}, content = #{content}, title = #{title}, region = #{region}, img = #{img}, orgImg= #{orgImg}
-	region = #{region}
 	WHERE id = #{id};
 </update>
 

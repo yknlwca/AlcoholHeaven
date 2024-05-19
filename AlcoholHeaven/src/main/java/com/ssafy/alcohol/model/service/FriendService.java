@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.alcohol.model.dto.Alcohol;
+import com.ssafy.alcohol.model.dto.Food;
 import com.ssafy.alcohol.model.dto.Friend;
 import com.ssafy.alcohol.model.dto.SearchCondition;
 
@@ -27,7 +28,8 @@ public interface FriendService {
 	public boolean likeUp(int id);
 	
 	public boolean likeDown(int id);
-	
 
 	public void fileFriend(MultipartFile multipartFile,Friend friend);
+	
+	public void updateFriend(MultipartFile multipartFile, Friend friend);
 }
