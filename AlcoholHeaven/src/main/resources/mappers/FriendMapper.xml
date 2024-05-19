@@ -22,7 +22,7 @@
 <update id="updateFriend" parameterType="Friend">
 	UPDATE friend
 	SET userId = #{userId}, title= #{title}, intro= #{intro}, region= #{region},
-	kindOf = #{kindOf}, img= #{img}
+	kindOf = #{kindOf}, img= #{img}, orgImg=#{orgImg}
 	WHERE id = #{id};
 </update>
 
