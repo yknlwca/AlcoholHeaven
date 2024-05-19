@@ -1,47 +1,38 @@
 <template>
   <br />
-  <div class="container my-2">
+  <div class="container my-2 d-flex flex-column align-items-center">
     <div class="container d-flex justify-content-center">
       <NoticeSearch style="width: 60%" />
     </div>
     <br />
-    <table class="table text-center p-2">
-      <tr>
-        <th
-          style="
-            width: 20%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          번호
-        </th>
-        <th
-          style="
-            width: 60%;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-          "
-        >
-          내용
-        </th>
+    <table class="table" style="width: 70%">
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>내용</th>
 
-        <th style="width: 20%; border-bottom: 1px solid black">작성자</th>
-      </tr>
-      <tr v-for="notice in currentPageNoticeList" :key="notice.id">
-        <td style="border-right: 1px solid black">
-          {{ notice.id }}
-        </td>
-        <td class="p-2" style="border-right: 1px solid black">
-          <RouterLink :to="`/notice/${notice.id}`" class="text-truncate">
-            {{ notice.content }}
-          </RouterLink>
-        </td>
-        <td style="border-right: 1px solid black">
-          {{ notice.userId }}
-        </td>
-      </tr>
+          <th>작성자</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(notice,index) in currentPageNoticeList" :key="notice.id">
+          <td>
+            {{ index+1 }}
+          </td>
+          <td>
+            <RouterLink :to="`/notice/${notice.id}`" class="text-truncate">
+              {{ notice.title }}
+            </RouterLink>
+          </td>
+          <td>
+            {{ notice.userId }}
+          </td>
+        </tr>
+      </tbody>
     </table>
+    <div style="width: 70%;" v-if="loginUser.id==='admin'">
+      <button class="btn btn-outline-success" @click="createNotice">글쓰기</button>
+    </div>
     <nav aria-label="Page navigation">
       <ul class="pagination d-flex justify-content-center">
         <li class="page-item">
@@ -81,8 +72,10 @@
 import { useNoticeStore } from "@/stores/notice";
 import { computed, onMounted, ref } from "vue";
 import NoticeSearch from "@/components/notice/NoticeSearch.vue";
+import { useRouter } from "vue-router";
 
 const store = useNoticeStore();
+const router = useRouter();
 
 onMounted(() => {
   store.getNoticeList();
@@ -105,6 +98,10 @@ const currentPageNoticeList = computed(() => {
     currentPage.value * perPage
   );
 });
+const createNotice = function(){
+  router.push({name:'noticeCreate'})
+}
+const loginUser = ref(JSON.parse(sessionStorage.getItem("loginUser")));
 </script>
 
 <style scoped></style>

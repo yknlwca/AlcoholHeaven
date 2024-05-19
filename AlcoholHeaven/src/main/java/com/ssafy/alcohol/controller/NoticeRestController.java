@@ -36,7 +36,7 @@ public class NoticeRestController {
 		return new ResponseEntity<>(notices, HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/detail/{id}")
 	public ResponseEntity<?> detail(@PathVariable("id")int id){
 		Notice notice = nService.detail(id);
 		if(notice == null) {

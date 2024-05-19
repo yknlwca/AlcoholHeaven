@@ -1,11 +1,12 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 const REST_NOTICE_API = `http://localhost:8080/api/notice`;
 
 export const useNoticeStore = defineStore('notice', () => {
-
+  const router = useRouter()
   const createNotice = function (notice) {
     axios({
       url: REST_NOTICE_API,
@@ -46,13 +47,18 @@ export const useNoticeStore = defineStore('notice', () => {
       })
   };
 
-  const updateNotice = function () {
-    axios.put(`${REST_NOTICE_API}/${id}`, notice.value)
+  const updateNotice = function (id, notice) {
+    axios.put(`${REST_NOTICE_API}/${id}`, notice)
       .then(() => {
         router.push({ name: 'noticeList' })
       })
   };
-
+  const deleteNotice = function(id){
+    axios.delete(`${REST_NOTICE_API}/${id}`)
+    .then(()=>{
+      router.push({name:'noticeList'})
+    })
+  }
   return {
     notice,
     noticeList,
@@ -61,6 +67,7 @@ export const useNoticeStore = defineStore('notice', () => {
     updateNotice,
     createNotice,
     getNoticeList,
+    deleteNotice,
 
   }
 });
