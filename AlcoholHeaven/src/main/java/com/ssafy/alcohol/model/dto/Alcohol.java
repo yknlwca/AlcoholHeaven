@@ -7,6 +7,7 @@ public class Alcohol {
 //	content TEXT,
 //	region VARCHAR(20) NOT NULL
 	private int id;
+	private String userId;
 	private String name;
 	private String detailRegion;
 	private String kindOf;
@@ -97,17 +98,26 @@ public class Alcohol {
 		this.heart = heart;
 	}
 
-	@Override
-	public String toString() {
-		return "Alcohol [id=" + id + ", name=" + name + ", detailRegion=" + detailRegion + ", kindOf=" + kindOf
-				+ ", content=" + content + ", region=" + region + ", weight=" + weight + ", img=" + img + ", orgImg="
-				+ orgImg + ", heart=" + heart + "]";
+	public String getUserId() {
+		return userId;
 	}
 
-	public Alcohol(int id, String name, String detailRegion, String kindOf, String content, String region, float weight,
-			String img, String orgImg, int heart) {
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	@Override
+	public String toString() {
+		return "Alcohol [id=" + id + ", userId=" + userId + ", name=" + name + ", detailRegion=" + detailRegion
+				+ ", kindOf=" + kindOf + ", content=" + content + ", region=" + region + ", weight=" + weight + ", img="
+				+ img + ", orgImg=" + orgImg + ", heart=" + heart + "]";
+	}
+
+	public Alcohol(int id, String userId, String name, String detailRegion, String kindOf, String content,
+			String region, float weight, String img, String orgImg, int heart) {
 		super();
 		this.id = id;
+		this.userId = userId;
 		this.name = name;
 		this.detailRegion = detailRegion;
 		this.kindOf = kindOf;
@@ -124,4 +134,5 @@ public class Alcohol {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 }
