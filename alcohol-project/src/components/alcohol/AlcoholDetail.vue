@@ -5,15 +5,14 @@
     <hr />
     <div class="left d-flex flex-column p-2" style="width: 70%">
       <div class="d-flex justify-content-center">
-        <img style="width: 70%; border-radius: 10%" :src="`http://localhost:8080/uploads/alcohol/${store.alcohol.img}`" alt="" />
+        <img style="width: 70%; height: 100%; border-radius: 10%" :src="`http://localhost:8080/uploads/alcohol/${store.alcohol.img}`" alt="" />
       </div>
       <div class="container" style="width: 75%">
 
-        <Review :review-type="{ id: store.alcohol.id, type: 1 }" />
+        <Review :review-type="{ id: id, type: 1 }" />
       </div>
     </div>
     <div class="right d-flex flex-column p-2" style="width: 50%">
-      <br />
       <br />
       <div>
         <h3>이름 : {{ store.alcohol.name }}</h3>
