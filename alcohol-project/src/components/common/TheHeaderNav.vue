@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container text-center">
+  <div class="container text-center my-3">
     <RouterLink to="/"
       ><img src="@/assets/img/알코올천국로고_최종.png" alt="알코올천국입니다!"
     /></RouterLink>
