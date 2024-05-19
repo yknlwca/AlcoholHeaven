@@ -7,7 +7,6 @@
       <div class="d-flex justify-content-center">
         <img style="width: 70%; border-radius: 10%" :src="`http://localhost:8080/uploads/food/${store.food.img}`" alt="" />
       </div>
-      <!-- C:\Users\choik\OneDrive\문서\AlcoholHeaven\AlcoholHeaven\uploads\food -->
       <div class="container" style="width: 75%">
         <!-- 리뷰 띄우기 -->
 
