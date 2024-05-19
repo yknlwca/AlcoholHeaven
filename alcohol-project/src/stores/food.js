@@ -58,13 +58,24 @@ export const useFoodStore = defineStore('food', () => {
   };
 
 
-  const updateFood = function (id, food) {
-    axios.put(`${REST_FOOD_API}/${id}`, food).then(() => {
-      router.push({ name: 'foodDetail', params: { id: id } })
-    }).catch((error) => {
-      console.error("There was an error updating the food item:", error);
-    });
+  const updateFood = function (id, formData) {
+    axios({
+      url: `${REST_FOOD_API}/file/${id}`,
+      method: 'PUT',
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then(() => {
+        router.push({ name: 'foodDetail', params: { id: id } });
+      })
+      .catch((error) => {
+        console.error("There was an error updating the food item:", error);
+      });
   };
+
+
   const deleteFood = function (id) {
     axios.delete(`${REST_FOOD_API}/${id}`)
       .then(() => {

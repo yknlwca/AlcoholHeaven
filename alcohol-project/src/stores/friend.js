@@ -51,12 +51,23 @@ export const useFriendStore = defineStore('friend', () => {
       })
   };
 
-  const updateFriend = function (id, friend) {
-    axios.put(`${REST_FRIEND_API}/${id}`, friend)
+  const updateFriend = function (id, formData) {
+    axios({
+      url: `${REST_FRIEND_API}/file/${id}`,
+      method: 'PUT',
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
       .then(() => {
-        router.push({ name: 'friendDetail', params: { id: id } })
+        router.push({ name: 'friendDetail', params: { id: id } });
       })
+      .catch((error) => {
+        console.error("There was an error updating the food item:", error);
+      });
   };
+
   const deleteFriend = function (id) {
     axios.delete(`${REST_FRIEND_API}/${id}`)
       .then(() => {

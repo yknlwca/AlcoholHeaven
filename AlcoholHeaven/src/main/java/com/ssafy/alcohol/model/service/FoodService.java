@@ -26,4 +26,6 @@ public interface FoodService {
 	public boolean likeDown(int id);
 	
 	public void fileFood(MultipartFile multipartFile, Food food);
+
+	public void updateFood(MultipartFile multipartFile, Food food);
 }

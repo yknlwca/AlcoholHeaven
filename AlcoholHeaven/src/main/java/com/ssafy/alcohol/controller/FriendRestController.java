@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.alcohol.model.dto.Alcohol;
+import com.ssafy.alcohol.model.dto.Food;
 import com.ssafy.alcohol.model.dto.Friend;
 import com.ssafy.alcohol.model.dto.SearchCondition;
 import com.ssafy.alcohol.model.service.FriendService;
@@ -96,6 +97,14 @@ public class FriendRestController {
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
 	}
 	
+	@PutMapping("/file/{id}")
+	public ResponseEntity<Void> updateFileUpload(@PathVariable int id,
+	                                             @RequestParam(value = "file", required = false) MultipartFile multipartFile,
+	                                             @ModelAttribute Friend friend) {
+	    friend.setId(id); // 업데이트할 엔티티의 ID 설정
+	    fService.updateFriend(multipartFile, friend);
+	    return new ResponseEntity<>(HttpStatus.OK);
+	}
 	
 	@PutMapping("/likeup/{id}")
 	public ResponseEntity<?> likeUp(@PathVariable("id") int id){

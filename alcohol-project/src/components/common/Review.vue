@@ -65,8 +65,8 @@ const props = defineProps({
 });
 onMounted(() => {
   store.getReviewList(props.reviewType.type, props.reviewType.id);
-  console.log(props.reviewType.id);
-  console.log(props.reviewType.type);
+  // console.log(props.reviewType.id);
+  // console.log(props.reviewType.type);
 });
 //현재 로그인한 유저
 const loginUser = ref(JSON.parse(sessionStorage.getItem("loginUser")))
