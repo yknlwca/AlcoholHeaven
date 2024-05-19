@@ -23,8 +23,8 @@
 
 
 <insert id="insertAlcohol" parameterType="Alcohol" keyProperty="id" useGeneratedKeys="true">
-    INSERT INTO alcohol (name, detailRegion, kindOf, content, region, weight, img, orgImg)
-    VALUES (#{name}, #{detailRegion}, #{kindOf}, #{content}, #{region}, #{weight}, #{img}, #{orgImg});
+    INSERT INTO alcohol (userId,name, detailRegion, kindOf, content, region, weight, img, orgImg)
+    VALUES (#{userId},#{name}, #{detailRegion}, #{kindOf}, #{content}, #{region}, #{weight}, #{img}, #{orgImg});
 </insert>
 
 <delete id="deleteAlcohol" parameterType="int">
@@ -34,7 +34,7 @@
 
 <update id="updateAlcohol" parameterType="Alcohol">
 	UPDATE alcohol
-	SET name = #{name}, detailRegion = #{detailRegion}, kindOf = #{kindOf}, content = #{content},
+	SET userId = #{userID}, name = #{name}, detailRegion = #{detailRegion}, kindOf = #{kindOf}, content = #{content},
 	region = #{region}, weight= #{weight}, img = #{img}
 	WHERE id = #{id};
 </update>

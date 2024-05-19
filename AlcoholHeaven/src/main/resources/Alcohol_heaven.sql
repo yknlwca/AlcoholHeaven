@@ -5,13 +5,15 @@ USE alcohol_heaven;
 
 CREATE TABLE IF NOT EXISTS `ALCOHOL` (
     `id`    INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `userId` VARCHAR(20),
     `name`    VARCHAR(20)    NOT NULL,
     `detailRegion`    VARCHAR(20)    NOT NULL,
     `kindOf`    VARCHAR(20)    NOT NULL,
     `content`    TEXT NOT NULL,
     `region`    VARCHAR(20) NOT    NULL,
     `weight`    FLOAT NOT NULL,
-	`img` VARCHAR(40) NOT NULL,
+	`img` TEXT NOT NULL,
+    `orgImg` TEXT ,
     `heart` INT NOT NULL DEFAULT 0 
 );
 CREATE TABLE IF NOT EXISTS `friend` (
@@ -21,8 +23,8 @@ CREATE TABLE IF NOT EXISTS `friend` (
     `intro`    TEXT    NOT NULL,
     `region`    VARCHAR(20) NOT NULL,
     `kindOf`    VARCHAR(20)    NOT NULL,
-          `img` VARCHAR(40) NOT NULL,
-      `orgImg`  VARCHAR(40) NOT NULL,
+          `img` TEXT NOT NULL,
+      `orgImg`  TEXT NOT NULL,
     `heart` INT NOT NULL DEFAULT 0 
 );
 
