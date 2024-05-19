@@ -57,5 +57,6 @@ export const useAlcoholStore = defineStore('alcohol', () => {
         router.push({ name: 'alcohol-list', params: alcohol.value.region })
       })
   }
+
   return { alcoholList, getAlcoholList, searchAlcoholList, alcohol, createAlcohol, likeup, likedown, update, alcoholDetail }
 })

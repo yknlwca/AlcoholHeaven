@@ -22,6 +22,8 @@ import noticeDetail from '@/components/notice/NoticeDetail.vue'
 import noticeCreate from '@/components/notice/NoticeCreate.vue'
 import FoodUpdate from '@/components/food/FoodUpdate.vue'
 import FriendUpdate from '@/components/friend/FriendUpdate.vue'
+import NoticeUpdate from '@/components/notice/NoticeUpdate.vue'
+import AlcoholCreate from '@/components/alcohol/AlcoholCreate.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,6 +54,11 @@ const router = createRouter({
       path: '/alcohol/:name/:id',
       name: 'alcohol-detail',
       component: AlcoholDetail
+    },
+    {
+      path: '/alcohol/create/:region',
+      name: 'alcoholCreate',
+      component: AlcoholCreate
     },
     {
       path: '/food',
@@ -126,6 +133,11 @@ const router = createRouter({
           path: ':id',
           name: 'noticeDetail',
           component: noticeDetail
+        }
+        ,{
+          path: 'update/:id',
+          name: 'noticeUpdate',
+          component: NoticeUpdate
         }
       ]
     },

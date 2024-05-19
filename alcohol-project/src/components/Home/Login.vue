@@ -31,7 +31,6 @@ const store = useUserstore();
 
 const id = ref('');
 const password = ref('');
-const signIn = ref(false);
 
 
 const login = async () => {
@@ -52,7 +51,6 @@ const login = async () => {
 
 onMounted(() => {
   store.setSignIn(sessionStorage.getItem('signIn') === 'true');
-  console.log(store.signIn)
 });
 
 const register = () => {
