@@ -8,8 +8,7 @@ import com.ssafy.alcohol.model.dto.Alcohol;
 import com.ssafy.alcohol.model.dto.SearchCondition;
 
 public interface AlcoholService {
-	
-	
+
 	List<Alcohol> searchBoard(SearchCondition condition);
 
 	Alcohol readAlcohol(int id);
@@ -23,10 +22,12 @@ public interface AlcoholService {
 	List<Alcohol> selectAlcohol(String region);
 
 	List<Alcohol> selectAll();
-	
+
 	boolean likeUp(int id);
-	
+
 	boolean likeDown(int id);
-	
+
 	public void fileAlcohol(MultipartFile multipartFile, Alcohol alcohol);
+
+	public void updateAlcohol(MultipartFile multipartFile, Alcohol alcohol);
 }

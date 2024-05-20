@@ -34,8 +34,8 @@
 
 <update id="updateAlcohol" parameterType="Alcohol">
 	UPDATE alcohol
-	SET userId = #{userID}, name = #{name}, detailRegion = #{detailRegion}, kindOf = #{kindOf}, content = #{content},
-	region = #{region}, weight= #{weight}, img = #{img}
+	SET userId = #{userId}, name = #{name}, detailRegion = #{detailRegion}, kindOf = #{kindOf}, content = #{content},
+	region = #{region}, weight= #{weight}, img = #{img}, orgImg = #{orgImg}
 	WHERE id = #{id};
 </update>
 
