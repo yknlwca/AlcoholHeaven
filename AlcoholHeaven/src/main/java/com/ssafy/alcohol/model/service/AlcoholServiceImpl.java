@@ -91,7 +91,7 @@ public class AlcoholServiceImpl implements AlcoholService {
 					}
 				}
 
-				File file = new File(uploadDirectory, fileId);
+				File file = new File(uploadDirectory, fileId + "." + arr[arr.length - 1]);
 				multipartFile.transferTo(file);
 
 				alDao.insertAlcohol(alcohol);
@@ -104,4 +104,44 @@ public class AlcoholServiceImpl implements AlcoholService {
 
 	}
 
+	@Override
+	public void updateAlcohol(MultipartFile multipartFile,Alcohol alcohol) {
+		if (multipartFile != null && multipartFile.getSize() > 0) {
+			try {
+				String fileName = multipartFile.getOriginalFilename();
+				String fileId = UUID.randomUUID().toString();
+
+				System.out.println("파일 이름: " + fileName);
+				System.out.println("파일 크기: " + multipartFile.getSize());
+
+				String[] arr = fileName.split("\\.");
+				if (arr.length > 1) {
+					alcohol.setImg(fileId + "." + arr[arr.length - 1]);
+				} else {
+					alcohol.setImg(fileId);
+				}
+				alcohol.setOrgImg(fileName);
+
+				String uploadDir = System.getProperty("user.dir") + "/uploads/alcohol";
+				File uploadDirectory = new File(uploadDir);
+				if (!uploadDirectory.exists()) {
+					boolean dirCreated = uploadDirectory.mkdirs(); // 디렉토리가 존재하지 않으면 생성
+					if (dirCreated) {
+						System.out.println("업로드 디렉토리가 생성되었습니다: " + uploadDir);
+					} else {
+						System.err.println("업로드 디렉토리 생성에 실패했습니다: " + uploadDir);
+					}
+				}
+
+				File file = new File(uploadDirectory, fileId + "." + arr[arr.length - 1]);
+				multipartFile.transferTo(file);
+
+				alDao.updateAlcohol(alcohol);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
