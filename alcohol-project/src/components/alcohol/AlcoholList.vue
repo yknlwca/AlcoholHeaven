@@ -86,29 +86,28 @@
 
 <script setup>
 import { useRoute, useRouter } from "vue-router";
-import { onMounted, ref, watch, computed } from "vue";
+import { onMounted, ref, watch, computed, onUnmounted } from "vue";
 import { useAlcoholStore } from "@/stores/alcohol";
 import ALcoholSearch from "./ALcoholSearch.vue";
 const route = useRoute();
 const name = ref(route.params.name);
 const store = useAlcoholStore();
 const currentPage = ref(localStorage.getItem("page"));
-watch(
-  () => route.params.name,
-  (newName) => {
-    name.value = newName;
-    currentPage.value = 1;
-    localStorage.setItem("page", 1);
-    store.getAlcoholList(name.value);
-  }
-);
-
 onMounted(() => {
-  console.log(route.query);
   name.value = route.params.name;
   currentPage.value = localStorage.getItem("page");
+  if (!route.query.key) {
+    store.getAlcoholList(name.value);
+  } else {
+    store.searchAlcoholList(
+      { key: route.query.key, word: route.query.word },
+      name.value
+    );
+  }
 });
-
+onUnmounted(() => {
+  localStorage.setItem("alcohol", null);
+});
 const perPage = 4;
 
 if (localStorage.getItem("page") == 1) {
@@ -151,6 +150,16 @@ watch(
         name.value
       );
     }
+  }
+);
+watch(
+  () => route.params.name,
+  (newName) => {
+    console.log("param", "바뀜");
+    name.value = newName;
+    currentPage.value = 1;
+    localStorage.setItem("page", 1);
+    store.getAlcoholList(newName);
   }
 );
 const like = ref(false);
