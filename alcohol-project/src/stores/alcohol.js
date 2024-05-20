@@ -9,7 +9,7 @@ export const useAlcoholStore = defineStore('alcohol', () => {
   const getAlcoholList = function (region) {
     axios.get(`${REST_ALCOHOL_API}/${region}`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         alcoholList.value = response.data
       })
   }
