@@ -2,10 +2,15 @@
   <div class="container">
     <div class="alcohol">
       <div id="map" class="text-center">
-        <div v-if="name !== null" class="d-flex align-items-center justify-content-center">
+        <div
+          v-if="name !== null"
+          class="d-flex align-items-center justify-content-center"
+        >
           <h1 style="display: inline-block">현재 지역 : {{ name }}</h1>
           &nbsp;
-          <button class="btn btn-success btn-sm" @click="createAlcohol">술 추가하기</button>
+          <button class="btn btn-success btn-sm" @click="createAlcohol">
+            술 추가하기
+          </button>
         </div>
       </div>
       <router-view></router-view>
@@ -128,9 +133,9 @@ function drawMap(target) {
 onUnmounted(() => {
   localStorage.removeItem("name");
 });
-const createAlcohol = function(){
-  router.push({name:'alcoholCreate'})
-}
+const createAlcohol = function () {
+  router.push({ name: "alcoholCreate", params: { region: name.value } });
+};
 </script>
 <style scoped>
 .alcohol {

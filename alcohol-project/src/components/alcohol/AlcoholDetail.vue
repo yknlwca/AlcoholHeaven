@@ -5,10 +5,13 @@
     <hr />
     <div class="left d-flex flex-column p-2" style="width: 70%">
       <div class="d-flex justify-content-center">
-        <img style="width: 70%; height: 100%; border-radius: 10%" :src="`http://localhost:8080/uploads/alcohol/${store.alcohol.img}`" alt="" />
+        <img
+          style="width: 70%; height: 100%; border-radius: 10%"
+          :src="`http://localhost:8080/uploads/alcohol/${store.alcohol.img}`"
+          alt=""
+        />
       </div>
       <div class="container" style="width: 75%">
-
         <Review :review-type="{ id: id, type: 1 }" />
       </div>
     </div>
@@ -17,19 +20,29 @@
       <div>
         <h3>이름 : {{ store.alcohol.name }}</h3>
         <div v-if="store.alcohol.userId === loginUser.id">
-          <button type="button" class="btn btn-outline-success" style="
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            style="
               --bs-btn-padding-y: 0.25rem;
               --bs-btn-padding-x: 0.5rem;
               --bs-btn-font-size: 0.75rem;
-            " @click="moveUpdate">
+            "
+            @click="moveUpdate"
+          >
             수정
           </button>
           <span>&nbsp;</span>
-          <button type="button" class="btn btn-outline-success" style="
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            style="
               --bs-btn-padding-y: 0.25rem;
               --bs-btn-padding-x: 0.5rem;
               --bs-btn-font-size: 0.75rem;
-            " @click="alcoholDelete">
+            "
+            @click="alcoholDelete"
+          >
             삭제
           </button>
         </div>
@@ -70,7 +83,7 @@ const moveUpdate = function () {
   router.push({ name: "alcoholUpdate", params: { id: id.value } });
 };
 const alcoholDelete = function () {
-  store.deleteAlcohol(id.value);
+  store.deleteAlcohol(id.value, store.alcohol.region);
 };
 
 // 지도

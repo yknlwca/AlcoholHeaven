@@ -27,14 +27,17 @@ export const useAlcoholStore = defineStore('alcohol', () => {
         console.log(alcohol.value)
       })
   }
-  const createAlcohol = function (alcohol) {
+  const createAlcohol = function (formData,region) {
     axios({
-      url: REST_ALCOHOL_API,
+      url: `${REST_ALCOHOL_API}/file`,
       method: 'POST',
-      data: alcohol,
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     })
       .then(() => {
-        router.push({ name: 'alcohol-list', params: alcohol.value.region })
+        router.push({ name: 'alcohol-list', params: {name:region }})
       })
       .catch((err) => {
         console.log(err)
@@ -52,12 +55,28 @@ export const useAlcoholStore = defineStore('alcohol', () => {
         console.log(alcohol.value)
       })
   }
-  const update = function (id) {
-    axios.put(`${REST_ALCOHOL_API}/update/${id}`, alcohol.value)
+  const updateAlcohol = function (id,region, formData) {
+    axios({
+      url: `${REST_ALCOHOL_API}/file/${id}`,
+      method: 'PUT',
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
       .then(() => {
-        router.push({ name: 'alcohol-list', params: alcohol.value.region })
+        router.push({ name: 'alcohol-detail', params: { id: id, name:region } });
       })
+      .catch((error) => {
+        console.error("There was an error updating the food item:", error);
+      });
+  };
+  const deleteAlcohol = function(id, region){
+    axios.delete(`${REST_ALCOHOL_API}/${id}`)
+    .then(()=>{
+      router.push({name:'alcohol-list', params:{name:region}})
+    })
   }
 
-  return { alcoholList, getAlcoholList, searchAlcoholList, alcohol, createAlcohol, likeup, likedown, update, alcoholDetail }
+  return { alcoholList, getAlcoholList, searchAlcoholList, alcohol, createAlcohol, likeup, likedown, updateAlcohol, alcoholDetail, deleteAlcohol  }
 })
