@@ -59,18 +59,30 @@
       </div>
       <hr />
       <!-- 지도 키워드 -->
-      <div>
-        <h5>{{ store.food.region }} 주변 {{ store.food.menu }} 맛집</h5>
-        지도
-        <kakaoMap :food="store.food" />
-      </div>
+      <!-- <h5>{{ store.food.region }} 주변 {{ store.food.menu }} 맛집</h5> -->
+      <KakaoMap
+        style="border-radius: 10%; width: 100%"
+        :lat="37.566826"
+        :lng="126.9786567"
+        @onLoadKakaoMap="onLoadKakaoMap"
+      >
+        <KakaoMapMarker
+          v-for="(marker, index) in markerList"
+          :key="marker.key === undefined ? index : marker.key"
+          :lat="marker.lat"
+          :lng="marker.lng"
+          :infoWindow="marker.infoWindow"
+          :clickable="true"
+          @onClickKakaoMapMarker="onClickMapMarker(marker)"
+        />
+      </KakaoMap>
     </div>
   </div>
 </template>
 
 <script setup>
 import Review from "@/components/common/Review.vue";
-import kakaoMap from "@/components/kakao/KakaoMap.vue";
+import { KakaoMap, KakaoMapMarker } from "vue3-kakao-maps";
 import { useRoute, useRouter } from "vue-router";
 import { onMounted, ref, reactive } from "vue";
 import { useFoodStore } from "@/stores/food";
@@ -88,6 +100,71 @@ const moveUpdate = function () {
 };
 const foodDelete = function () {
   store.deleteFood(id.value);
+};
+
+// 지도
+// npm install vue3-kakao-maps
+const map = ref();
+const markerList = ref([]);
+
+const onLoadKakaoMap = (mapRef) => {
+  map.value = mapRef;
+
+  // 장소 검색 객체 생성
+  const ps = new kakao.maps.services.Places();
+
+  // 키워드 장소 검색
+  const keyword = store.food.region + " " + store.food.menu + "맛집";
+  // console.log(keyword);
+  ps.keywordSearch(keyword, placesSearchCB);
+};
+
+// 키워드 검색 완료 시 호출되는 콜백 함수
+const placesSearchCB = (data, status) => {
+  if (status === kakao.maps.services.Status.OK) {
+    // 검색된 장소 위치를 기준으로 지도 범위를 재설정
+    // LatLngBounds 객체에 좌표 추가
+    const bounds = new kakao.maps.LatLngBounds();
+
+    for (let marker of data) {
+      // console.log(marker);
+      const markerItem = {
+        lat: marker.y,
+        lng: marker.x,
+        infoWindow: {
+          content:
+            `<div  style="
+              font-size: 10px;
+            ">` +
+            marker.place_name +
+            `<br>` +
+            `<p>` +
+            marker.road_address_name +
+            `</p>` +
+            marker.phone +
+            `</div>`,
+          visible: false,
+        },
+      };
+      markerList.value.push(markerItem);
+      bounds.extend(new kakao.maps.LatLng(Number(marker.y), Number(marker.x)));
+    }
+
+    // 검색된 장소 위치 기준 지도 범위 재설정
+    map.value?.setBounds(bounds);
+  }
+};
+
+// 마커 클릭시 인포윈도우의 visible 값 반전
+const onClickMapMarker = (markerItem) => {
+  if (
+    markerItem.infoWindow?.visible !== null &&
+    markerItem.infoWindow?.visible !== undefined
+  ) {
+    markerItem.infoWindow.visible = !markerItem.infoWindow.visible;
+  } else {
+    markerItem.infoWindow.visible = true;
+  }
 };
 </script>
 
