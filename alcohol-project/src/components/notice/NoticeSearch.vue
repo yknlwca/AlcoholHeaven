@@ -11,24 +11,24 @@
           <input type="text" class="form-control" v-model="searchInfo.word" />
         </div>
         <div class="col-2">
-          <button class="btn btn-success" @click="searchFoodList">검색</button>
+          <button class="btn btn-success" @click="searchNoticeList">검색</button>
         </div>
       </div>
     </div>
   </template>
   
   <script setup>
-  import { ref, computed } from "vue";
+  import { ref,  } from "vue";
   import { useNoticeStore } from "@/stores/notice";
-  import { useRoute } from "vue-router";
   
-  const route = useRoute();
   const store = useNoticeStore();
   const searchInfo = ref({
     key: "none",
     word: "",
   });
   const searchNoticeList = function () {
+    localStorage.setItem("page", 1);
+
     store.searchNoticeList(searchInfo.value);
   };
   </script>

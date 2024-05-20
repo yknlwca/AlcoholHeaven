@@ -48,6 +48,7 @@ export const useFriendStore = defineStore('friend', () => {
     })
       .then((response) => {
         friendList.value = response.data;
+        router.push({name:'friendList',query:{key:searchCondition.key, word: searchCondition.word,}})
       })
   };
 

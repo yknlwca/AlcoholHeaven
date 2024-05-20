@@ -36,11 +36,11 @@
               세부 지역 : {{ alcohol.detailRegion }}
             </li>
             <li class="list-group-item">종류 : {{ alcohol.kindOf }}</li>
-            <li class="list-group-item">좋아요 : {{ alcohol.heart }}</li>
+            <li class="list-group-item">좋아요 : {{ storeLike.likeCnt(1,alcohol.id) }}</li>
             <i
               class="bi bi-heart"
-              :class="{ red: like }"
-              @click="clickHeart(alcohol.id)"
+              :class="{ red: storeLike.check({id:0,userId: loginUser.id, type:1, boardId:alcohol.id}) }"
+              @click="clickHeart({id:0,userId: loginUser.id, type:1, boardId:alcohol.id})"
             ></i>
           </ul>
         </div>
@@ -89,10 +89,13 @@ import { useRoute, useRouter } from "vue-router";
 import { onMounted, ref, watch, computed, onUnmounted } from "vue";
 import { useAlcoholStore } from "@/stores/alcohol";
 import ALcoholSearch from "./ALcoholSearch.vue";
+import { useLikeStore } from "@/stores/boardLike";
 const route = useRoute();
 const name = ref(route.params.name);
 const store = useAlcoholStore();
 const currentPage = ref(localStorage.getItem("page"));
+const loginUser = ref(JSON.parse(sessionStorage.getItem("loginUser")));
+const storeLike = useLikeStore();
 onMounted(() => {
   name.value = route.params.name;
   currentPage.value = localStorage.getItem("page");
@@ -106,7 +109,8 @@ onMounted(() => {
   }
 });
 onUnmounted(() => {
-  localStorage.setItem("alcohol", null);
+  // localStorage.setItem("alcohol", null);
+  localStorage.setItem("page",1)
 });
 const perPage = 4;
 
@@ -134,7 +138,7 @@ watch(
       currentPage.value * perPage
     ),
   () => {
-    console.log(route.query);
+    // console.log(route.query);
     currentPage.value = localStorage.getItem("page");
   }
 );
@@ -162,15 +166,15 @@ watch(
     store.getAlcoholList(newName);
   }
 );
-const like = ref(false);
 
-const clickHeart = function (id) {
-  if (like.value) {
-    like.value = false;
-    store.likedown(id);
+const clickHeart = function (boardLike) {
+  console.log(storeLike.check(boardLike))
+  if (storeLike.check(boardLike)) {
+    storeLike.removeLike(boardLike);
+    console.log(storeLike.check(boardLike))
   } else {
-    like.value = true;
-    store.likeup(id);
+    storeLike.clickLike(boardLike);
+    console.log(storeLike.check(boardLike))
   }
 };
 </script>
