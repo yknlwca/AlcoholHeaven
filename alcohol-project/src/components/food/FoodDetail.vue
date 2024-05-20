@@ -5,7 +5,11 @@
     <hr />
     <div class="left d-flex flex-column p-2" style="width: 70%">
       <div class="d-flex justify-content-center">
-        <img style="width: 70%; border-radius: 10%" :src="`http://localhost:8080/uploads/food/${store.food.img}`" alt="" />
+        <img
+          style="width: 70%; border-radius: 10%"
+          :src="`http://localhost:8080/uploads/food/${store.food.img}`"
+          alt=""
+        />
       </div>
       <div class="container" style="width: 75%">
         <!-- 리뷰 띄우기 -->
@@ -19,19 +23,29 @@
       <div>
         <h3>제목 : {{ store.food.title }}</h3>
         <div v-if="store.food.userId === loginUser.id">
-          <button type="button" class="btn btn-outline-success" style="
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            style="
               --bs-btn-padding-y: 0.25rem;
               --bs-btn-padding-x: 0.5rem;
               --bs-btn-font-size: 0.75rem;
-            " @click="moveUpdate">
+            "
+            @click="moveUpdate"
+          >
             수정
           </button>
           <span>&nbsp;</span>
-          <button type="button" class="btn btn-outline-success" style="
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            style="
               --bs-btn-padding-y: 0.25rem;
               --bs-btn-padding-x: 0.5rem;
               --bs-btn-font-size: 0.75rem;
-            " @click="foodDelete">
+            "
+            @click="foodDelete"
+          >
             삭제
           </button>
         </div>
@@ -48,6 +62,7 @@
       <div>
         <h5>{{ store.food.region }} 주변 {{ store.food.menu }} 맛집</h5>
         지도
+        <kakaoMap :food="store.food" />
       </div>
     </div>
   </div>
@@ -55,8 +70,9 @@
 
 <script setup>
 import Review from "@/components/common/Review.vue";
+import kakaoMap from "@/components/kakao/KakaoMap.vue";
 import { useRoute, useRouter } from "vue-router";
-import { onMounted, ref, toRaw } from "vue";
+import { onMounted, ref, reactive } from "vue";
 import { useFoodStore } from "@/stores/food";
 
 const route = useRoute();
@@ -73,8 +89,6 @@ const moveUpdate = function () {
 const foodDelete = function () {
   store.deleteFood(id.value);
 };
-
-// 지도
 </script>
 
 <style scoped></style>
