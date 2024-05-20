@@ -1,11 +1,11 @@
-
 <template>
   <div>
     <RouterView />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+localStorage.removeItem("name");
+</script>
 
-<style scoped>
-</style>
+<style scoped></style>

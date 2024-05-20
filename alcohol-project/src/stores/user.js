@@ -111,4 +111,6 @@ export const useUserstore = defineStore('user', () => {
     checkSignIn,
     logout
   }
-})
+},{
+  persist: true,
+},)
