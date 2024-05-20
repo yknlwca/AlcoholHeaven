@@ -60,4 +60,6 @@ export const useReviewStore = defineStore('review', () => {
     createReview,
     deleteReview
   }
-});
+},{
+  persist: true,
+},);

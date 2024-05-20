@@ -12,11 +12,12 @@ export const useAlcoholStore = defineStore('alcohol', () => {
         alcoholList.value = response.data
       })
   }
-  const searchAlcoholList = function (condition) {
+  const searchAlcoholList = function (condition,region) {
     axios.get(`${REST_ALCOHOL_API}/search`, {
       params: condition
     }).then((response) => {
-      alcoholList.value = response.data.filter((alcohol) => alcohol.region === localStorage.getItem('name'))
+      alcoholList.value = response.data.filter((alcohol) => alcohol.region === region)
+      router.push({name:'alcohol-list', params:{name:localStorage.getItem('name')}, query:{key:condition.key, word: condition.word,},})
     })
   }
   const alcohol = ref({})
@@ -24,7 +25,7 @@ export const useAlcoholStore = defineStore('alcohol', () => {
     axios.get(`${REST_ALCOHOL_API}/detail/${id}`)
       .then((response) => {
         alcohol.value = response.data
-        console.log(alcohol.value)
+        // console.log(alcohol.value)
       })
   }
   const createAlcohol = function (formData,region) {
@@ -79,4 +80,6 @@ export const useAlcoholStore = defineStore('alcohol', () => {
   }
 
   return { alcoholList, getAlcoholList, searchAlcoholList, alcohol, createAlcohol, likeup, likedown, updateAlcohol, alcoholDetail, deleteAlcohol  }
-})
+},{
+  persist: true,
+},)
