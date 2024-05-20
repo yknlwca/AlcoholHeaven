@@ -14,7 +14,7 @@ export const useReviewStore = defineStore('review', () => {
     // 술1, 음식2, 친구3
     axios.get(`${REST_REVIEW_API}/${type}/${id}`)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         reviewList.value = response.data;
 
       })
