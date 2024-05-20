@@ -62,9 +62,9 @@ CREATE TABLE IF NOT EXISTS  `USER` (
 	`id` VARCHAR(20) NOT NULL UNIQUE,
     `password`    VARCHAR(20)    NOT NULL,
     `name`    VARCHAR(20)    NOT NULL,
-    `idNumber`    BIGINT    NOT NULL,
+    `idNumber`    VARCHAR(13)    NOT NULL,
     `email`    VARCHAR(50)    NOT NULL,
-    `phoneNumber`    BIGINT    NOT NULL
+    `phoneNumber`    VARCHAR(11)    NOT NULL
 );
 select * from user;
 
@@ -76,6 +76,12 @@ CREATE TABLE IF NOT EXISTS `REVIEW` (
     `writer`    VARCHAR(20)    NOT NULL,
     `content`    TEXT NOT NULL,
     `type` INT NOT NULL
+);
+CREATE TABLE `boardLike` (
+	`id`	 INT    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`userId`	VARCHAR(20)	NOT NULL,
+	`type`	INT	NOT NULL,
+	`boardId`	INT	NOT NULL
 );
 
 INSERT INTO review (id, writer, content, type)
