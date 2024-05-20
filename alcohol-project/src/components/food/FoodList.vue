@@ -59,7 +59,7 @@
         </li>
         <li
           class="page-item"
-          :class="{ active: currentPage === page }"
+          :class="{ active: currentPage == page }"
           v-for="page in pageCount"
           :key="page"
         >
@@ -83,28 +83,39 @@
 
 <script setup>
 import { useFoodStore } from "@/stores/food";
-import { computed, ref, onMounted } from "vue";
+import { computed, ref, onMounted,onUnmounted, watch } from "vue";
 import {useRouter, useRoute} from 'vue-router'
 import FoodSearch from "@/components/food/FoodSearch.vue";
 
 const store = useFoodStore();
 const router = useRouter();
-
+const route = useRoute();
+const currentPage = ref(localStorage.getItem("page"));
 onMounted(() => {
-  store.getFoodList();
-});
+  currentPage.value = localStorage.getItem("page");
+  if(!route.query.key){
+    store.getFoodList();
+  }else{
+    store.searchFoodList({ key: route.query.key, word: route.query.word });
 
+  }
+});
+onUnmounted(() => {
+  // localStorage.setItem("alcohol", null);
+  localStorage.setItem("page",1)
+});
 const perPage = 10;
-const currentPage = ref(1);
+
 
 const pageCount = computed(() => {
   return Math.ceil(store.foodList.length / perPage);
 });
 
 const clickPage = function (page) {
+  localStorage.setItem("page", page);
   currentPage.value = page;
 };
-console.log(store.foodList);
+// console.log(store.foodList);
 const currentPageFoodList = computed(() => {
   return store.foodList.slice(
     (currentPage.value - 1) * perPage,
@@ -114,6 +125,30 @@ const currentPageFoodList = computed(() => {
 const createFood = function(){
   router.push({name: 'foodCreate'})
 }
+watch(
+  () =>
+    store.foodList.slice(
+      (currentPage.value - 1) * perPage,
+      currentPage.value * perPage
+    ),
+  () => {
+    // console.log(route.query);
+    currentPage.value = localStorage.getItem("page");
+  }
+);
+watch(
+  () => route.query.key,
+  () => {
+    // console.log("바뀜");
+    if (!route.query.key) {
+      store.getFoodList();
+    } else {
+      store.searchFoodList(
+        { key: route.query.key, word: route.query.word }
+      );
+    }
+  }
+);
 </script>
 
 <style scoped>
