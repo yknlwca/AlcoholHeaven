@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+localStorage.removeItem("name");
+</script>
 
 <template>
   <div>
-    <RouterView/>
+    <RouterView />
   </div>
 </template>

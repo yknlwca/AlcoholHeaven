@@ -60,7 +60,7 @@
           </li>
           <li
             class="page-item"
-            :class="{ active: currentPage === page }"
+            :class="{ active: currentPage == page }"
             v-for="page in pageCount"
             :key="page"
           >
@@ -85,38 +85,41 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { onMounted, ref, watch, computed } from "vue";
 import { useAlcoholStore } from "@/stores/alcohol";
 import ALcoholSearch from "./ALcoholSearch.vue";
-import { active } from "d3";
 const route = useRoute();
 const name = ref(route.params.name);
 const store = useAlcoholStore();
+const currentPage = ref(localStorage.getItem("page"));
 watch(
   () => route.params.name,
   (newName) => {
     name.value = newName;
-  }
-);
-// const alcoholList = ref(store.getAlcoholList(name.value));
-watch(
-  () => store.getAlcoholList(name.value),
-  (newList) => {
-    store.alcoholList.value = newList;
+    currentPage.value = 1;
+    localStorage.setItem("page", 1);
+    store.getAlcoholList(name.value);
   }
 );
 
 onMounted(() => {
+  console.log(route.query);
   name.value = route.params.name;
-  store.getAlcoholList(name.value);
+  currentPage.value = localStorage.getItem("page");
 });
+
 const perPage = 4;
-const currentPage = ref(1);
+
+if (localStorage.getItem("page") == 1) {
+  currentPage.value = 1;
+}
+
 const pageCount = computed(() => {
   return Math.ceil(store.alcoholList.length / perPage);
 });
 const clickPage = function (page) {
+  localStorage.setItem("page", page);
   currentPage.value = page;
 };
 const currentPageAlcoholList = computed(() => {
@@ -125,6 +128,31 @@ const currentPageAlcoholList = computed(() => {
     currentPage.value * perPage
   );
 });
+watch(
+  () =>
+    store.alcoholList.slice(
+      (currentPage.value - 1) * perPage,
+      currentPage.value * perPage
+    ),
+  () => {
+    console.log(route.query);
+    currentPage.value = localStorage.getItem("page");
+  }
+);
+watch(
+  () => route.query.key,
+  () => {
+    console.log("바뀜");
+    if (!route.query.key) {
+      store.getAlcoholList(name.value);
+    } else {
+      store.searchAlcoholList(
+        { key: route.query.key, word: route.query.word },
+        name.value
+      );
+    }
+  }
+);
 const like = ref(false);
 
 const clickHeart = function (id) {
