@@ -44,6 +44,7 @@ export const useNoticeStore = defineStore('notice', () => {
     })
       .then((response) => {
         noticeList.value = response.data;
+        router.push({name:'noticeList',query:{key:searchCondition.key, word: searchCondition.word,}})
       })
   };
 

@@ -106,7 +106,8 @@ onMounted(() => {
   }
 });
 onUnmounted(() => {
-  localStorage.setItem("alcohol", null);
+  // localStorage.setItem("alcohol", null);
+  localStorage.setItem("page",1)
 });
 const perPage = 4;
 

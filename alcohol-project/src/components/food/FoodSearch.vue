@@ -21,17 +21,16 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref,  } from "vue";
 import { useFoodStore } from "@/stores/food";
-import { useRoute } from "vue-router";
 
-const route = useRoute();
 const store = useFoodStore();
 const searchInfo = ref({
   key: "none",
   word: "",
 });
 const searchFoodList = function () {
+  localStorage.setItem("page", 1);
   store.searchFoodList(searchInfo.value);
 };
 </script>

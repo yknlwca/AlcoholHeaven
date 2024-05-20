@@ -21,21 +21,19 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useFriendStore } from '@/stores/friend';
+import { ref } from "vue";
+import { useFriendStore } from "@/stores/friend";
 
 const store = useFriendStore();
 const searchInfo = ref({
-    key: "none",
-    word: "",
+  key: "none",
+  word: "",
 });
 
 const searchFriendList = function () {
-    store.searchFriendList(searchInfo.value);
+  localStorage.setItem("page", 1);
+  store.searchFriendList(searchInfo.value);
 };
-
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

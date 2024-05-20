@@ -6,8 +6,7 @@ import "bootstrap-icons/font/bootstrap-icons.css"
 
 import { useKakao } from 'vue3-kakao-maps/@utils';
 
-useKakao(import.meta.env.VITE_KAKAO_API_KEY, ['clusterer', 'services', 'drawing']);
-
+useKakao(import.meta.env.VITE_KAKAO_API_KEY, ['clusterer', 'services', 'drawing']); 
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 

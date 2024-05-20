@@ -45,6 +45,7 @@ export const useFoodStore = defineStore('food', () => {
     })
       .then((response) => {
         foodList.value = response.data;
+        router.push({name:'foodList',query:{key:searchCondition.key, word: searchCondition.word,}})
       })
   };
 

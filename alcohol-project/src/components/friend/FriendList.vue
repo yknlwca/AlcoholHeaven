@@ -66,7 +66,7 @@
         </li>
         <li
           class="page-item"
-          :class="{ active: currentPage === page }"
+          :class="{ active: currentPage == page }"
           v-for="page in pageCount"
           :key="page"
         >
@@ -90,25 +90,34 @@
 
 <script setup>
 import { useFriendStore } from "@/stores/friend";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref,onUnmounted,watch } from "vue";
 import FriendSearch from "@/components/friend/FriendSearch.vue";
 import {useRouter, useRoute} from 'vue-router'
 const router = useRouter();
-
+const route = useRoute();
 const store = useFriendStore();
-
+const currentPage = ref(localStorage.getItem("page"));
 onMounted(() => {
-  store.getFriendList();
-});
+  currentPage.value = localStorage.getItem("page");
+  if(!route.query.key){
+    store.getFriendList();
+  }else{
+    store.searchFriendList({ key: route.query.key, word: route.query.word });
 
-const perPage = 10;
-const currentPage = ref(1);
+  }
+});
+onUnmounted(() => {
+  // localStorage.setItem("alcohol", null);
+  localStorage.setItem("page",1)
+});
+const perPage = 1;
 
 const pageCount = computed(() => {
   return Math.ceil(store.friendList.length / perPage);
 });
 
 const clickPage = function (page) {
+  localStorage.setItem("page", page);
   currentPage.value = page;
 };
 
@@ -121,6 +130,30 @@ const currentPageFriendList = computed(() => {
 const createFriend = function(){
   router.push({name: 'friendCreate'})
 }
+watch(
+  () =>
+    store.friendList.slice(
+      (currentPage.value - 1) * perPage,
+      currentPage.value * perPage
+    ),
+  () => {
+    // console.log(route.query);
+    currentPage.value = localStorage.getItem("page");
+  }
+);
+watch(
+  () => route.query.key,
+  () => {
+    // console.log("바뀜");
+    if (!route.query.key) {
+      store.getFriendList();
+    } else {
+      store.searchFriendList(
+        { key: route.query.key, word: route.query.word }
+      );
+    }
+  }
+);
 </script>
 
 <style scoped>
