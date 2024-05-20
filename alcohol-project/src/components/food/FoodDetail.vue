@@ -101,7 +101,7 @@
 import Review from "@/components/common/Review.vue";
 import { KakaoMap, KakaoMapMarker, KakaoMapCustomOverlay } from "vue3-kakao-maps";
 import { useRoute, useRouter } from "vue-router";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useFoodStore } from "@/stores/food";
 
 const route = useRoute();
@@ -127,8 +127,14 @@ const map = ref();
 const markerList = ref([]);
 const infowindow = ref();
 let markers = [];
-const keyword = ref(`${store.food.region} ${store.food.menu} 맛집`);
+const keyword = computed(() => `${store.food.region} ${store.food.menu} 맛집`);
 
+// watch(() => store.food, () => {
+//   searchPlaces();
+// });
+onMounted(() => {
+  searchPlaces();
+})
 const onLoadKakaoMap = (mapRef) => {
   map.value = mapRef;
 
@@ -219,10 +225,10 @@ const getListItem = (index, places) => {
   } else {
     itemStr += `<p>${places.address_name}</p>`;
   }
-
-  itemStr += `<p class="tel">번호 : ${places.phone}</p></div><hr>`;
-
-  el.innerHTML = itemStr;
+  if (places.phone) {
+    itemStr += `<p class="tel">번호 : ${places.phone}</p></div>`;
+  }
+  el.innerHTML = itemStr + `<hr>`;
   el.className = 'item';
 
   return el;
@@ -336,6 +342,23 @@ const removeAllChildNodes = (el) => {
 
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:10px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:500px;}
-#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:170px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.map_wrap {
+            position: relative;
+            width: 100%;
+            height: 500px;
+        }
+        #menu_wrap {
+            position: absolute;
+            border-radius: 10%;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 170px;
+            padding: 5px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.7);
+            z-index: 1;
+            font-size: 12px;
+            border-radius: 10px;
+        }
 </style>
