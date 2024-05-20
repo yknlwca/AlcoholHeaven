@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch, onMounted } from "vue";
 import { useAlcoholStore } from "@/stores/alcohol";
 import { useRoute } from "vue-router";
 
@@ -31,7 +31,9 @@ const searchInfo = ref({
   word: "",
 });
 const searchAlcoholList = function () {
-  store.searchAlcoholList(searchInfo.value);
+  localStorage.setItem("page", 1);
+  store.searchAlcoholList(searchInfo.value, localStorage.getItem("name"));
+  searchInfo.value = { key: "none", word: "" };
 };
 </script>
 

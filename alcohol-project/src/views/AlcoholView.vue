@@ -80,7 +80,9 @@ function drawMap(target) {
           name.value = localStorage.getItem("name");
           router.push({
             name: "alcohol-list",
-            params: { name: d.target.__data__.properties.name },
+            params: {
+              name: d.target.__data__.properties.name,
+            },
           });
         });
 
@@ -130,9 +132,6 @@ function drawMap(target) {
     console.log("Clicked on region:", regionName); // 클릭된 지역 이름 로깅
   }
 }
-onUnmounted(() => {
-  localStorage.removeItem("name");
-});
 const createAlcohol = function () {
   router.push({ name: "alcoholCreate", params: { region: name.value } });
 };

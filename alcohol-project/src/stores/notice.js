@@ -70,4 +70,6 @@ export const useNoticeStore = defineStore('notice', () => {
     deleteNotice,
 
   }
-});
+},{
+  persist: true,
+},);
