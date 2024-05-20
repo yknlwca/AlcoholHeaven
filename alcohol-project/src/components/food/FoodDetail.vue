@@ -101,7 +101,7 @@
 import Review from "@/components/common/Review.vue";
 import { KakaoMap, KakaoMapMarker, KakaoMapCustomOverlay } from "vue3-kakao-maps";
 import { useRoute, useRouter } from "vue-router";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useFoodStore } from "@/stores/food";
 
 const route = useRoute();
@@ -127,8 +127,14 @@ const map = ref();
 const markerList = ref([]);
 const infowindow = ref();
 let markers = [];
-const keyword = ref(`${store.food.region} ${store.food.menu} 맛집`);
+const keyword = computed(() => `${store.food.region} ${store.food.menu} 맛집`);
 
+// watch(() => store.food, () => {
+//   searchPlaces();
+// });
+onMounted(() => {
+  searchPlaces();
+})
 const onLoadKakaoMap = (mapRef) => {
   map.value = mapRef;
 
@@ -219,10 +225,10 @@ const getListItem = (index, places) => {
   } else {
     itemStr += `<p>${places.address_name}</p>`;
   }
-
-  itemStr += `<p class="tel">번호 : ${places.phone}</p></div><hr>`;
-
-  el.innerHTML = itemStr;
+  if (places.phone) {
+    itemStr += `<p class="tel">번호 : ${places.phone}</p></div>`;
+  }
+  el.innerHTML = itemStr + `<hr>`;
   el.className = 'item';
 
   return el;
