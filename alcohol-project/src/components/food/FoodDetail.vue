@@ -64,6 +64,7 @@
         style="border-radius: 10%; width: 100%"
         :lat="37.566826"
         :lng="126.9786567"
+        :level="7"
         @onLoadKakaoMap="onLoadKakaoMap"
       >
         <KakaoMapMarker
