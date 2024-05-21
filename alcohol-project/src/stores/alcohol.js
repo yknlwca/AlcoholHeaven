@@ -29,6 +29,25 @@ export const useAlcoholStore = defineStore('alcohol', () => {
         // console.log(alcohol.value)
       })
   }
+  const content = ref("");
+
+  const getGPT = (region, name) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await axios.get(`http://localhost:8080/gpt/${region}/${name}`);
+        content.value = response.data.choices[0].message.content;
+        resolve(response);
+      } catch (error) {
+        console.error("Error fetching GPT data:", error);
+        reject(error);
+      }
+    });
+  };
+
+  const reset = function () {
+    content.value = "";
+  }
+
   const createAlcohol = function (formData,region) {
     axios({
       url: `${REST_ALCOHOL_API}/file`,
@@ -80,7 +99,7 @@ export const useAlcoholStore = defineStore('alcohol', () => {
     })
   }
 
-  return { alcoholList, getAlcoholList, searchAlcoholList, alcohol, createAlcohol, likeup, likedown, updateAlcohol, alcoholDetail, deleteAlcohol  }
+  return { alcoholList, getAlcoholList, searchAlcoholList, alcohol, createAlcohol, likeup, likedown, updateAlcohol, alcoholDetail, deleteAlcohol,content, getGPT ,reset }
 },{
   persist: true,
 },)
