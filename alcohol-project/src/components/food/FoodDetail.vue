@@ -106,11 +106,7 @@
 
 <script setup>
 import Review from "@/components/common/Review.vue";
-import {
-  KakaoMap,
-  KakaoMapMarker,
-  KakaoMapCustomOverlay,
-} from "vue3-kakao-maps";
+
 import { useRoute, useRouter } from "vue-router";
 import { computed, onMounted, ref, watch } from "vue";
 import { useFoodStore } from "@/stores/food";
@@ -134,18 +130,29 @@ const foodDelete = () => {
 };
 
 // 지도
+import {
+  KakaoMap,
+  KakaoMapMarker,
+  KakaoMapCustomOverlay,
+} from "vue3-kakao-maps";
+import { debounce } from "lodash";
+
 const map = ref();
 const markerList = ref([]);
 const infowindow = ref();
 let markers = [];
+const keywordInput = ref("");
 const keyword = computed(() => `${store.food.region} ${store.food.menu} 맛집`);
 
-// watch(() => store.food, () => {
-//   searchPlaces();
-// });
-onMounted(() => {
+const debouncedSearchPlaces = debounce(() => {
   searchPlaces();
+}, 50);
+
+watch(keyword, () => {
+  keywordInput.value = keyword.value;
+  debouncedSearchPlaces();
 });
+
 const onLoadKakaoMap = (mapRef) => {
   map.value = mapRef;
 
