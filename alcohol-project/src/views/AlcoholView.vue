@@ -2,11 +2,11 @@
   <div class="container">
     <div class="alcohol">
       <div id="map" class="text-center">
-        <div v-if="name === null" class="text-center">
+        <div v-if="name === ''" class="text-center">
           <h1>지역을 선택해주세요.</h1>
         </div>
         <div
-          v-if="name !== null"
+          v-if="name !== ''"
           class="d-flex align-items-center justify-content-center"
         >
           <h1>
@@ -27,12 +27,17 @@ import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
-const name = ref("");
+const name = ref(localStorage.getItem("name") || "");
+
 onMounted(() => {
   drawMap("#map");
-  name.value = localStorage.getItem("name");
-  console.log(name.value);
-  // localStorage.setItem("name", "");
+  watch(
+    () => route.params.name,
+    (newName) => {
+      name.value = newName || "";
+      localStorage.setItem("name", name.value);
+    }
+  );
 });
 onUnmounted(() => {
   localStorage.setItem("name", "");
