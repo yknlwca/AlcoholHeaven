@@ -1,5 +1,4 @@
 <template>
-
   <div class="container text-center my-3">
     <RouterLink to="/"
       ><img src="@/assets/img/알코올천국로고_최종.png" alt="알코올천국입니다!"
@@ -7,14 +6,17 @@
   </div>
   <div class="container text-end" v-if="store.signIn">
     <b>{{ store.user.name }}님 안녕하세요! </b>
-    <button @click="store.logout" class="btn btn-outline-success  btn-sm">로그아웃</button>
+    <button @click="store.logout" class="btn btn-outline-success btn-sm">
+      로그아웃
+    </button>
   </div>
   <!--로그인유저가 null이면 안뜨게 할것임-->
 
   <nav class="my-2" v-if="store.signIn">
-
     <div :class="alcohol">
-      <RouterLink to="/alcohol">지역별 술 찾기</RouterLink>
+      <RouterLink to="/alcohol" @click="removeRegion"
+        >지역별 술 찾기</RouterLink
+      >
     </div>
     <div :class="food">
       <RouterLink :to="{ name: 'foodList' }">안주 찾기</RouterLink>
@@ -48,12 +50,13 @@ const friend = computed(() => {
 const notice = computed(() => {
   if (route.name === "notice") return { active: true };
 });
-
-
+const removeRegion = function () {
+  localStorage.removeItem("name");
+  // setTimeout(location.reload(), 1000);
+};
 onMounted(() => {
   store.checkSignIn();
 });
-
 </script>
 
 <style scoped>
