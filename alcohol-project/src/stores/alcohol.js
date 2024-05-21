@@ -6,6 +6,13 @@ import axios from 'axios'
 export const useAlcoholStore = defineStore('alcohol', () => {
   const REST_ALCOHOL_API = 'http://localhost:8080/api/alcohol'
   const alcoholList = ref([])
+  const getAllAlcoholList = function(){
+    axios.get(`${REST_ALCOHOL_API}`)
+      .then((response)=>{
+        alcoholList.value = response.data
+      })
+    
+  }
   const getAlcoholList = function (region) {
     axios.get(`${REST_ALCOHOL_API}/${region}`)
       .then((response) => {
@@ -99,7 +106,7 @@ export const useAlcoholStore = defineStore('alcohol', () => {
     })
   }
 
-  return { alcoholList, getAlcoholList, searchAlcoholList, alcohol, createAlcohol, likeup, likedown, updateAlcohol, alcoholDetail, deleteAlcohol,content, getGPT ,reset }
+  return { getAllAlcoholList,alcoholList, getAlcoholList, searchAlcoholList, alcohol, createAlcohol, likeup, likedown, updateAlcohol, alcoholDetail, deleteAlcohol,content, getGPT ,reset }
 },{
   persist: true,
 },)

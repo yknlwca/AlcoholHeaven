@@ -33,4 +33,11 @@ public class BoardLikeServiceImpl implements BoardLikeService{
 		return bDao.select(boardLike);
 	}
 
+	@Override
+	public boardLike selectByType(int type) {
+		// TODO Auto-generated method stub
+		return bDao.selectByType(type);
+	}
+
+
 }

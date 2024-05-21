@@ -29,6 +29,11 @@ public class BoardLikeRestController {
 			return new ResponseEntity<>(true,HttpStatus.OK);
 		}
 	}
+	@GetMapping("/{type}")
+	public ResponseEntity<?> selectByType(@PathVariable("type")int type){
+		boardLike boardLike = bService.selectByType(type);
+		return new ResponseEntity<>(boardLike,HttpStatus.OK);
+	}
 	@GetMapping("/{type}/{boardId}")
 	public ResponseEntity<?> likeCnt(@PathVariable("type")int type, @PathVariable("boardId")int boardId){
 		int cnt = bService.likeCnt(type, boardId);

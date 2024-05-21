@@ -11,4 +11,5 @@ public interface BoardLikeDao {
 	int delete(boardLike boardLike);
 	//좋아요 개수
 	int likeCnt(int type, int boardId);
+	boardLike selectByType(int type);
 }

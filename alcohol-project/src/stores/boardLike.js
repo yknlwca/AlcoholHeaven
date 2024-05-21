@@ -63,8 +63,23 @@ export const useLikeStore = defineStore('boardLike', () => {
         throw error;
     }
 }
+  const alcoholLike = ref([])
+  const foodLike = ref([])
+  const friendLike = ref([])
 
-  return {clickLike, removeLike, likeCnt,check }
+  const listByType = function(type){
+    axios.get(`${REST_LIKE_API}/${type}`)
+    .then((response)=>{
+      if(type===1){
+        alcoholLike.value = response.data;
+      }else if(type===2){
+        foodLike.value = response.data;
+      }else{
+        friendLike.value = response.data;
+      }
+    })
+  }
+  return {clickLike, removeLike, likeCnt,check,alcoholLike,foodLike,friendLike,listByType }
 },{
   persist: true,
 },)
