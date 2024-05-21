@@ -49,7 +49,6 @@
                 :boardId="alcohol.id"
               />
             </li>
-
           </ul>
         </div>
       </div>
@@ -178,17 +177,6 @@ watch(
     store.getAlcoholList(newName);
   }
 );
-
-const clickHeart = function (boardLike) {
-  console.log(storeLike.check(boardLike));
-  if (storeLike.check(boardLike)) {
-    storeLike.removeLike(boardLike);
-    console.log(storeLike.check(boardLike));
-  } else {
-    storeLike.clickLike(boardLike);
-    console.log(storeLike.check(boardLike));
-  }
-};
 </script>
 
 <style scoped></style>
