@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ChatGPTRestController {
 
+
     private static String API_KEY = "https://www.notion.so/Project-With-f75a867eb065409c8a3b6b33bbde2b2a";
+
     private static String GPT_URL = "https://api.openai.com/v1/chat/completions";
     private static final int MAX_RETRIES = 5;
     private static final int INITIAL_RETRY_DELAY = 2000;
