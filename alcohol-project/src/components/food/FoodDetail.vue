@@ -395,6 +395,7 @@ const removeAllChildNodes = (el) => {
   padding: 0;
   font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
   font-size: 10px;
+  font-weight: bold;
 }
 .map_wrap a,
 .map_wrap a:hover,
@@ -420,5 +421,6 @@ const removeAllChildNodes = (el) => {
   z-index: 1;
   font-size: 12px;
   border-radius: 10px;
+  /* font-weight: bold; */
 }
 </style>
