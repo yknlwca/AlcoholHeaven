@@ -18,9 +18,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(food,index) in currentPageFoodList" :key="food.id">
+        <tr v-for="(food, index) in currentPageFoodList" :key="food.id">
           <td scope="row">
-            {{ index+1 }}
+            {{ index + 1 }}
           </td>
           <td>
             {{ food.userId }}
@@ -38,14 +38,16 @@
             {{ food.region }}
           </td>
           <td>
-            {{ food.heart }}
+            <LikeCount :type="2" :id="food.id" />
           </td>
         </tr>
       </tbody>
     </table>
-    <div style="width: 70%;">
-    <button class="btn btn-outline-success" @click="createFood">안주 추천하기</button>
-  </div>
+    <div style="width: 70%">
+      <button class="btn btn-outline-success" @click="createFood">
+        안주 추천하기
+      </button>
+    </div>
     <nav aria-label="Page navigation">
       <ul class="pagination d-flex justify-content-center">
         <li class="page-item">
@@ -83,9 +85,10 @@
 
 <script setup>
 import { useFoodStore } from "@/stores/food";
-import { computed, ref, onMounted,onUnmounted, watch } from "vue";
-import {useRouter, useRoute} from 'vue-router'
+import { computed, ref, onMounted, onUnmounted, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import FoodSearch from "@/components/food/FoodSearch.vue";
+import LikeCount from "../common/LikeCount.vue";
 
 const store = useFoodStore();
 const router = useRouter();
@@ -93,19 +96,17 @@ const route = useRoute();
 const currentPage = ref(localStorage.getItem("page"));
 onMounted(() => {
   currentPage.value = localStorage.getItem("page");
-  if(!route.query.key){
+  if (!route.query.key) {
     store.getFoodList();
-  }else{
+  } else {
     store.searchFoodList({ key: route.query.key, word: route.query.word });
-
   }
 });
 onUnmounted(() => {
   // localStorage.setItem("alcohol", null);
-  localStorage.setItem("page",1)
+  localStorage.setItem("page", 1);
 });
 const perPage = 10;
-
 
 const pageCount = computed(() => {
   return Math.ceil(store.foodList.length / perPage);
@@ -122,9 +123,9 @@ const currentPageFoodList = computed(() => {
     currentPage.value * perPage
   );
 });
-const createFood = function(){
-  router.push({name: 'foodCreate'})
-}
+const createFood = function () {
+  router.push({ name: "foodCreate" });
+};
 watch(
   () =>
     store.foodList.slice(
@@ -143,9 +144,7 @@ watch(
     if (!route.query.key) {
       store.getFoodList();
     } else {
-      store.searchFoodList(
-        { key: route.query.key, word: route.query.word }
-      );
+      store.searchFoodList({ key: route.query.key, word: route.query.word });
     }
   }
 );
