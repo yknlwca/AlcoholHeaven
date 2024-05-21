@@ -57,9 +57,20 @@
         <h5>상세 지역 : {{ store.alcohol.detailRegion }}</h5>
       </div>
       <hr />
-      <!-- 지도 키워드 -->
       <div>
-        <button>{{ store.alcohol.name }}과 어울리는 안주 추천받기</button>
+        <button
+          class="btn btn-outline-success"
+          @click="getGPT(store.alcohol.region, store.alcohol.name)"
+        >
+          {{ store.alcohol.name }}과 어울리는 안주 추천받기
+        </button>
+      </div>
+      <div v-if="loading" class="loading-animation text-center">
+        <i class="bi bi-hourglass-split" style="font-size: 80px"></i>
+      </div>
+      <div v-if="store.content">
+        <hr />
+        <p v-for="line in store.content.split('\n')">{{ line }}</p>
       </div>
     </div>
   </div>
@@ -68,13 +79,18 @@
 <script setup>
 import Review from "@/components/common/Review.vue";
 import { useRoute, useRouter } from "vue-router";
-import { onMounted, ref, toRaw } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import { useAlcoholStore } from "@/stores/alcohol";
 
 const route = useRoute();
 const router = useRouter();
 const store = useAlcoholStore();
 const id = ref(route.params.id);
+
+onUnmounted(() => {
+  store.reset();
+});
+
 onMounted(() => {
   store.alcoholDetail(id.value);
 });
@@ -86,7 +102,18 @@ const alcoholDelete = function () {
   store.deleteAlcohol(id.value, store.alcohol.region);
 };
 
-// 지도
+const loading = ref(false);
+const getGPT = (region, name) => {
+  loading.value = true;
+  store.getGPT(region, name).finally(() => {
+    loading.value = false;
+  });
+};
 </script>
 
-<style scoped></style>
+<style scoped>
+.loading-animation {
+  font-size: 16px;
+  color: #6237fc;
+}
+</style>

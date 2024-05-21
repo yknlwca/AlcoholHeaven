@@ -17,7 +17,16 @@
     <div class="right d-flex flex-column p-2" style="width: 50%">
       <br /><br />
       <div>
-        <h3>제목 : {{ store.food.title }}</h3>
+        <h3 class="d-flex justify-content-between">
+          제목 : {{ store.food.title }}
+          <LikeItem
+            :id="0"
+            :userId="loginUser.id"
+            :type="2"
+            :boardId="store.food.id"
+          />
+        </h3>
+
         <div v-if="store.food.userId === loginUser.id">
           <button
             type="button"
@@ -57,7 +66,7 @@
       <div class="map_wrap">
         <div class="map_container">
           <KakaoMap
-            style="border-radius: 10%; width: 100%; height: 100%;"
+            style="border-radius: 10%; width: 100%; height: 100%"
             :lat="37.566826"
             :lng="126.9786567"
             :level="7"
@@ -85,10 +94,17 @@
         <div id="menu_wrap" class="bg_white">
           <div class="option">
             <div>
-                추천 : <input type="text" v-model="keyword" id="keyword" size="15" @keyup.enter="searchPlaces">
+              추천 :
+              <input
+                type="text"
+                v-model="keyword"
+                id="keyword"
+                size="15"
+                @keyup.enter="searchPlaces"
+              />
             </div>
           </div>
-          <hr>
+          <hr />
           <ul id="placesList"></ul>
           <div id="pagination"></div>
         </div>
@@ -99,7 +115,8 @@
 
 <script setup>
 import Review from "@/components/common/Review.vue";
-import { KakaoMap, KakaoMapMarker, KakaoMapCustomOverlay } from "vue3-kakao-maps";
+import LikeItem from "@/components/common/LikeItem.vue";
+
 import { useRoute, useRouter } from "vue-router";
 import { computed, onMounted, ref, watch } from "vue";
 import { useFoodStore } from "@/stores/food";
@@ -123,23 +140,34 @@ const foodDelete = () => {
 };
 
 // 지도
+import {
+  KakaoMap,
+  KakaoMapMarker,
+  KakaoMapCustomOverlay,
+} from "vue3-kakao-maps";
+import { debounce } from "lodash";
+
 const map = ref();
 const markerList = ref([]);
 const infowindow = ref();
 let markers = [];
+const keywordInput = ref("");
 const keyword = computed(() => `${store.food.region} ${store.food.menu} 맛집`);
 
-// watch(() => store.food, () => {
-//   searchPlaces();
-// });
-onMounted(() => {
+const debouncedSearchPlaces = debounce(() => {
   searchPlaces();
-})
+}, 50);
+
+watch(keyword, () => {
+  keywordInput.value = keyword.value;
+  debouncedSearchPlaces();
+});
+
 const onLoadKakaoMap = (mapRef) => {
   map.value = mapRef;
 
   infowindow.value = new kakao.maps.InfoWindow({ zIndex: 1 });
-    
+
   // 장소 검색 객체 생성
   const ps = new kakao.maps.services.Places();
 
@@ -149,7 +177,7 @@ const onLoadKakaoMap = (mapRef) => {
 
 const searchPlaces = () => {
   if (!keyword.value.trim()) {
-    alert('키워드를 입력해주세요!');
+    alert("키워드를 입력해주세요!");
     return;
   }
   const ps = new kakao.maps.services.Places();
@@ -162,15 +190,15 @@ const placesSearchCB = (data, status, pagination) => {
     displayPlaces(data);
     displayPagination(pagination);
   } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-    alert('검색 결과가 존재하지 않습니다.');
+    alert("검색 결과가 존재하지 않습니다.");
   } else if (status === kakao.maps.services.Status.ERROR) {
-    alert('검색 결과 중 오류가 발생했습니다.');
+    alert("검색 결과 중 오류가 발생했습니다.");
   }
 };
 
 // 검색 결과 목록과 마커를 표시하는 함수
 const displayPlaces = (places) => {
-  const listEl = document.getElementById('placesList');
+  const listEl = document.getElementById("placesList");
   const fragment = document.createDocumentFragment();
   const bounds = new kakao.maps.LatLngBounds();
 
@@ -187,11 +215,11 @@ const displayPlaces = (places) => {
 
     // 마커와 검색 결과 항목에 mouseover 이벤트 추가
     (function (marker, title) {
-      kakao.maps.event.addListener(marker, 'mouseover', function () {
+      kakao.maps.event.addListener(marker, "mouseover", function () {
         displayInfowindow(marker, title);
       });
 
-      kakao.maps.event.addListener(marker, 'mouseout', function () {
+      kakao.maps.event.addListener(marker, "mouseout", function () {
         infowindow.value.close();
       });
 
@@ -214,7 +242,7 @@ const displayPlaces = (places) => {
 
 // 검색 결과 항목을 생성하는 함수
 const getListItem = (index, places) => {
-  const el = document.createElement('li');
+  const el = document.createElement("li");
   let itemStr = `
     <div class="info">
       <h5>${places.place_name}</h5>`;
@@ -229,22 +257,22 @@ const getListItem = (index, places) => {
     itemStr += `<p class="tel">번호 : ${places.phone}</p></div>`;
   }
   el.innerHTML = itemStr + `<hr>`;
-  el.className = 'item';
+  el.className = "item";
 
   return el;
 };
 
 // 마커를 생성하고 지도에 표시하는 함수
 const addMarker = (position, idx) => {
-  const imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png '
+  const imageSrc =
+    "http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png ";
   const imageSize = new kakao.maps.Size(24, 35); // 이미지 크기 조정
 
   const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
   const marker = new kakao.maps.Marker({
     position: position,
-    image: markerImage
+    image: markerImage,
   });
-
 
   marker.setMap(map.value);
   markers.push(marker);
@@ -262,7 +290,7 @@ const removeMarker = () => {
 
 // 검색 결과 목록 하단에 페이지 번호를 표시하는 함수
 const displayPagination = (pagination) => {
-  const paginationEl = document.getElementById('pagination');
+  const paginationEl = document.getElementById("pagination");
   const fragment = document.createDocumentFragment();
   const currentScroll = window.scrollY;
 
@@ -271,12 +299,12 @@ const displayPagination = (pagination) => {
   }
 
   for (let i = 1; i <= pagination.last; i++) {
-    const el = document.createElement('a');
+    const el = document.createElement("a");
     el.href = "#";
     el.innerHTML = i + " ";
 
     if (i === pagination.current) {
-      el.className = 'on';
+      el.className = "on";
     } else {
       el.onclick = (function (i) {
         return function () {
@@ -284,7 +312,7 @@ const displayPagination = (pagination) => {
           setTimeout(() => {
             window.scrollTo(0, currentScroll);
           }, 100);
-        }
+        };
       })(i);
     }
 
@@ -333,32 +361,66 @@ const removeAllChildNodes = (el) => {
   cursor: pointer;
 }
 
-#placesList li {list-style: none;}
-#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
-#placesList .item span {display: block;margin-top:4px;}
-#pagination {margin:10px auto;text-align: center;}
-#pagination a {display:inline-block;margin-right:10px;}
-#pagination .on {font-weight: bold; cursor: default;color:#777;}
+#placesList li {
+  list-style: none;
+}
+#placesList .item {
+  position: relative;
+  border-bottom: 1px solid #888;
+  overflow: hidden;
+  cursor: pointer;
+  min-height: 65px;
+}
+#placesList .item span {
+  display: block;
+  margin-top: 4px;
+}
+#pagination {
+  margin: 10px auto;
+  text-align: center;
+}
+#pagination a {
+  display: inline-block;
+  margin-right: 10px;
+}
+#pagination .on {
+  font-weight: bold;
+  cursor: default;
+  color: #777;
+}
 
-.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:10px;}
-.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+.map_wrap,
+.map_wrap * {
+  margin: 0;
+  padding: 0;
+  font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+}
+.map_wrap a,
+.map_wrap a:hover,
+.map_wrap a:active {
+  color: #000;
+  text-decoration: none;
+}
 .map_wrap {
-            position: relative;
-            width: 100%;
-            height: 500px;
-        }
-        #menu_wrap {
-            position: absolute;
-            border-radius: 10%;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 170px;
-            padding: 5px;
-            overflow-y: auto;
-            background: rgba(255, 255, 255, 0.7);
-            z-index: 1;
-            font-size: 12px;
-            border-radius: 10px;
-        }
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+#menu_wrap {
+  position: absolute;
+  border-radius: 10%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 170px;
+  padding: 5px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1;
+  font-size: 12px;
+  border-radius: 10px;
+  /* font-weight: bold; */
+}
 </style>

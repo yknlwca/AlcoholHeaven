@@ -36,12 +36,19 @@
               세부 지역 : {{ alcohol.detailRegion }}
             </li>
             <li class="list-group-item">종류 : {{ alcohol.kindOf }}</li>
-            <li class="list-group-item">좋아요 : {{ storeLike.likeCnt(1,alcohol.id) }}</li>
-            <i
-              class="bi bi-heart"
-              :class="{ red: storeLike.check({id:0,userId: loginUser.id, type:1, boardId:alcohol.id}) }"
-              @click="clickHeart({id:0,userId: loginUser.id, type:1, boardId:alcohol.id})"
-            ></i>
+
+            <li class="list-group-item">
+              좋아요 :
+              <LikeCount :type="1" :id="alcohol.id" />
+            </li>
+            <li class="list-group-item">
+              <LikeItem
+                :id="0"
+                :userId="loginUser.id"
+                :type="1"
+                :boardId="alcohol.id"
+              />
+            </li>
           </ul>
         </div>
       </div>
@@ -90,6 +97,10 @@ import { onMounted, ref, watch, computed, onUnmounted } from "vue";
 import { useAlcoholStore } from "@/stores/alcohol";
 import ALcoholSearch from "./ALcoholSearch.vue";
 import { useLikeStore } from "@/stores/boardLike";
+
+import LikeCount from "@/components/common/LikeCount.vue"; // 위의 컴포넌트 파일
+import LikeItem from "@/components/common/LikeItem.vue"; // 위의 컴포넌트 파일
+
 const route = useRoute();
 const name = ref(route.params.name);
 const store = useAlcoholStore();
@@ -110,7 +121,7 @@ onMounted(() => {
 });
 onUnmounted(() => {
   // localStorage.setItem("alcohol", null);
-  localStorage.setItem("page",1)
+  localStorage.setItem("page", 1);
 });
 const perPage = 4;
 
@@ -166,21 +177,6 @@ watch(
     store.getAlcoholList(newName);
   }
 );
-
-const clickHeart = function (boardLike) {
-  console.log(storeLike.check(boardLike))
-  if (storeLike.check(boardLike)) {
-    storeLike.removeLike(boardLike);
-    console.log(storeLike.check(boardLike))
-  } else {
-    storeLike.clickLike(boardLike);
-    console.log(storeLike.check(boardLike))
-  }
-};
 </script>
 
-<style scoped>
-.red {
-  color: red;
-}
-</style>
+<style scoped></style>

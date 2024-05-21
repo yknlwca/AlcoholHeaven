@@ -2,15 +2,19 @@
   <div class="container">
     <div class="alcohol">
       <div id="map" class="text-center">
+        <div v-if="name === ''" class="text-center">
+          <h1>지역을 선택해주세요.</h1>
+        </div>
         <div
-          v-if="name !== null"
+          v-if="name !== ''"
           class="d-flex align-items-center justify-content-center"
         >
-          <h1 style="display: inline-block">현재 지역 : {{ name }}</h1>
-          &nbsp;
-          <button class="btn btn-success btn-sm" @click="createAlcohol">
-            술 추가하기
-          </button>
+          <h1>
+            현재 지역 : {{ name }}
+            <button class="btn btn-success btn-sm" @click="createAlcohol">
+              술 추가하기
+            </button>
+          </h1>
         </div>
       </div>
       <router-view></router-view>
@@ -19,15 +23,26 @@
 </template>
 <script setup>
 import * as d3 from "d3";
-import { ref, onMounted, onUnmounted } from "vue";
-import { useRouter } from "vue-router";
+import { ref, onMounted, onUnmounted, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
-const name = ref("");
-name.value = localStorage.getItem("name");
+const route = useRoute();
+const name = ref(localStorage.getItem("name") || "");
+
 onMounted(() => {
   drawMap("#map");
+  watch(
+    () => route.params.name,
+    (newName) => {
+      name.value = newName || "";
+      localStorage.setItem("name", name.value);
+    }
+  );
 });
-
+onUnmounted(() => {
+  localStorage.setItem("name", "");
+  name.value = null;
+});
 //지도 그리기
 function drawMap(target) {
   var width = 700; //지도의 넓이
@@ -147,6 +162,7 @@ const createAlcohol = function () {
   .alcohol {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
 }
 </style>

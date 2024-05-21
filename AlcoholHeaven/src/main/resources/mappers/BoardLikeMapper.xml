@@ -7,7 +7,7 @@
 	</insert>
 	<delete id="delete" parameterType="boardLike">
 		DELETE FROM boardLike
-		WHERE userId = #{userID}
+		WHERE userId = #{userId}
 		AND type = #{type}
 		AND boardId = #{boardId}
 	</delete>
