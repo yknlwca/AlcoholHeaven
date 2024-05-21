@@ -22,4 +22,8 @@
 		AND type = #{type}
 		AND boardId = #{boardId} 
 	</select>
+	<select id="selectByType" resultType="boardLike" parameterType="int">
+		SELECT * FROM boardLike
+		WHERE type = #{type}
+	</select>
 </mapper>
