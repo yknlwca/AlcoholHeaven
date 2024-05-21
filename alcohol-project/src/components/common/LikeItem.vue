@@ -1,22 +1,20 @@
 <template>
-  <LikeCount :type="type" :id="id" :likeCount="likeCount" />
   <i class="bi bi-heart-fill" :class="{ red: isLiked }" @click="toggleLike"></i>
 </template>
 
 <script setup>
 import { ref, onMounted, defineProps } from "vue";
-import LikeCount from "@/components/alcohol/LikeCount.vue"; // 위의 컴포넌트 파일
 import { useLikeStore } from "@/stores/boardLike";
 import axios from "axios";
 const storeLike = useLikeStore();
-const likeCount = ref(0);
+
 const props = defineProps({
   id: {
     type: Number,
     required: true,
   },
   userId: {
-    type: Number,
+    type: String,
     required: true,
   },
   type: {
@@ -51,7 +49,7 @@ const toggleLike = async () => {
       await storeLike.clickLike(boardLike);
     }
     isLiked.value = !isLiked.value;
-    likeCount.value = await storeLike.likeCnt(props.type, props.id);
+    window.location.reload(true);
   } catch (error) {
     console.error("좋아요 상태를 변경하는 중 오류 발생:", error);
   }
@@ -60,3 +58,8 @@ onMounted(() => {
   checkLike();
 });
 </script>
+<style scoped>
+.red {
+  color: red;
+}
+</style>

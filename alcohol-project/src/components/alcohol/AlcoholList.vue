@@ -36,13 +36,18 @@
               세부 지역 : {{ alcohol.detailRegion }}
             </li>
             <li class="list-group-item">종류 : {{ alcohol.kindOf }}</li>
-
-            <LikeItem
-              :id="0"
-              :userId="loginUser.id"
-              :type="1"
-              :boardId="alcohol.id"
-            />
+            <li class="list-group-item">
+              좋아요 :
+              <LikeCount :type="1" :id="alcohol.id" />
+            </li>
+            <li class="list-group-item">
+              <LikeItem
+                :id="0"
+                :userId="loginUser.id"
+                :type="1"
+                :boardId="alcohol.id"
+              />
+            </li>
           </ul>
         </div>
       </div>
@@ -91,8 +96,8 @@ import { onMounted, ref, watch, computed, onUnmounted } from "vue";
 import { useAlcoholStore } from "@/stores/alcohol";
 import ALcoholSearch from "./ALcoholSearch.vue";
 import { useLikeStore } from "@/stores/boardLike";
-
-import LikeItem from "./LikeItem.vue"; // 위의 컴포넌트 파일
+import LikeCount from "@/components/common/LikeCount.vue"; // 위의 컴포넌트 파일
+import LikeItem from "@/components/common/LikeItem.vue"; // 위의 컴포넌트 파일
 const route = useRoute();
 const name = ref(route.params.name);
 const store = useAlcoholStore();
@@ -182,8 +187,4 @@ const clickHeart = function (boardLike) {
 };
 </script>
 
-<style scoped>
-.red {
-  color: red;
-}
-</style>
+<style scoped></style>

@@ -17,7 +17,16 @@
     <div class="right d-flex flex-column p-2" style="width: 50%">
       <br /><br />
       <div>
-        <h3>제목 : {{ store.food.title }}</h3>
+        <h3 class="d-flex justify-content-between">
+          제목 : {{ store.food.title }}
+          <LikeItem
+            :id="0"
+            :userId="loginUser.id"
+            :type="2"
+            :boardId="store.food.id"
+          />
+        </h3>
+
         <div v-if="store.food.userId === loginUser.id">
           <button
             type="button"
@@ -106,6 +115,7 @@
 
 <script setup>
 import Review from "@/components/common/Review.vue";
+import LikeItem from "@/components/common/LikeItem.vue";
 
 import { useRoute, useRouter } from "vue-router";
 import { computed, onMounted, ref, watch } from "vue";
