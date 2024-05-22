@@ -2,7 +2,7 @@
   <br />
   <div class="container my-2 d-flex flex-column align-items-center">
     <div class="container d-flex justify-content-center">
-      <NoticeSearch style="width: 60%" />
+      <NoticeSearch style="width: 70%" />
     </div>
     <br />
     <table class="table" style="width: 70%">
