@@ -2,7 +2,13 @@
   <div>
     <h5>실시간 인기 안주🍖</h5>
     <div v-for="(food, index) in sortedFoodList" :key="food.id">
-      <p v-if="food.heart != 0">{{ index + 1 }}위 {{ food.title }}</p>
+      <p v-if="food.heart != 0" style="display: inline-block">
+        {{ index + 1 }}위
+      </p>
+      &nbsp;
+      <RouterLink :to="`/food/${food.id}`" v-if="food.heart != 0">
+        <b>{{ food.title }}</b>
+      </RouterLink>
     </div>
   </div>
 </template>
@@ -45,5 +51,9 @@ const sortedFoodList = computed(() => {
 * {
   font-family: "Palatino Linotype", "Book Antiqua";
   font-weight: bold;
+}
+a {
+  color: rgb(3, 130, 84);
+  text-decoration: none;
 }
 </style>

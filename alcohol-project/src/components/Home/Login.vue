@@ -1,9 +1,11 @@
 <template>
+  <div class="main" v-if="store.signIn === false">
+    <span>외로운 사람들 모여라!</span>
+  </div>
   <div
     class="container d-flex flex-column align-items-center justify-content-center my-5"
     v-if="store.signIn === false"
   >
-    <h1>외로운 사람들 모여라!</h1>
     <form
       action=""
       style="width: 100%"
@@ -61,6 +63,8 @@ const login = async () => {
       alert("로그인 중 오류가 발생했습니다.");
     }
   }
+  id.value = "";
+  password.value = "";
 };
 
 onMounted(() => {
@@ -72,4 +76,23 @@ const register = () => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+@keyframes mymove {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 70%;
+  }
+}
+
+.main {
+  display: inline-block;
+  /* width: 100%; */
+  /* height: 100px; */
+  /* margin: 1em; */
+  font-size: 50px;
+  position: relative;
+  animation: mymove 5s forwards;
+}
+</style>

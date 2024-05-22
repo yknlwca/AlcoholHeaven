@@ -10,3 +10,4 @@ localStorage.removeItem("name");
   <!--로그인 유저가 null이 아니면 다른 창-->
   <Home />
 </template>
+<style scoped></style>
