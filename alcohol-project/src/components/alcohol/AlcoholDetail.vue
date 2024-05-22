@@ -26,7 +26,7 @@
             style="
               --bs-btn-padding-y: 0.25rem;
               --bs-btn-padding-x: 0.5rem;
-              --bs-btn-font-size: 0.75rem;
+              --bs-btn-font-size: 0.56em;
             "
             @click="moveUpdate"
           >
@@ -39,7 +39,7 @@
             style="
               --bs-btn-padding-y: 0.25rem;
               --bs-btn-padding-x: 0.5rem;
-              --bs-btn-font-size: 0.75rem;
+              --bs-btn-font-size: 0.6rem;
             "
             @click="alcoholDelete"
           >
@@ -49,12 +49,24 @@
       </div>
       <hr />
       <div>
-        <h5>작성자 : {{ store.alcohol.userId }}</h5>
-        <h5>설명 : {{ store.alcohol.content }}</h5>
-        <h5>도수 : {{ store.alcohol.weight }}</h5>
-        <h5>종류 : {{ store.alcohol.kindOf }}</h5>
-        <h5>지역 : {{ store.alcohol.region }}</h5>
-        <h5>상세 지역 : {{ store.alcohol.detailRegion }}</h5>
+        <h5>설명</h5>
+        <pre>{{ store.alcohol.content }}</pre>
+        <hr />
+        <h5>작성자 :</h5>
+        <span>&nbsp;{{ store.alcohol.userId }}</span>
+        <br />
+        <h5>도수 :</h5>
+        <span>&nbsp;</span>{{ store.alcohol.weight }}
+        <br />
+        <h5>종류 :</h5>
+        <span>&nbsp;</span>{{ store.alcohol.kindOf }}
+        <br />
+        <h5>지역 :</h5>
+        <span>&nbsp;</span>{{ store.alcohol.region }}
+        <br />
+        <h5>상세 지역 :</h5>
+        <span>&nbsp;</span>{{ store.alcohol.detailRegion }}
+        <br />
       </div>
       <hr />
       <div>
@@ -62,12 +74,20 @@
           class="btn btn-outline-success"
           @click="getGPT(store.alcohol.region, store.alcohol.name)"
         >
-          {{ store.alcohol.name }}과 어울리는 안주 추천받기
+          <span v-if="!loading">
+            {{ store.alcohol.name }}과 어울리는 안주 추천받기
+          </span>
+          <span v-if="loading">
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            잠시후 안주가 도착합니다! 잠시만 기다려주세요!
+          </span>
         </button>
       </div>
-      <div v-if="loading" class="loading-animation text-center">
-        <i class="bi bi-hourglass-split" style="font-size: 80px"></i>
-      </div>
+
       <div v-if="store.content && !loading">
         <br />
         <p v-for="line in store.content.split('\n')">{{ line }}</p>
@@ -115,5 +135,41 @@ const getGPT = (region, name) => {
 .loading-animation {
   font-size: 16px;
   color: rgb(3, 130, 84);
+
+  /* animation-duration   */
+  animation-name: lotate;
+  animation-duration: 10s;
+  /* or */
+  /* animation : lotate 3s; */
+}
+/* 시작 시점에선 0도, 50% 시점에선 180도, 완료 시점에선 360도 회전시키는 애니메이션입니다. */
+@keyframes lotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#loading {
+  width: 100px;
+  height: 100px;
+  background: blue;
+  margin: 7em;
+
+  /* animation-duration   */
+  animation-name: lotate;
+  animation-duration: 10s;
+  /* or */
+  /* animation : lotate 3s; */
+}
+h5 {
+  display: inline-block;
 }
 </style>

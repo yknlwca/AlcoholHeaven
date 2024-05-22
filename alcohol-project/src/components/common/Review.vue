@@ -2,7 +2,15 @@
   <div>
     <br />
     <b style="font-size: 20px">리뷰 </b
-    ><button class="btn btn-outline-success" @click="openModal">
+    ><button
+      class="btn btn-outline-success"
+      @click="openModal"
+      style="
+        --bs-btn-padding-y: 0.25rem;
+        --bs-btn-padding-x: 0.5rem;
+        --bs-btn-font-size: 0.6rem;
+      "
+    >
       리뷰 작성
     </button>
     <table class="table">

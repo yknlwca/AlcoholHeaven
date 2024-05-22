@@ -15,12 +15,7 @@
       <div>
         <h3 class="d-flex justify-content-between">
           제목 : {{ store.friend.title }}
-          <LikeItem
-            :id="0"
-            :userId="loginUser.id"
-            :type="3"
-            :boardId="store.friend.id"
-          />
+          <LikeItem :id="0" :userId="loginUser.id" :type="3" :boardId="id" />
         </h3>
         <div v-if="store.friend.userId === loginUser.id">
           <button
@@ -29,7 +24,7 @@
             style="
               --bs-btn-padding-y: 0.25rem;
               --bs-btn-padding-x: 0.5rem;
-              --bs-btn-font-size: 0.75rem;
+              --bs-btn-font-size: 0.6rem;
             "
             @click="moveUpdate"
           >
@@ -42,7 +37,7 @@
             style="
               --bs-btn-padding-y: 0.25rem;
               --bs-btn-padding-x: 0.5rem;
-              --bs-btn-font-size: 0.75rem;
+              --bs-btn-font-size: 0.6rem;
             "
             @click="deleteFriend"
           >
@@ -52,13 +47,16 @@
       </div>
       <hr />
       <div>
-        <h5>저를 소개합니다.</h5>
-        <h5>
-          {{ store.friend.intro }}
-        </h5>
-
-        <h5>좋아하는 술 : {{ store.friend.kindOf }}</h5>
-        <h5>사는 지역 : {{ store.friend.region }}</h5>
+        <h5>소개</h5>
+        <pre
+          >{{ store.friend.intro }}
+        </pre>
+        <hr />
+        <h5>좋아하는 술 :</h5>
+        <span>&nbsp;{{ store.friend.kindOf }}</span>
+        <br />
+        <h5>사는 지역 :</h5>
+        <span>&nbsp;{{ store.friend.region }}</span>
       </div>
       <hr />
       <div>
@@ -93,4 +91,8 @@ const deleteFriend = function () {
 const loginUser = ref(JSON.parse(sessionStorage.getItem("loginUser")));
 </script>
 
-<style scoped></style>
+<style scoped>
+h5 {
+  display: inline-block;
+}
+</style>
