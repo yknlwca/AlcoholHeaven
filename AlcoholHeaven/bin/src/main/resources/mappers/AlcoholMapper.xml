@@ -22,9 +22,9 @@
 </select>
 
 
-<insert id="insertAlcohol" parameterType="Alcohol">
-    INSERT INTO alcohol (name, detailRegion, kindOf, content, region, weight, img)
-    VALUES (#{name}, #{detailRegion}, #{kindOf}, #{content}, #{region}, #{weight}, #{img});
+<insert id="insertAlcohol" parameterType="Alcohol" keyProperty="id" useGeneratedKeys="true">
+    INSERT INTO alcohol (userId,name, detailRegion, kindOf, content, region, weight, img, orgImg)
+    VALUES (#{userId},#{name}, #{detailRegion}, #{kindOf}, #{content}, #{region}, #{weight}, #{img}, #{orgImg});
 </insert>
 
 <delete id="deleteAlcohol" parameterType="int">
@@ -34,8 +34,8 @@
 
 <update id="updateAlcohol" parameterType="Alcohol">
 	UPDATE alcohol
-	SET name = #{name}, detailRegion = #{detailRegion}, kindOf = #{kindOf}, content = #{content},
-	region = #{region}, weight= #{weight}, img = #{img}
+	SET userId = #{userId}, name = #{name}, detailRegion = #{detailRegion}, kindOf = #{kindOf}, content = #{content},
+	region = #{region}, weight= #{weight}, img = #{img}, orgImg = #{orgImg}
 	WHERE id = #{id};
 </update>
 

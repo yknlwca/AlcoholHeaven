@@ -49,7 +49,7 @@ public class ChatGPTRestController {
 
                 JSONObject message = new JSONObject();
                 message.put("role", "user");
-                message.put("content", region + " " + name + "과 어울리는 안주 추천해줘. 형식은 (메뉴명) : (설명) 으로 5개 부탁할게");
+                message.put("content", region + " " + name + "과 어울리는 안주 추천해줘. 형식은 (메뉴명) : (설명) 으로 셜명은 한줄평으로 5개 부탁할게");
 
                 JSONArray messages = new JSONArray();
                 messages.put(message);

@@ -112,10 +112,10 @@
               추천 :
               <input
                 type="text"
-                v-model="keyword"
+                v-model="keywordInput"
                 id="keyword"
                 size="15"
-                @keyup.enter="searchPlaces()"
+                @keyup.enter="searchPlaces"
               />
             </div>
           </div>
@@ -162,22 +162,25 @@ import {
   KakaoMapMarker,
   KakaoMapCustomOverlay,
 } from "vue3-kakao-maps";
-import { debounce } from "lodash";
 
 const map = ref();
 const markerList = ref([]);
 const infowindow = ref();
 let markers = [];
 const keywordInput = ref("");
+
 const keyword = computed(() => `${store.food.region} ${store.food.menu} 맛집`);
 
-const debouncedSearchPlaces = debounce(() => {
-  searchPlaces();
-}, 50);
+watch(keyword, (newValue) => {
+  keywordInput.value = newValue;
+  localStorage.setItem("keyword", newValue);
+});
 
-watch(keyword, () => {
-  keywordInput.value = keyword.value;
-  debouncedSearchPlaces();
+onMounted(() => {
+  const savedKeyword = localStorage.getItem("keyword");
+  if (savedKeyword) {
+    keywordInput.value = savedKeyword;
+  }
 });
 
 const onLoadKakaoMap = (mapRef) => {
@@ -189,16 +192,16 @@ const onLoadKakaoMap = (mapRef) => {
   const ps = new kakao.maps.services.Places();
 
   // 키워드 장소 검색
-  ps.keywordSearch(keyword.value, placesSearchCB);
+  ps.keywordSearch(keywordInput.value, placesSearchCB);
 };
 
 const searchPlaces = () => {
-  if (!keyword.value.trim()) {
+  if (!keywordInput.value.trim()) {
     alert("키워드를 입력해주세요!");
     return;
   }
   const ps = new kakao.maps.services.Places();
-  ps.keywordSearch(keyword.value, placesSearchCB);
+  ps.keywordSearch(keywordInput.value, placesSearchCB);
 };
 
 // 키워드 검색 완료 시 호출되는 콜백 함수
@@ -445,9 +448,4 @@ const removeAllChildNodes = (el) => {
 h5 {
   display: inline-block;
 }
-
-h5 {
-  display: inline-block;
-}
-
 </style>
