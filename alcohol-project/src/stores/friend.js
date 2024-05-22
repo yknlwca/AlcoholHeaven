@@ -26,7 +26,7 @@ export const useFriendStore = defineStore('friend', () => {
 
   const friendList = ref([]);
   const getFriendList = function () {
-    axios.get(REST_FRIEND_API)
+    return axios.get(REST_FRIEND_API)
       .then((response) => {
         friendList.value = response.data;
       })
