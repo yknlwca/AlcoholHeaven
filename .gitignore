@@ -31,3 +31,4 @@ Editor directories and files
 *.sw?
 
 *.tsbuildinfo
+/.metadata/
