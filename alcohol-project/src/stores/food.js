@@ -29,7 +29,7 @@ export const useFoodStore = defineStore('food', () => {
 
   const foodList = ref([]);
   const getFoodList = function () {
-    axios.get(REST_FOOD_API)
+    return axios.get(REST_FOOD_API)
       .then((response) => {
         console.log(response);
         foodList.value = response.data;
