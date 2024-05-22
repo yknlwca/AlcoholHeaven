@@ -142,6 +142,7 @@ const id = ref(route.params.id);
 const isactive = ref(false);
 
 onMounted(() => {
+  console.log(store.food.img);
   store.getFood(id.value);
 });
 
