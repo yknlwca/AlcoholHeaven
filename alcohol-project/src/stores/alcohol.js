@@ -7,11 +7,11 @@ export const useAlcoholStore = defineStore('alcohol', () => {
   const REST_ALCOHOL_API = 'http://localhost:8080/api/alcohol'
   const alcoholList = ref([])
   const getAllAlcoholList = function(){
-    axios.get(`${REST_ALCOHOL_API}`)
+    return axios.get(`${REST_ALCOHOL_API}`)
       .then((response)=>{
+        console.log('getAllAl', response.data);
         alcoholList.value = response.data
       })
-    
   }
   const getAlcoholList = function (region) {
     axios.get(`${REST_ALCOHOL_API}/${region}`)
