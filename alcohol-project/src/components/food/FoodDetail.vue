@@ -102,6 +102,7 @@
               :yAnchor="1.4"
               :visible="marker.overlay.visible"
               :content="marker.overlay.content"
+              class="overlay-content"
             />
           </KakaoMap>
         </div>
@@ -162,7 +163,6 @@ import {
   KakaoMapCustomOverlay,
 } from "vue3-kakao-maps";
 import { debounce } from "lodash";
-import { active } from "d3";
 
 const map = ref();
 const markerList = ref([]);
@@ -340,7 +340,7 @@ const displayPagination = (pagination) => {
 
 // 인포윈도우에 장소명을 표시하는 함수
 const displayInfowindow = (marker, title) => {
-  const content = `<div style="padding:5px;z-index:1;">${title}</div>`;
+  const content = `<div class="custom-overlay" style="padding:5px;z-index:1;text-align:center;">${title}</div>`;
   infowindow.value.setContent(content);
   infowindow.value.open(map.value, marker);
 };
@@ -410,7 +410,7 @@ const removeAllChildNodes = (el) => {
 .map_wrap * {
   margin: 0;
   padding: 0;
-  font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
+  font-family: "Malgun Gothic", dotum, sans-serif;
   font-size: 10px;
   font-weight: bold;
 }
@@ -434,7 +434,7 @@ const removeAllChildNodes = (el) => {
   width: 170px;
   padding: 5px;
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.5);
   z-index: 1;
   font-size: 12px;
   border-radius: 10px;
@@ -442,5 +442,48 @@ const removeAllChildNodes = (el) => {
 }
 h5 {
   display: inline-block;
+}
+
+.map_wrap {
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+
+#menu_wrap {
+  position: absolute;
+  border-radius: 10%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 170px;
+  padding: 5px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 1;
+  font-size: 12px;
+  border-radius: 10px;
+  /* font-weight: bold; */
+}
+
+h5 {
+  display: inline-block;
+}
+
+.overlay-content {
+  text-align: center;
+}
+
+/* Custom overlay style */
+.custom-overlay {
+  display: inline-block;
+  max-width: 150px; /* Set max-width to prevent overly wide overlays */
+  padding: 5px 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  white-space: nowrap;
 }
 </style>

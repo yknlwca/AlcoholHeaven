@@ -12,7 +12,7 @@ export const useReviewStore = defineStore('review', () => {
 
   const getReviewList = function (type,id) {
     // 술1, 음식2, 친구3
-    axios.get(`${REST_REVIEW_API}/${type}/${id}`)
+     return axios.get(`${REST_REVIEW_API}/${type}/${id}`)
       .then((response) => {
         // console.log(response);
         reviewList.value = response.data;
@@ -24,7 +24,7 @@ export const useReviewStore = defineStore('review', () => {
   };
 
   const createReview = function (review) {
-    axios({
+     return axios({
       url: REST_REVIEW_API,
       method: 'POST',
       data: review
@@ -40,7 +40,7 @@ export const useReviewStore = defineStore('review', () => {
 
 
   const deleteReview = function (review) {
-    axios
+    return axios
       .delete(`${REST_REVIEW_API}/${review.reviewId}`)
       .then(() => {
         // 삭제 후 리뷰 목록 갱신
