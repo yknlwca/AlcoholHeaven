@@ -68,8 +68,8 @@
       <div v-if="loading" class="loading-animation text-center">
         <i class="bi bi-hourglass-split" style="font-size: 80px"></i>
       </div>
-      <div v-if="store.content">
-        <hr />
+      <div v-if="store.content && !loading">
+        <br />
         <p v-for="line in store.content.split('\n')">{{ line }}</p>
       </div>
     </div>
@@ -114,6 +114,6 @@ const getGPT = (region, name) => {
 <style scoped>
 .loading-animation {
   font-size: 16px;
-  color: #6237fc;
+  color: rgb(3, 130, 84);
 }
 </style>
