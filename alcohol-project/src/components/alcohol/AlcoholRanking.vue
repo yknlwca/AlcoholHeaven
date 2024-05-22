@@ -1,9 +1,9 @@
 <template>
   <div>
-    이달의 술
-    <p v-for="(alcohol, index) in sortedAlcoholList" :key="alcohol.id">
-      {{ alcohol.name }}
-    </p>
+    <h5>실시간 인기 주류🍻</h5>
+    <div v-for="(alcohol, index) in sortedAlcoholList" :key="alcohol.id">
+      <p v-if="alcohol.heart != 0">{{ index + 1 }}위 {{ alcohol.name }}</p>
+    </div>
   </div>
 </template>
 
@@ -17,11 +17,9 @@ const alcoholStore = useAlcoholStore();
 const alcoholList = ref([]);
 
 const fetchAlcoholData = async () => {
-  console.log("ranking fetch");
   alcoholList.value = [];
   await alcoholStore.getAllAlcoholList();
   alcoholList.value = alcoholStore.alcoholList;
-  console.log("after fetch", alcoholStore.alcoholList);
 
   // heart 값을 비동기로 설정
   const heartPromises = alcoholList.value.map(async (alcohol) => {
@@ -39,9 +37,13 @@ const fetchAlcoholData = async () => {
 onMounted(fetchAlcoholData);
 
 const sortedAlcoholList = computed(() => {
-  console.log("ranking computed", alcoholList.value);
   return alcoholList.value.slice(0, 5);
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+* {
+  font-family: "Palatino Linotype", "Book Antiqua";
+  font-weight: bold;
+}
+</style>
