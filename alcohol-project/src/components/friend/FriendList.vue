@@ -102,7 +102,7 @@ onUnmounted(() => {
   // localStorage.setItem("alcohol", null);
   localStorage.setItem("page", 1);
 });
-const perPage = 1;
+const perPage = 10;
 
 const pageCount = computed(() => {
   return Math.ceil(store.friendList.length / perPage);

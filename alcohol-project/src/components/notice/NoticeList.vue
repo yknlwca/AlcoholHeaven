@@ -15,13 +15,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(notice,index) in currentPageNoticeList" :key="notice.id">
+        <tr v-for="(notice, index) in currentPageNoticeList" :key="notice.id">
           <td>
-            {{ index+1 }}
+            {{ index + 1 }}
           </td>
           <td>
             <RouterLink :to="`/notice/${notice.id}`" class="text-truncate">
-              {{ notice.title }}
+              <b>{{ notice.title }}</b>
             </RouterLink>
           </td>
           <td>
@@ -30,8 +30,10 @@
         </tr>
       </tbody>
     </table>
-    <div style="width: 70%;" v-if="loginUser.id==='admin'">
-      <button class="btn btn-outline-success" @click="createNotice">글쓰기</button>
+    <div style="width: 70%" v-if="loginUser.id === 'admin'">
+      <button class="btn btn-outline-success" @click="createNotice">
+        글쓰기
+      </button>
     </div>
     <nav aria-label="Page navigation">
       <ul class="pagination d-flex justify-content-center">
@@ -72,7 +74,7 @@
 import { useNoticeStore } from "@/stores/notice";
 import { computed, onMounted, ref, onUnmounted, watch } from "vue";
 import NoticeSearch from "@/components/notice/NoticeSearch.vue";
-import { useRouter,useRoute } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 const store = useNoticeStore();
 const router = useRouter();
@@ -80,16 +82,15 @@ const route = useRoute();
 const currentPage = ref(localStorage.getItem("page"));
 onMounted(() => {
   currentPage.value = localStorage.getItem("page");
-  if(!route.query.key){
+  if (!route.query.key) {
     store.getNoticeList();
-  }else{
+  } else {
     store.searchNoticeList({ key: route.query.key, word: route.query.word });
-
   }
 });
 onUnmounted(() => {
   // localStorage.setItem("alcohol", null);
-  localStorage.setItem("page",1)
+  localStorage.setItem("page", 1);
 });
 const perPage = 10;
 
@@ -108,9 +109,9 @@ const currentPageNoticeList = computed(() => {
     currentPage.value * perPage
   );
 });
-const createNotice = function(){
-  router.push({name:'noticeCreate'})
-}
+const createNotice = function () {
+  router.push({ name: "noticeCreate" });
+};
 const loginUser = ref(JSON.parse(sessionStorage.getItem("loginUser")));
 watch(
   () =>
@@ -130,12 +131,15 @@ watch(
     if (!route.query.key) {
       store.getNoticeList();
     } else {
-      store.searchNoticeList(
-        { key: route.query.key, word: route.query.word }
-      );
+      store.searchNoticeList({ key: route.query.key, word: route.query.word });
     }
   }
 );
 </script>
 
-<style scoped></style>
+<style scoped>
+a {
+  color: rgb(3, 130, 84);
+  text-decoration: none;
+}
+</style>

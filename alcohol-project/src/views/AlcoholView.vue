@@ -12,7 +12,7 @@
           <h1>
             현재 지역 : {{ name }}
             <button class="btn btn-success btn-sm" @click="createAlcohol">
-              술 추가하기
+              소개하기
             </button>
           </h1>
         </div>
