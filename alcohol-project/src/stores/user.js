@@ -17,7 +17,7 @@ export const useUserstore = defineStore('user', () => {
       router.push({ name: 'home' });
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        alert('ID가 이미 존재합니다.');
+        alert('가입정보를 다시 확인해주세요.');
       } else {
         console.log(error);
         alert('가입정보를 다시 확인해주세요.');
@@ -42,6 +42,7 @@ export const useUserstore = defineStore('user', () => {
     try {
       const response = await axios.get(`${REST_USER_API}/${id}`);
       user.value = response.data;
+      console.log(response.data)
       return user.value;
     } catch (error) {
       console.log(error);

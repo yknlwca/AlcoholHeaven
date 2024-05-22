@@ -1,7 +1,15 @@
 <template>
   <div>
-    이달의 안주
-    <p v-for="food in sortedFoodList" :key="food.id">{{ food.title }}</p>
+    <h5>실시간 인기 안주🍖</h5>
+    <div v-for="(food, index) in sortedFoodList" :key="food.id">
+      <p v-if="food.heart != 0" style="display: inline-block">
+        {{ index + 1 }}위
+      </p>
+      &nbsp;
+      <RouterLink :to="`/food/${food.id}`" v-if="food.heart != 0">
+        <b>{{ food.title }}</b>
+      </RouterLink>
+    </div>
   </div>
 </template>
 
@@ -14,13 +22,14 @@ const likeStore = useLikeStore();
 const foodStore = useFoodStore();
 const foodList = ref([]);
 const fetchFoodData = async () => {
+  console.log("ranking fetch");
   foodList.value = [];
   await foodStore.getFoodList();
   foodList.value = foodStore.foodList;
-
+  console.log("after fetch", foodStore.foodList);
   // heart 값을 비동기로 설정
   const heartPromises = foodList.value.map(async (food) => {
-    food.heart = await likeStore.likeCnt(1, food.id);
+    food.heart = await likeStore.likeCnt(2, food.id);
   });
 
   await Promise.all(heartPromises);
@@ -33,8 +42,18 @@ const fetchFoodData = async () => {
 onMounted(fetchFoodData);
 
 const sortedFoodList = computed(() => {
-  return foodList.value.slice(0, 1);
+  console.log("ranking computed", foodList.value);
+  return foodList.value.slice(0, 5);
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+* {
+  font-family: "Palatino Linotype", "Book Antiqua";
+  font-weight: bold;
+}
+a {
+  color: rgb(3, 130, 84);
+  text-decoration: none;
+}
+</style>
