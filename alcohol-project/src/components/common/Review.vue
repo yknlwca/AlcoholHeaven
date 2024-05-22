@@ -5,7 +5,7 @@
     ><button class="btn btn-outline-success" @click="openModal">
       리뷰 작성
     </button>
-    <table class="table ">
+    <table class="table">
       <thead>
         <tr class="table-light">
           <th scope="col">번호</th>
@@ -20,12 +20,12 @@
           <td>{{ review.writer }}</td>
           <td>{{ review.content }}</td>
           <button
-              class="btn btn-outline-success"
-              @click="deleteReview(review)"
-              v-if="loginUser.id === review.writer"
-            >
-              삭제
-            </button>
+            class="btn btn-outline-success"
+            @click="deleteReview(review)"
+            v-if="loginUser.id === review.writer"
+          >
+            삭제
+          </button>
         </tr>
       </tbody>
     </table>
@@ -36,7 +36,7 @@
         <form @submit.prevent="createReview">
           <div>
             <label for="writer">작성자</label>
-            <input class="form-control" :value="loginUser.id" readonly/>
+            <input class="form-control" :value="loginUser.id" readonly />
           </div>
           <br />
           <div>
@@ -69,7 +69,7 @@ onMounted(() => {
   // console.log(props.reviewType.type);
 });
 //현재 로그인한 유저
-const loginUser = ref(JSON.parse(sessionStorage.getItem("loginUser")))
+const loginUser = ref(JSON.parse(sessionStorage.getItem("loginUser")));
 // 리뷰
 const deleteReview = (review) => {
   store.deleteReview(review);
@@ -88,7 +88,7 @@ const newReview = ref({
 const createReview = () => {
   // console.log("잘되나요", newReview.value);/
   store.createReview(newReview.value);
-  newReview.value.writer = "";
+  // newReview.value.writer = "";
   newReview.value.content = "";
   closeModal();
 };
