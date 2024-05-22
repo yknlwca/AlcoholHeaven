@@ -1,21 +1,32 @@
 <template>
   <div>
-    <h5>실시간 인기 주류🍻</h5>
-    <div v-for="(alcohol, index) in sortedAlcoholList" :key="alcohol.id">
-      <p v-if="alcohol.heart != 0" style="display: inline-block">
-        {{ index + 1 }}위
-      </p>
-      &nbsp;
-      <RouterLink
-        :to="{
-          name: 'alcohol-detail',
-          params: { name: alcohol.region, id: alcohol.id },
-        }"
-        v-if="alcohol.heart != 0"
-      >
-        {{ alcohol.name }}
-      </RouterLink>
-    </div>
+    <table class="table">
+      <thead >
+        <tr >
+          <th scope="col" style="background-color: rgb(1, 173, 111);color:white ;"><h5>실시간 인기 주류🍻</h5></th>
+        </tr>
+      </thead>
+      <tbody v-for="(alcohol, index) in sortedAlcoholList" :key="alcohol.id">
+        <tr>
+        <td scope="row" >
+          <p v-if="alcohol.heart != 0" style="display: inline-block">
+            {{ index + 1 }}위
+          </p>
+          &nbsp;
+          <RouterLink
+            :to="{
+              name: 'alcohol-detail',
+              params: { name: alcohol.region, id: alcohol.id },
+            }"
+            v-if="alcohol.heart != 0"
+          >
+            {{ alcohol.name }}
+          </RouterLink>
+          <span v-if="alcohol.heart != 0">({{ alcohol.region }})</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 

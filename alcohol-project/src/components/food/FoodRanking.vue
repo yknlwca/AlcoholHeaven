@@ -1,15 +1,26 @@
 <template>
   <div>
-    <h5>실시간 인기 안주🍖</h5>
-    <div v-for="(food, index) in sortedFoodList" :key="food.id">
-      <p v-if="food.heart != 0" style="display: inline-block">
-        {{ index + 1 }}위
-      </p>
-      &nbsp;
-      <RouterLink :to="`/food/${food.id}`" v-if="food.heart != 0">
-        <b>{{ food.title }}</b>
-      </RouterLink>
-    </div>
+    <table class="table">
+      <thead class="table-success">
+        <tr>
+          <th scope="col" style="background-color: rgb(1, 173, 111);color:white ;"> <h5>실시간 인기 안주🍖</h5></th>
+        </tr>
+      </thead>
+      <tbody v-for="(food, index) in sortedFoodList" :key="food.id">
+        <tr>
+        <td scope="row" >
+          <p v-if="food.heart != 0" style="display: inline-block">
+            {{ index + 1 }}위
+          </p>
+          &nbsp;
+          <RouterLink :to="`/food/${food.id}`" v-if="food.heart != 0">
+          <b>{{ food.title }}</b>
+          </RouterLink>
+          <span v-if="food.heart != 0">({{ food.region }})</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
