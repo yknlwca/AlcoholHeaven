@@ -1,5 +1,0 @@
-package com.ssafy.alcohol.model.dao;
-
-public interface BookLikeDao {
-
-}
