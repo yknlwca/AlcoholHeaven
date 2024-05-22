@@ -1,6 +1,6 @@
 <template>
   <div class="main" v-if="store.signIn === false">
-    <span>외로운 사람들 모여라!</span>
+    <span style="color: #01AD6F;">외로운 사람들 모여라!</span>
   </div>
   <div
     class="container d-flex flex-column align-items-center justify-content-center my-5"

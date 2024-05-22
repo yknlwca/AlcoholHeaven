@@ -1,15 +1,26 @@
 <template>
   <div>
-    <h5>실시간 인기 장이💑</h5>
-    <div v-for="(friend, index) in sortedFriendList" :key="friend.id">
-      <p v-if="friend.heart != 0" style="display: inline-block">
-        {{ index + 1 }}위
-      </p>
-      &nbsp;
-      <RouterLink :to="`/friend/${friend.id}`" v-if="friend.heart != 0">
-        <b>{{ friend.title }}</b>
-      </RouterLink>
-    </div>
+    <table class="table">
+      <thead class="table-success">
+        <tr>
+          <th scope="col" style="background-color: rgb(1, 173, 111);color:white ;"> <h5>실시간 인기 쟁이💑</h5></th>
+        </tr>
+      </thead>
+      <tbody v-for="(friend, index) in sortedFriendList" :key="friend.id">
+        <tr>
+        <td scope="row" >
+          <p v-if="friend.heart != 0" style="display: inline-block">
+            {{ index + 1 }}위
+          </p>
+          &nbsp;
+          <RouterLink :to="`/friend/${friend.id}`" v-if="friend.heart != 0">
+          <b>{{ friend.title }}</b>
+          </RouterLink>
+          <span v-if="friend.heart != 0">({{ friend.region }})</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
