@@ -18,7 +18,6 @@ import FoodRanking from "@/components/food/FoodRanking.vue";
 import FriendRanking from "@/components/friend/FriendRanking.vue";
 import { useUserstore } from "@/stores/user";
 
-
 import { onMounted } from "vue";
 
 const store = useUserstore();

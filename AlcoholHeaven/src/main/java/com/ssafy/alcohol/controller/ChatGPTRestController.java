@@ -9,6 +9,7 @@ import java.net.URL;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChatGPTRestController {
 
 
-    private static String API_KEY = "https://www.notion.so/Project-With-f75a867eb065409c8a3b6b33bbde2b2a";
+	@Value("${VITE_CHATGPT_API_KEY}")
+    private String API_KEY;
 
     private static String GPT_URL = "https://api.openai.com/v1/chat/completions";
     private static final int MAX_RETRIES = 5;
