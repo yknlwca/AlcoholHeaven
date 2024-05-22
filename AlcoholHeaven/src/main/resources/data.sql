@@ -1,3 +1,4 @@
+
 -- FRIEND 테이블에 데이터 삽입
 INSERT INTO `friend` (`userId`, `title`, `intro`, `region`, `kindOf`, `img`, `orgImg`, `heart`)
 VALUES
@@ -77,6 +78,7 @@ VALUES
 -- FOOD 테이블에 데이터 삽입
 INSERT INTO `FOOD` (`userId`, `menu`, `content`, `title`, `region`, `kindOf`, `heart`, `img`, `orgImg`)
 VALUES
+
 ('alice', '치즈 플래터', '와인과 어울리는 다양한 치즈를 소개합니다.', '치즈', '옥동', '와인', 15, '치즈.jpg', 'wine_cheese_org.jpg'),
 ('bob', '감자튀김', '맥주와 찰떡궁합인 바삭한 감자튀김 레시피입니다.', '감자튀김', '목동', '맥주', 12, '감자튀김.jpg', 'beer_fries_org.jpg'),
 ('charlie', '오징어볶음', '매콤한 오징어볶음과 소주의 환상적인 조합입니다.', '오징어볶음', '인계동', '소주', 18, '오징어볶음.jpg', 'soju_squid_org.jpg'),
