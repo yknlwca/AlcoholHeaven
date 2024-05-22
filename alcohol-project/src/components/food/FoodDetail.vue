@@ -446,12 +446,6 @@ h5 {
   display: inline-block;
 }
 
-.map_wrap {
-  position: relative;
-  width: 100%;
-  height: 500px;
-}
-
 h5 {
   display: inline-block;
 }
