@@ -40,7 +40,7 @@ onMounted(() => {
   );
 });
 onUnmounted(() => {
-  localStorage.setItem("name", "");
+  // localStorage.setItem("name", "");
   name.value = null;
 });
 //지도 그리기

@@ -1,27 +1,40 @@
 <template>
-    <div>
-       이달의 안주 
-       <p v-for="i in 1" :key="i">{{ foodList[i].title }}</p>
-    </div>
+  <div>
+    이달의 안주
+    <p v-for="food in sortedFoodList" :key="food.id">{{ food.title }}</p>
+  </div>
 </template>
 
 <script setup>
-    import {ref} from 'vue'
-    import { useLikeStore } from '@/stores/boardLike';
-    import {useFoodStore} from '@/stores/food'
+import { ref, onMounted, computed } from "vue";
+import { useLikeStore } from "@/stores/boardLike";
+import { useFoodStore } from "@/stores/food";
 
-    const likeStore = useLikeStore();
-    const foodStore = useFoodStore();
+const likeStore = useLikeStore();
+const foodStore = useFoodStore();
+const foodList = ref([]);
+const fetchFoodData = async () => {
+  foodList.value = [];
+  await foodStore.getFoodList();
+  foodList.value = foodStore.foodList;
 
-    foodStore.getFoodList();
-    const foodList = ref(foodStore.foodList);
-    foodList.value.forEach(food => {
-        food.heart = likeStore.likeCnt(2,food.id);
-    });
-    foodList.value.sort((a,b)=> b.heart-a.heart)
+  // heart 값을 비동기로 설정
+  const heartPromises = foodList.value.map(async (food) => {
+    food.heart = await likeStore.likeCnt(1, food.id);
+  });
+
+  await Promise.all(heartPromises);
+
+  // heart 값으로 정렬
+  foodList.value.sort((a, b) => b.heart - a.heart);
+  console.log(foodList.value);
+};
+
+onMounted(fetchFoodData);
+
+const sortedFoodList = computed(() => {
+  return foodList.value.slice(0, 1);
+});
 </script>
 
-<style scoped>
-    
-
-</style>
+<style scoped></style>
