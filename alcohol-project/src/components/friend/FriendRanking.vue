@@ -2,7 +2,13 @@
   <div>
     <h5>실시간 인기 장이💑</h5>
     <div v-for="(friend, index) in sortedFriendList" :key="friend.id">
-      <p v-if="friend.heart != 0">{{ index + 1 }}위 {{ friend.title }}</p>
+      <p v-if="friend.heart != 0" style="display: inline-block">
+        {{ index + 1 }}위
+      </p>
+      &nbsp;
+      <RouterLink :to="`/friend/${friend.id}`" v-if="friend.heart != 0">
+        <b>{{ friend.title }}</b>
+      </RouterLink>
     </div>
   </div>
 </template>
@@ -44,5 +50,9 @@ friendList.value.sort((a, b) => b.heart - a.heart);
 * {
   font-family: "Palatino Linotype", "Book Antiqua";
   font-weight: bold;
+}
+a {
+  color: rgb(3, 130, 84);
+  text-decoration: none;
 }
 </style>

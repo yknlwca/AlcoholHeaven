@@ -1,11 +1,15 @@
 <template>
-  <div class="container" v-if="store.signIn" style="width: 80%">
-    <imgSlide />
-    <h4>실시간 순위!</h4>
-    <div class="d-flex justify-content-between">
-      <AlcoholRanking style="width: 30%" />
-      <FoodRanking style="width: 30%" />
-      <FriendRanking style="width: 30%" />
+  <div class="container" v-if="store.signIn">
+    <div class="d-flex justify-content-center">
+      <imgSlide style="width: 60%; height: 300px" />
+    </div>
+    <br />
+    <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-between" style="width: 70%">
+        <AlcoholRanking />
+        <FoodRanking />
+        <FriendRanking />
+      </div>
     </div>
   </div>
 </template>
