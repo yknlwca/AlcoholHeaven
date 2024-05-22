@@ -340,7 +340,7 @@ const displayPagination = (pagination) => {
 
 // 인포윈도우에 장소명을 표시하는 함수
 const displayInfowindow = (marker, title) => {
-  const content = `<div class="custom-overlay" style="padding:5px;z-index:1;text-align:center;">${title}</div>`;
+  const content = `<div style="padding:5px;z-index:1; margin:auto;">${title}</div>`;
   infowindow.value.setContent(content);
   infowindow.value.open(map.value, marker);
 };
@@ -425,21 +425,23 @@ const removeAllChildNodes = (el) => {
   width: 100%;
   height: 500px;
 }
+
 #menu_wrap {
   position: absolute;
   border-radius: 10%;
   top: 0;
   left: 0;
   bottom: 0;
-  width: 170px;
+  width: 150px;
   padding: 5px;
   overflow-y: auto;
   background: rgba(255, 255, 255, 0.5);
   z-index: 1;
   font-size: 12px;
   border-radius: 10px;
-  /* font-weight: bold; */
+  font-weight: bold;
 }
+
 h5 {
   display: inline-block;
 }
@@ -448,22 +450,6 @@ h5 {
   position: relative;
   width: 100%;
   height: 500px;
-}
-
-#menu_wrap {
-  position: absolute;
-  border-radius: 10%;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 170px;
-  padding: 5px;
-  overflow-y: auto;
-  background: rgba(255, 255, 255, 0.5);
-  z-index: 1;
-  font-size: 12px;
-  border-radius: 10px;
-  /* font-weight: bold; */
 }
 
 h5 {
