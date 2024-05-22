@@ -1,9 +1,9 @@
 <template>
   <div>
-    이달의 인기쟁이
-    <p v-for="friend in sortedFriendList" :key="friend.id">
-      {{ friend.title }}
-    </p>
+    <h5>실시간 인기 장이💑</h5>
+    <div v-for="(friend, index) in sortedFriendList" :key="friend.id">
+      <p v-if="friend.heart != 0">{{ index + 1 }}위 {{ friend.title }}</p>
+    </div>
   </div>
 </template>
 
@@ -22,22 +22,27 @@ const fetchFriendData = async () => {
 
   // heart 값을 비동기로 설정
   const heartPromises = friendList.value.map(async (friend) => {
-    friend.heart = await likeStore.likeCnt(1, friend.id);
+    friend.heart = await likeStore.likeCnt(3, friend.id);
   });
 
   await Promise.all(heartPromises);
 
   // heart 값으로 정렬
   friendList.value.sort((a, b) => b.heart - a.heart);
-  console.log(friendList.value);
+  // console.log(friendList.value);
 };
 
 onMounted(fetchFriendData);
 
 const sortedFriendList = computed(() => {
-  return friendList.value.slice(0, 1);
+  return friendList.value.slice(0, 5);
 });
 friendList.value.sort((a, b) => b.heart - a.heart);
 </script>
 
-<style scoped></style>
+<style scoped>
+* {
+  font-family: "Palatino Linotype", "Book Antiqua";
+  font-weight: bold;
+}
+</style>

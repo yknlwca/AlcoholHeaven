@@ -20,7 +20,7 @@ import { onMounted } from "vue";
 const store = useAlcoholStore();
 onMounted(() => {
   store.getAllAlcoholList();
-  console.log(store.alcoholList);
+  // console.log(store.alcoholList);
 });
 </script>
 

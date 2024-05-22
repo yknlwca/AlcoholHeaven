@@ -1,6 +1,5 @@
 <template>
   <div class="container" v-if="store.signIn" style="width: 80%">
-    <h1>외로운 사람들 모여라!</h1>
     <imgSlide />
     <h4>실시간 순위!</h4>
     <div class="d-flex justify-content-between">

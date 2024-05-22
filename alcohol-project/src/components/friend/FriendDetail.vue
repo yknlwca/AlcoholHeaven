@@ -5,7 +5,7 @@
     <div class="left d-flex flex-column p-2" style="width: 50%">
       <div class="d-flex justify-content-center">
         <img
-          style="width: 100%; border-radius: 10%"
+          style="width: 70%; height: 500px; border-radius: 10%"
           :src="`http://localhost:8080/uploads/friend/${store.friend.img}`"
           alt=""
         />

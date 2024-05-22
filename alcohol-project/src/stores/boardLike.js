@@ -13,7 +13,7 @@ export const useLikeStore = defineStore('boardLike', () => {
         data: boardLike,
       })
       .then(() => {
-        console.log("좋아요 클릭")
+        // console.log("좋아요 클릭")
       })
       .catch((error) => {
         console.log(error);
@@ -26,7 +26,7 @@ export const useLikeStore = defineStore('boardLike', () => {
       data: boardLike,
     })
       .then(() => {
-        console.log("좋아요 취소")
+        // console.log("좋아요 취소")
       })
       .catch((error) => {
         console.log(error);
@@ -42,7 +42,7 @@ export const useLikeStore = defineStore('boardLike', () => {
   const likeCnt = async function(type, id) {
     try {
         const response = await axios.get(`${REST_LIKE_API}/${type}/${id}`);
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -56,7 +56,7 @@ export const useLikeStore = defineStore('boardLike', () => {
         const response = await axios.get(`${REST_LIKE_API}/check`, {
             params: boardLike
         });
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
