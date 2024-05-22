@@ -29,7 +29,7 @@
             style="
               --bs-btn-padding-y: 0.25rem;
               --bs-btn-padding-x: 0.5rem;
-              --bs-btn-font-size: 0.75rem;
+              --bs-btn-font-size: 0.6rem;
             "
             @click="moveUpdate"
           >
@@ -42,7 +42,7 @@
             style="
               --bs-btn-padding-y: 0.25rem;
               --bs-btn-padding-x: 0.5rem;
-              --bs-btn-font-size: 0.75rem;
+              --bs-btn-font-size: 0.6rem;
             "
             @click="foodDelete"
           >
