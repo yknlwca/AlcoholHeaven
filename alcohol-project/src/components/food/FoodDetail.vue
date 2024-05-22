@@ -19,12 +19,7 @@
       <div>
         <h3 class="d-flex justify-content-between">
           제목 : {{ store.food.title }}
-          <LikeItem
-            :id="0"
-            :userId="loginUser.id"
-            :type="2"
-            :boardId="store.food.id"
-          />
+          <LikeItem :id="0" :userId="loginUser.id" :type="2" :boardId="id" />
         </h3>
 
         <div v-if="store.food.userId === loginUser.id">
@@ -57,13 +52,32 @@
       </div>
       <hr />
       <div>
-        <h5>메뉴 : {{ store.food.menu }}</h5>
-        <h5>설명 : {{ store.food.content }}</h5>
-        <h5>어울리는 술 : {{ store.food.kindOf }}</h5>
-        <h5>지역 : {{ store.food.region }}</h5>
+        <h5>내용</h5>
+        <pre>{{ store.food.content }}</pre>
+        <hr />
+        <h5>메뉴 :</h5>
+        <span>&nbsp; {{ store.food.menu }}</span>
+        <br />
+        <h5>어울리는 술 :</h5>
+        <span>&nbsp;{{ store.food.kindOf }}</span>
+        <br />
+        <h5>지역 :</h5>
+        <span>&nbsp;{{ store.food.region }}</span>
       </div>
       <hr />
-      <div class="map_wrap">
+      <div>
+        <button
+          type="button"
+          class="btn btn-outline-success"
+          @click="isactive = !isactive"
+        >
+          <span v-if="!isactive"
+            >{{ store.food.region }} 주변 {{ store.food.menu }} 맛집 보기</span
+          >
+          <span v-if="isactive">접기</span>
+        </button>
+      </div>
+      <div v-if="isactive" class="map_wrap">
         <div class="map_container">
           <KakaoMap
             style="border-radius: 10%; width: 100%; height: 100%"
@@ -125,6 +139,7 @@ const route = useRoute();
 const router = useRouter();
 const store = useFoodStore();
 const id = ref(route.params.id);
+const isactive = ref(false);
 
 onMounted(() => {
   store.getFood(id.value);
@@ -146,6 +161,7 @@ import {
   KakaoMapCustomOverlay,
 } from "vue3-kakao-maps";
 import { debounce } from "lodash";
+import { active } from "d3";
 
 const map = ref();
 const markerList = ref([]);
@@ -422,5 +438,8 @@ const removeAllChildNodes = (el) => {
   font-size: 12px;
   border-radius: 10px;
   /* font-weight: bold; */
+}
+h5 {
+  display: inline-block;
 }
 </style>
