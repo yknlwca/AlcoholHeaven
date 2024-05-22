@@ -115,7 +115,7 @@
                 v-model="keyword"
                 id="keyword"
                 size="15"
-                @keyup.enter="searchPlaces"
+                @keyup.enter="searchPlaces()"
               />
             </div>
           </div>
@@ -470,20 +470,4 @@ h5 {
   display: inline-block;
 }
 
-.overlay-content {
-  text-align: center;
-}
-
-/* Custom overlay style */
-.custom-overlay {
-  display: inline-block;
-  max-width: 150px; /* Set max-width to prevent overly wide overlays */
-  padding: 5px 10px;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  white-space: nowrap;
-}
 </style>
