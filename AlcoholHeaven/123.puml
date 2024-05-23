@@ -1,0 +1,545 @@
+@startuml
+class com.ssafy.alcohol.model.dto.User {
+- int userKey
+- String id
+- String password
+- String name
+- String idNumber
+- String email
+- String phoneNumber
++ int getUserKey()
++ void setUserKey(int)
++ String getId()
++ void setId(String)
++ String getPassword()
++ void setPassword(String)
++ String getName()
++ void setName(String)
++ String getIdNumber()
++ void setIdNumber(String)
++ String getEmail()
++ void setEmail(String)
++ String getPhoneNumber()
++ void setPhoneNumber(String)
++ String toString()
+}
+
+
+class com.ssafy.alcohol.model.dto.Food {
+- int id
+- String userId
+- String menu
+- String content
+- String title
+- String region
+- String kindOf
+- String heart
+- String img
+- String orgImg
++ int getId()
++ void setId(int)
++ String getUserId()
++ void setUserId(String)
++ String getMenu()
++ void setMenu(String)
++ String getContent()
++ void setContent(String)
++ String getTitle()
++ void setTitle(String)
++ String getRegion()
++ void setRegion(String)
++ String getKindOf()
++ void setKindOf(String)
++ String getHeart()
++ void setHeart(String)
++ String getImg()
++ void setImg(String)
++ String getOrgImg()
++ void setOrgImg(String)
++ String toString()
+}
+
+
+interface com.ssafy.alcohol.model.dao.FriendDao {
++ List<Friend> selectAll()
++ List<Friend> search(SearchCondition)
++ Friend selectOne(int)
++ int insertFriend(Friend)
++ int deleteFriend(int)
++ int updateFriend(Friend)
++ int likeUp(int)
++ int likeDown(int)
+}
+
+class com.ssafy.alcohol.model.service.UserServiceImpl {
+- UserDao uDao
++ List<User> searchAll()
++ User readUser(String)
++ boolean writeUser(User)
++ boolean removeUser(String)
++ boolean modifyUser(User)
++ User login(String,String)
+}
+
+
+interface com.ssafy.alcohol.model.service.AlcoholService {
+~ List<Alcohol> searchBoard(SearchCondition)
+~ Alcohol readAlcohol(int)
+~ boolean writeAlcohol(Alcohol)
+~ boolean removeAlcohol(int)
+~ boolean modifyAlcohol(Alcohol)
+~ List<Alcohol> selectAlcohol(String)
+~ List<Alcohol> selectAll()
+~ boolean likeUp(int)
+~ boolean likeDown(int)
++ void fileAlcohol(MultipartFile,Alcohol)
++ void updateAlcohol(MultipartFile,Alcohol)
+}
+
+class com.ssafy.alcohol.model.service.BoardLikeServiceImpl {
+- BoardLikeDao bDao
++ int insert(boardLike)
++ int delete(boardLike)
++ int likeCnt(int,int)
++ boardLike select(boardLike)
++ boardLike selectByType(int)
+}
+
+
+interface com.ssafy.alcohol.model.service.BoardLikeService {
+~ boardLike select(boardLike)
+~ int insert(boardLike)
+~ int delete(boardLike)
+~ int likeCnt(int,int)
+~ boardLike selectByType(int)
+}
+
+class com.ssafy.alcohol.controller.UserRestController {
+- {static} String SUCCESS
+- {static} String FAIL
+- UserServiceImpl uService
++ ResponseEntity<?> list()
++ ResponseEntity<?> selectOne(String)
++ ResponseEntity<?> make(User)
++ ResponseEntity<?> delete(String)
++ ResponseEntity<?> update(String,User)
++ ResponseEntity<?> login(User,HttpSession)
+}
+
+
+class com.ssafy.alcohol.model.service.FriendServiceImpl {
+- FriendDao fDao
++ List<Friend> searchFriend(SearchCondition)
++ Friend readFriend(int)
++ boolean writeFriend(Friend)
++ boolean removeFriend(int)
++ boolean modifyFriend(Friend)
++ boolean likeUp(int)
++ boolean likeDown(int)
++ List<Friend> selectAll()
++ void fileFriend(MultipartFile,Friend)
++ void updateFriend(MultipartFile,Friend)
+}
+
+
+class com.ssafy.alcohol.config.SwaggerConfig {
++ OpenAPI springShopOpenAPI()
+}
+
+interface com.ssafy.alcohol.model.service.UserService {
+~ List<User> searchAll()
+~ User readUser(String)
+~ boolean writeUser(User)
+~ boolean removeUser(String)
+~ boolean modifyUser(User)
+~ User login(String,String)
+}
+
+class com.ssafy.alcohol.controller.ReviewRestController {
+- ReviewServiceImpl rService
++ ResponseEntity<?> selectReview(int,int)
++ ResponseEntity<?> write(Review)
++ ResponseEntity<?> delete(int)
+}
+
+
+class com.ssafy.alcohol.controller.BoardLikeRestController {
+- BoardLikeServiceImpl bService
++ ResponseEntity<?> check(boardLike)
++ ResponseEntity<?> selectByType(int)
++ ResponseEntity<?> likeCnt(int,int)
++ ResponseEntity<?> clickLike(boardLike)
++ ResponseEntity<?> removeLike(boardLike)
+}
+
+
+class com.ssafy.alcohol.model.dto.Alcohol {
+- int id
+- String userId
+- String name
+- String detailRegion
+- String kindOf
+- String content
+- String region
+- float weight
+- String img
+- String orgImg
+- int heart
++ int getId()
++ void setId(int)
++ String getName()
++ void setName(String)
++ String getDetailRegion()
++ void setDetailRegion(String)
++ String getKindOf()
++ void setKindOf(String)
++ String getContent()
++ void setContent(String)
++ String getRegion()
++ void setRegion(String)
++ float getWeight()
++ void setWeight(float)
++ String getImg()
++ void setImg(String)
++ String getOrgImg()
++ void setOrgImg(String)
++ int getHeart()
++ void setHeart(int)
++ String getUserId()
++ void setUserId(String)
++ String toString()
+}
+
+
+interface com.ssafy.alcohol.model.service.NoticeService {
+~ List<Notice> selectAll()
+~ Notice detail(int)
+~ int write(Notice)
+~ int update(Notice)
+~ int delete(int)
+~ List<Notice> search(SearchCondition)
+}
+
+class com.ssafy.alcohol.model.service.NoticeServiceImpl {
+- NoticeDao nDao
++ List<Notice> selectAll()
++ Notice detail(int)
++ int write(Notice)
++ int update(Notice)
++ int delete(int)
++ List<Notice> search(SearchCondition)
+}
+
+
+class com.ssafy.alcohol.model.dto.Review {
+- int reviewId
+- String writer
++ int getReviewId()
++ void setReviewId(int)
++ int getId()
++ void setId(int)
++ String getWriter()
++ void setWriter(String)
++ String getContent()
++ void setContent(String)
++ int getType()
++ void setType(int)
++ String toString()
+}
+
+
+class com.ssafy.alcohol.model.dto.Notice {
+- int id
+- String userId
++ int getId()
++ void setId(int)
++ String getUserId()
++ void setUserId(String)
++ String getContent()
++ void setContent(String)
++ String getTitle()
++ void setTitle(String)
++ String getPassword()
++ void setPassword(String)
++ String toString()
+}
+
+
+class com.ssafy.alcohol.model.service.AlcoholServiceImpl {
+- AlcoholDao alDao
++ List<Alcohol> searchBoard(SearchCondition)
++ Alcohol readAlcohol(int)
++ boolean writeAlcohol(Alcohol)
++ boolean removeAlcohol(int)
++ List<Alcohol> selectAlcohol(String)
++ List<Alcohol> selectAll()
++ boolean modifyAlcohol(Alcohol)
++ boolean likeUp(int)
++ boolean likeDown(int)
++ void fileAlcohol(MultipartFile,Alcohol)
++ void updateAlcohol(MultipartFile,Alcohol)
+}
+
+
+interface com.ssafy.alcohol.model.dao.BoardLikeDao {
+~ boardLike select(boardLike)
+~ int insert(boardLike)
+~ int delete(boardLike)
+~ int likeCnt(int,int)
+~ boardLike selectByType(int)
+}
+
+interface com.ssafy.alcohol.model.dao.ReviewDao {
+~ List<Review> selectReview(int,int)
+~ int write(Review)
+~ int delete(int)
+}
+
+class com.ssafy.alcohol.model.service.ReviewServiceImpl {
+- ReviewDao rDao
++ List<Review> selectReview(int,int)
++ int write(Review)
++ int delete(int)
+}
+
+
+interface com.ssafy.alcohol.model.service.ReviewService {
+~ List<Review> selectReview(int,int)
+~ int write(Review)
+~ int delete(int)
+}
+
+interface com.ssafy.alcohol.model.service.FoodService {
++ List<Food> searchFood(SearchCondition)
++ Food readFood(int)
++ boolean writeFood(Food)
++ boolean removeFood(int)
++ boolean modifyFood(Food)
++ List<Food> selectAll()
++ boolean likeUp(int)
++ boolean likeDown(int)
++ void fileFood(MultipartFile,Food)
++ void updateFood(MultipartFile,Food)
+}
+
+class com.ssafy.alcohol.controller.NoticeRestController {
+- NoticeServiceImpl nService
++ ResponseEntity<?> selectAll()
++ ResponseEntity<?> detail(int)
++ ResponseEntity<?> search(SearchCondition)
++ ResponseEntity<?> write(Notice)
++ ResponseEntity<?> update(int,Notice)
++ ResponseEntity<?> delete(int)
+}
+
+
+class com.ssafy.alcohol.model.dto.Friend {
+- int id
+- String userId
+- String title
+- String intro
+- String region
+- String kindOf
+- String img
+- String orgImg
+- int heart
++ int getId()
++ void setId(int)
++ String getUserId()
++ void setUserId(String)
++ String getTitle()
++ void setTitle(String)
++ String getIntro()
++ void setIntro(String)
++ String getRegion()
++ void setRegion(String)
++ String getKindOf()
++ void setKindOf(String)
++ String getImg()
++ void setImg(String)
++ String getOrgImg()
++ void setOrgImg(String)
++ int getHeart()
++ void setHeart(int)
++ String toString()
+}
+
+
+class com.ssafy.alcohol.controller.AlcoholRestController {
+- {static} String SUCCESS
+- {static} String FAIL
+- AlcoholService alService
++ ResponseEntity<?> selectAll()
++ ResponseEntity<?> search(SearchCondition)
++ ResponseEntity<?> selectByRegion(String)
++ ResponseEntity<Alcohol> detail(int)
++ ResponseEntity<?> write(Alcohol)
++ ResponseEntity<Void> fileUpload(MultipartFile,Alcohol)
++ ResponseEntity<?> delete(int)
++ ResponseEntity<?> update(int,Alcohol)
++ ResponseEntity<Void> updateFileUpload(int,MultipartFile,Alcohol)
++ ResponseEntity<?> likeUp(int)
++ ResponseEntity<?> likeDown(int)
+}
+
+
+class com.ssafy.alcohol.model.service.FoodServiceImpl {
+- FoodDao fDao
++ List<Food> searchFood(SearchCondition)
++ Food readFood(int)
++ boolean writeFood(Food)
++ boolean removeFood(int)
++ boolean modifyFood(Food)
++ void updateFood(MultipartFile,Food)
++ List<Food> selectAll()
++ boolean likeUp(int)
++ boolean likeDown(int)
++ void fileFood(MultipartFile,Food)
+}
+
+
+class com.ssafy.alcohol.controller.ChatGPTRestController {
+- String API_KEY
+- {static} String GPT_URL
+- {static} int MAX_RETRIES
+- {static} int INITIAL_RETRY_DELAY
++ ResponseEntity<?> getGPT(String,String)
+}
+
+
+interface com.ssafy.alcohol.model.service.FriendService {
++ List<Friend> selectAll()
++ List<Friend> searchFriend(SearchCondition)
++ Friend readFriend(int)
++ boolean writeFriend(Friend)
++ boolean removeFriend(int)
++ boolean modifyFriend(Friend)
++ boolean likeUp(int)
++ boolean likeDown(int)
++ void fileFriend(MultipartFile,Friend)
++ void updateFriend(MultipartFile,Friend)
+}
+
+class com.ssafy.alcohol.model.dto.SearchCondition {
+- String key
+- String word
++ String getKey()
++ void setKey(String)
++ String getWord()
++ void setWord(String)
++ String toString()
+}
+
+
+class com.ssafy.alcohol.model.dto.boardLike {
+- int id
+- String userId
+- int type
++ int getId()
++ void setId(int)
++ String getUserId()
++ void setUserId(String)
++ int getType()
++ void setType(int)
++ int getBoardId()
++ void setBoardId(int)
++ String toString()
+}
+
+
+interface com.ssafy.alcohol.model.dao.FoodDao {
++ List<Food> search(SearchCondition)
++ Food selectOne(int)
++ int insertFood(Food)
++ int deleteFood(int)
++ int updateFood(Food)
++ List<Food> selectAll()
++ int likeUp(int)
++ int likeDown(int)
+}
+
+class com.ssafy.alcohol.config.DBConfig {
+}
+interface com.ssafy.alcohol.model.dao.NoticeDao {
+~ List<Notice> selectAll()
+~ Notice detail(int)
+~ int write(Notice)
+~ int update(Notice)
+~ int delete(int)
+~ List<Notice> search(SearchCondition)
+}
+
+class com.ssafy.alcohol.controller.FoodRestController {
+- {static} String SUCCESS
+- {static} String FAIL
+- FoodService fService
++ ResponseEntity<?> selectAll()
++ ResponseEntity<?> list(SearchCondition)
++ ResponseEntity<?> detail(int)
++ ResponseEntity<?> write(Food)
++ ResponseEntity<Void> fileUpload(MultipartFile,Food)
++ ResponseEntity<?> delete(int)
++ ResponseEntity<?> update(int,Food)
++ ResponseEntity<Void> updateFileUpload(int,MultipartFile,Food)
++ ResponseEntity<?> likeUp(int)
++ ResponseEntity<?> likeDown(int)
+}
+
+
+class com.ssafy.alcohol.config.WebConfig {
++ void addResourceHandlers(ResourceHandlerRegistry)
++ void addCorsMappings(CorsRegistry)
+}
+
+interface com.ssafy.alcohol.model.dao.UserDao {
++ List<User> selectAll()
++ int insertUser(User)
++ User selectOne(String)
++ int deleteUser(String)
++ int updateUser(User)
+}
+
+class com.ssafy.alcohol.AlcoholHeavenApplication {
++ {static} void main(String[])
+}
+
+interface com.ssafy.alcohol.model.dao.AlcoholDao {
+~ List<Alcohol> search(SearchCondition)
+~ Alcohol selectOne(int)
+~ int insertAlcohol(Alcohol)
+~ int deleteAlcohol(int)
+~ int updateAlcohol(Alcohol)
+~ List<Alcohol> selectAlcohol(String)
+~ List<Alcohol> selectAll()
+~ int likeUp(int)
+~ int likeDown(int)
+}
+
+class com.ssafy.alcohol.controller.FriendRestController {
+- {static} String SUCCESS
+- {static} String FAIL
+- FriendService fService
++ ResponseEntity<?> search(SearchCondition)
++ ResponseEntity<?> selectAll()
++ ResponseEntity<?> detail(int)
++ ResponseEntity<?> write(Friend)
++ ResponseEntity<Void> fileUpload(MultipartFile,Friend)
++ ResponseEntity<?> delete(int)
++ ResponseEntity<?> update(int,Friend)
++ ResponseEntity<Void> updateFileUpload(int,MultipartFile,Friend)
++ ResponseEntity<?> likeUp(int)
++ ResponseEntity<?> likeDown(int)
+}
+
+
+
+
+com.ssafy.alcohol.model.service.UserService <|.. com.ssafy.alcohol.model.service.UserServiceImpl
+com.ssafy.alcohol.model.service.BoardLikeService <|.. com.ssafy.alcohol.model.service.BoardLikeServiceImpl
+com.ssafy.alcohol.model.service.FriendService <|.. com.ssafy.alcohol.model.service.FriendServiceImpl
+com.ssafy.alcohol.model.service.NoticeService <|.. com.ssafy.alcohol.model.service.NoticeServiceImpl
+com.ssafy.alcohol.model.service.AlcoholService <|.. com.ssafy.alcohol.model.service.AlcoholServiceImpl
+com.ssafy.alcohol.model.service.ReviewService <|.. com.ssafy.alcohol.model.service.ReviewServiceImpl
+com.ssafy.alcohol.model.service.FoodService <|.. com.ssafy.alcohol.model.service.FoodServiceImpl
+org.springframework.web.servlet.config.annotation.WebMvcConfigurer <|.. com.ssafy.alcohol.config.WebConfig
+@enduml
