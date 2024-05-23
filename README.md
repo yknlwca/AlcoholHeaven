@@ -139,12 +139,35 @@ $ npm run dev
 
 ## 주요 기능 :bulb:
 
+### D3 라이브러리를 활용한 지도 구현
 
+
+<div align="center">
+  
+![image](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/7009e397-48f8-4754-8570-79e29b526a24)
+
+</div>
+
+### Chat GPT를 활용한 자동 안주 추천 시스템
+
+<div align="center">
+  
+![image](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/d336ef82-1552-4355-84bd-b347f9d70f2d)
+
+</div>
+
+### KaKao Map을 활용한 지역 주변 맛집 추천 시스템
+
+<div align="center">
+
+![image](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/f1849018-1d52-4d29-b3f5-16d7caabf999)
+
+</div>
 
 ## Architecture :seedling:
 
 <div align="center">
-
+  
   ### BackEnd - FrontEnd
 ![image](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/9e92b0bb-0abe-471b-b85a-2b910212e815)
 
@@ -186,4 +209,14 @@ destroyed: 컴포넌트가 파괴된 후 호출
 
 
 
-## 기타 추가 사항
+## 기타 추가 / 문의 사항
+
+<div align="center">
+
+[![Naver Badge](https://img.shields.io/badge/Naver-03C75A?style=flat-square&logo=Naver&logoColor=white&link=mailto:choikl3115@naver.com)](mailto:choikl3115@naver.com)
+:mailbox_with_mail: choikl3115@naver.com
+
+[![Gmail Badge](https://img.shields.io/badge/Gmail-d14836?style=flat-square&logo=Gmail&logoColor=white&link=mailto:kht19684@gamil.com)](mailto:kht19684@gamil.com)
+:mailbox_with_mail: kht19684@gamil.com
+
+</div>
