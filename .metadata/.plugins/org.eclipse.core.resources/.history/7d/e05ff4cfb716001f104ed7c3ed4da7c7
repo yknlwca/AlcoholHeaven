@@ -1,8 +1,0 @@
-package com.ssafy.alcohol.model.dto;
-
-public class boardLike {
-	private int id;
-	private String userId;
-	private int type, boardId;
-
-}

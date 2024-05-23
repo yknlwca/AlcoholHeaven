@@ -1,5 +1,0 @@
-package com.ssafy.alcohol.model.service;
-
-public interface BoardLikeServiceImpl {
-
-}
