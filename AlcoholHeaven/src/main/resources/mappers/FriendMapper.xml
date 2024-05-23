@@ -8,11 +8,13 @@
 	<if test="key != 'none'">
 	WHERE ${key} LIKE CONCAT('%', #{word}, '%')
 	</if>
+	ORDER BY id DESC
 </select>
 
 <!-- 성별 / 지역  -->
 <select id="selectAll" resultType="Friend">
-	SELECT * FROM friend;
+	SELECT * FROM friend
+	ORDER BY id DESC
 </select>
 
 

@@ -7,10 +7,12 @@
 	<if test="key != 'none'">
 			WHERE ${key} LIKE CONCAT('%', #{word}, '%')
 	</if>
+	ORDER BY id DESC
 </select>
 
 <select id="selectAll" resultType= "Food">
 	SELECT * FROM food
+	ORDER BY id DESC
 </select>
 
 <!-- 지역 / 메뉴 / 어울리는 술 -->
