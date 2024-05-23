@@ -144,7 +144,8 @@ $ npm run dev
 ## Architecture :seedling:
 
 <div align="center">
-  
+
+  ### BackEnd - FrontEnd
 ![image](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/9e92b0bb-0abe-471b-b85a-2b910212e815)
 
 </div>
@@ -160,12 +161,12 @@ $ npm run dev
 FrontEnd는 AJAX(Asynchronous JavaScript and XML) 기술을 사용하여 백엔드와 비동기적으로 통신
 
 <div align="center">
-  
+
+  ### Vue LifeCycle Hooks
 ![vue lifecycle hook](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/1d35cacb-2429-4d5c-853d-274f1ead8235)
 
 </div>
 
-#### 라이프사이클 훅의 순서
 beforeCreate: 인스턴스가 초기화된 후 데이터 관찰 및 이벤트 설정이 이루어지기 전에 호출
 
 created: 인스턴스가 생성된 후 호출
