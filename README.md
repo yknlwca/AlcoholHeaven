@@ -76,7 +76,7 @@ $ npm install
 $ npm run dev
 ```
 <div align="center">
-💡 Kakao Map과 Chat GPT의 API_KEY가 필요합니다
+💡 <b>Kakao Map</b>과 <b>Chat GPT</b>의 <b>API_KEY</b>가 필요합니다
 </div>
 
 ## Stacks :computer:
@@ -108,7 +108,7 @@ $ npm run dev
 ![VUE](https://img.shields.io/badge/VUE-4FC08D.svg?&style=for-the-badge&logo=VUE.JS&logoColor=white)
 ![NODE.JS](https://img.shields.io/badge/NODE.JS-5FA04E.svg?&style=for-the-badge&logo=NODE.JS&logoColor=white)
 ![BOOTSTRAP](https://img.shields.io/badge/BOOTSTRAP-7952B3.svg?&style=for-the-badge&logo=BOOTSTRAP&logoColor=white)
-![NODE.JS](https://img.shields.io/badge/NODE.JS-5FA04E.svg?&style=for-the-badge&logo=NODE.JS.JS&logoColor=white)
+![mysql](https://img.shields.io/badge/MYSQL-4479A1.svg?&style=for-the-badge&logo=mysql&logoColor=white)
 
 </div>
 
@@ -116,18 +116,73 @@ $ npm run dev
 
 <div align="center">
 
-![NOTION](https://img.shields.io/badge/NOTION-000000.svg?&style=for-the-badge&logo=NOTION.JS&logoColor=white)
 ![MATTERMOST](https://img.shields.io/badge/MATTERMOST-0058CC.svg?&style=for-the-badge&logo=MATTERMOST&logoColor=white)
 ![WEBEX](https://img.shields.io/badge/WEBEX-000000.svg?&style=for-the-badge&logo=WEBEX&logoColor=white)
+![NOTION](https://img.shields.io/badge/NOTION-000000.svg?&style=for-the-badge&logo=notion.JS&logoColor=white)
 
 </div>
 
 ## 화면 구성 :mag_right:
 
+### 실제 구현한 화면과 실행 순서
+
+| 구현기능 | 실제화면 |
+|--------------| ---------------------------------------------- |
+| 로그인<br>회원가입 |![로그인_회원가입](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/d3fc8cf0-9a53-4c60-868a-56f56e2df75b)|
+| MainPage |  ![메인페이지](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/41205b85-8dc4-49d8-8d73-70f47271d387)|
+| 술 찾기 | ![술찾기](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/16b54551-933f-4eba-8182-6e75513667cb)|
+| 안주 추천 | ![안주](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/4d247e54-dc27-458f-849d-95a4cfe383d0) |
+| 친구 추천 | ![친구](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/3f3b5df4-0e5d-4692-b1c2-b26015c73f98) |
+| 공지사항 | ![공지사항](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/bd76dcd9-910c-45f4-a5b3-1fc9ffdc53a9) |
+
+
+
 ## 주요 기능 :bulb:
 
-## Architecture
-ex) 프론트엔드와 백엔드가 어떻게 소통하는지에 대한 그림을 그려서 넣기
-생명주기 훅 그림과 설명
+
+
+## Architecture :seedling:
+
+<div align="center">
+  
+![image](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/9e92b0bb-0abe-471b-b85a-2b910212e815)
+
+</div>
+
+#### 요청과 응답 (Request / Response)
+  - HTTP 요청: FrontEnd는 BackEnd로 데이터를 보내기 위해 HTTP 요청 보냄. GET, POST, PUT, DELETE 등의 메서드를 사용
+  - HTTP 응답: BackEnd는 FrontEnd의 요청을 처리한 후, 그 결과를 HTTP 응답으로 반환
+
+#### RESTful API
+표준 HTTP 메서드: RESTful API는 GET, POST, PUT, DELETE 등의 표준 HTTP 메서드를 사용하여 리소스를 조작
+
+#### AJAX와 Fetch API
+FrontEnd는 AJAX(Asynchronous JavaScript and XML) 기술을 사용하여 백엔드와 비동기적으로 통신
+
+<div align="center">
+  
+![vue lifecycle hook](https://github.com/KIMHT98/AlcoholHeaven/assets/145303968/1d35cacb-2429-4d5c-853d-274f1ead8235)
+
+</div>
+
+#### 라이프사이클 훅의 순서
+beforeCreate: 인스턴스가 초기화된 후 데이터 관찰 및 이벤트 설정이 이루어지기 전에 호출
+
+created: 인스턴스가 생성된 후 호출
+
+beforeMount: 템플릿을 렌더링하여 가상 DOM을 생성한 후, 실제 DOM에 마운트되기 직전에 호출
+
+mounted: 컴포넌트가 실제 DOM에 삽입된 후 호출
+
+beforeUpdate: 반응형 데이터가 변경되어 DOM을 업데이트하기 직전에 호출
+
+updated: 데이터 변경으로 인해 가상 DOM이 다시 렌더링되고 실제 DOM에 패치된 후 호출
+
+beforeDestroy: 컴포넌트가 파괴되기 직전에 호출
+
+destroyed: 컴포넌트가 파괴된 후 호출
+
+
+
 
 ## 기타 추가 사항
