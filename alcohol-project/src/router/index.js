@@ -5,7 +5,7 @@ import AlcoholView from '@/views/AlcoholView.vue'
 import FoodView from '@/views/FoodView.vue'
 import FriendView from '@/views/FriendView.vue'
 import NoticeView from '@/views/NoticeView.vue'
-import Register from '@/views/Register.vue';
+import Register from '@/components/Home/Register.vue';
 import AlcoholList from '@/components/alcohol/AlcoholList.vue'
 
 import FriendList from '@/components/friend/FriendList.vue'
