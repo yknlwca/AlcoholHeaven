@@ -22,7 +22,7 @@
  
 <div align="center">
   
-SSAFY 서울 8반 김현태, 최광림
+김현태, 최광림
 
 </div>
 
